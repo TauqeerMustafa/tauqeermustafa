@@ -7,7 +7,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 <style>
-/* ===== GLOBAL STYLES ===== */
+/* ===== GLOBAL ===== */
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
 body{scroll-behavior:smooth;background:#0a0a0a;color:#fff;overflow-x:hidden;}
 section{padding:100px 50px;text-align:center;opacity:0;transform:translateY(50px);transition:1s ease;}
@@ -21,9 +21,11 @@ nav a{color:#fff;margin-left:25px;text-decoration:none;font-weight:500;position:
 nav a::after{content:'';position:absolute;width:0;height:2px;background:#00ffe7;left:0;bottom:-5px;transition:0.3s;}
 nav a:hover::after{width:100%;}
 
+/* ===== PARTICLES ===== */
+#particles-js{position:fixed;width:100%;height:100%;top:0;left:0;z-index:-1;}
+
 /* ===== HERO ===== */
-#home{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;background:linear-gradient(135deg,#0a0a0a,#1a1a1a), url('https://source.unsplash.com/1600x900/?technology,futuristic') no-repeat center/cover;position:relative;overflow:hidden;}
-#home::before{content:"";position:absolute;top:0;left:0;width:100%;height:100%;background:radial-gradient(#00ffe7 1px, transparent 1px);background-size:15px 15px;animation:particles 20s linear infinite;opacity:0.1;}
+#home{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;position:relative;overflow:hidden;}
 #home img{width:180px;height:180px;border-radius:50%;border:4px solid #00ffe7;margin-bottom:20px;animation:float 4s ease-in-out infinite alternate;box-shadow:0 0 30px #00ffe7,0 0 60px #ff00ff;}
 #home img:hover{transform:scale(1.1);box-shadow:0 0 60px #00ffe7,0 0 100px #ff00ff;}
 #home h2{background:linear-gradient(90deg,#00ffe7,#ff00ff,#ffe600);-webkit-background-clip:text;color:transparent;animation:fadeInUp 1s ease forwards;}
@@ -33,12 +35,11 @@ nav a:hover::after{width:100%;}
 #home .btn:hover::after{width:300%;height:300%;}
 #home .btn:hover{background:#ff00ff;color:#fff;transform:translateY(-3px);box-shadow:0 12px 25px rgba(255,0,255,0.5);}
 
-/* ===== ABOUT ===== */
+/* ===== SECTIONS COLORS ===== */
 #about{background:#1a1a2e;}
 #about h2{color:#00ffff;animation:slideInLeft 1s;}
 #about p{color:#cceeff;font-size:18px;max-width:900px;margin:0 auto;line-height:1.6;}
 
-/* ===== SKILLS ===== */
 #skills{background:#2e1a2e;}
 #skills h2{color:#ff00ff;animation:slideInRight 1s;}
 .skills-icons{display:flex;justify-content:center;flex-wrap:wrap;gap:20px;margin-top:30px;}
@@ -48,28 +49,24 @@ nav a:hover::after{width:100%;}
 #skills .card{background: rgba(50,30,50,0.85);padding:30px;border-radius:20px;flex:1 1 280px;transition: transform 0.5s, box-shadow 0.5s;}
 #skills .card:hover{transform:rotateX(5deg) rotateY(5deg) scale(1.05);box-shadow:0 25px 40px rgba(255,0,255,0.5);}
 
-/* ===== EDUCATION ===== */
 #education{background:#1a2e1a;}
 #education h2{color:#00ff00;animation:slideInLeft 1s;}
 #education ul{list-style:none;text-align:left;font-size:18px;line-height:1.8;max-width:900px;margin:0 auto;}
 #education li{margin:15px 0;position:relative;}
 #education li::before{content:"";position:absolute;left:-25px;top:8px;width:12px;height:12px;background:#00ff00;border-radius:50%;}
 
-/* ===== PROJECTS ===== */
 #projects{background:#2e2e1a;}
 #projects h2{color:#ffe600;animation:zoomIn 1s;}
 #projects .cards{display:flex;flex-wrap:wrap;gap:25px;justify-content:center;margin-top:30px;}
 #projects .card{background: rgba(50,50,30,0.85);padding:30px;border-radius:20px;cursor:pointer;transition: transform 0.5s, box-shadow 0.5s;}
 #projects .card:hover{transform:rotateX(5deg) rotateY(5deg) scale(1.05);box-shadow:0 25px 40px rgba(255,255,0,0.5);}
 
-/* ===== FREELANCE ===== */
 #freelance{background:#2e1a1a;}
 #freelance h2{color:#ff4500;animation:zoomIn 1s;}
 #freelance .cards{display:flex;justify-content:center;flex-wrap:wrap;gap:25px;margin-top:30px;}
 #freelance .card{background: rgba(50,30,30,0.85);padding:30px;border-radius:20px;transition: transform 0.5s;}
 #freelance .card:hover{transform:scale(1.05);box-shadow:0 20px 40px rgba(255,69,0,0.5);}
 
-/* ===== SOCIAL MEDIA ===== */
 #social{background:#1a1a1a;}
 #social h2{color:#1da1f2;animation:pulse 1s infinite;}
 .social-icons{display:flex;justify-content:center;gap:20px;margin-top:20px;}
@@ -83,7 +80,6 @@ nav a:hover::after{width:100%;}
 .social-icons a.email{color:#FFB800;}
 .social-icons a:hover{transform:scale(1.3);opacity:0.8;}
 
-/* ===== CONTACT ===== */
 #contact{background:#001a2e;}
 #contact h2{color:#00bfff;animation:fadeIn 1s;}
 #contact form{max-width:500px;margin:50px auto;text-align:left;}
@@ -92,7 +88,6 @@ nav a:hover::after{width:100%;}
 #contact button{padding:14px 36px;background:#00bfff;color:#0a0a0a;font-weight:600;border:none;border-radius:30px;cursor:pointer;position:relative;overflow:hidden;transition:0.3s;}
 #contact button:hover{background:#ff00ff;color:#fff;transform:translateY(-3px);box-shadow:0 12px 25px rgba(255,0,255,0.5);}
 
-/* ===== FOOTER ===== */
 footer{background:#000;color:#fff;padding:50px;text-align:center;}
 
 /* ===== ANIMATIONS ===== */
@@ -103,10 +98,11 @@ footer{background:#000;color:#fff;padding:50px;text-align:center;}
 @keyframes floatIcons{0%{transform:translateY(0);}100%{transform:translateY(-15px);}}
 @keyframes zoomIn{0%{transform:scale(0.8);opacity:0;}100%{transform:scale(1);opacity:1;}}
 @keyframes pulse{0%{transform:scale(1);}50%{transform:scale(1.1);}100%{transform:scale(1);}}
-@keyframes particles{0%{background-position:0 0;}100%{background-position:1500px 1500px;}}
 </style>
 </head>
 <body>
+
+<div id="particles-js"></div>
 
 <header>
 <h1>Tauqeer Mustafa</h1>
@@ -122,7 +118,6 @@ footer{background:#000;color:#fff;padding:50px;text-align:center;}
 </nav>
 </header>
 
-<!-- HERO -->
 <section id="home">
 <img src="https://cdn.openai.com/chatgpt/profile.png" alt="Tauqeer Mustafa">
 <h2>Hi, I'm Tauqeer Mustafa</h2>
@@ -130,13 +125,11 @@ footer{background:#000;color:#fff;padding:50px;text-align:center;}
 <button class="btn">Learn More</button>
 </section>
 
-<!-- ABOUT -->
 <section id="about">
 <h2>About Me</h2>
 <p>I specialize in programming, freelancing, and social media strategy. I combine technology, creativity, and digital marketing to make an impact.</p>
 </section>
 
-<!-- SKILLS -->
 <section id="skills">
 <h2>My Skills</h2>
 <div class="skills-icons">
@@ -153,7 +146,6 @@ footer{background:#000;color:#fff;padding:50px;text-align:center;}
 </div>
 </section>
 
-<!-- EDUCATION -->
 <section id="education">
 <h2>Education & Certifications</h2>
 <ul>
@@ -163,7 +155,6 @@ footer{background:#000;color:#fff;padding:50px;text-align:center;}
 </ul>
 </section>
 
-<!-- PROJECTS -->
 <section id="projects">
 <h2>Projects & Work</h2>
 <div class="cards">
@@ -173,7 +164,6 @@ footer{background:#000;color:#fff;padding:50px;text-align:center;}
 </div>
 </section>
 
-<!-- FREELANCE -->
 <section id="freelance">
 <h2>Freelance Portfolio</h2>
 <div class="cards">
@@ -182,7 +172,6 @@ footer{background:#000;color:#fff;padding:50px;text-align:center;}
 </div>
 </section>
 
-<!-- SOCIAL MEDIA -->
 <section id="social">
 <h2>Social Media</h2>
 <div class="social-icons">
@@ -196,7 +185,6 @@ footer{background:#000;color:#fff;padding:50px;text-align:center;}
 </div>
 </section>
 
-<!-- CONTACT -->
 <section id="contact">
 <h2>Contact Me</h2>
 <form>
@@ -214,7 +202,23 @@ footer{background:#000;color:#fff;padding:50px;text-align:center;}
 &copy; 2025 Tauqeer Mustafa | contact@tauqeermustafa.tech
 </footer>
 
+<script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
 <script>
+// Initialize particles.js
+particlesJS("particles-js", {
+  "particles": {
+    "number": {"value":80},
+    "color":{"value":["#00ffe7","#ff00ff","#ffe600"]},
+    "shape":{"type":"circle"},
+    "opacity":{"value":0.5},
+    "size":{"value":3,"random":true},
+    "line_linked":{"enable":true,"distance":120,"color":"#fff","opacity":0.3,"width":1},
+    "move":{"enable":true,"speed":2,"direction":"none","random":true,"straight":false,"bounce":false}
+  },
+  "interactivity":{"detect_on":"canvas","events":{"onhover":{"enable":true,"mode":"repulse"}}},
+  "retina_detect":true
+});
+
 // Scroll animation
 const sections = document.querySelectorAll('section');
 window.addEventListener('scroll', () => {
@@ -228,4 +232,3 @@ window.addEventListener('scroll', () => {
 </script>
 </body>
 </html>
-
