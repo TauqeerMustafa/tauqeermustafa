@@ -21,48 +21,137 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
 
   <style>
-    /* Styles omitted for brevity; keep existing styles */
+    /* FULL STYLES IMPLEMENTATION */
+    html, body {margin:0; padding:0; height:100%; font-family:'Outfit', sans-serif; background:#f8fafc; color:#0f172a;}
+    #bg-canvas{position:fixed; inset:0; z-index:0;}
+    #cursorOrb{position:fixed; z-index:9999; pointer-events:none; width:18px; height:18px; border-radius:50%; background:radial-gradient(circle, rgba(255,255,255,0.9), rgba(6,182,212,0.3)); box-shadow:0 0 20px rgba(6,182,212,0.4); transform:translate(-50%, -50%); transition:0.2s;}
+    #cursorOrb.big{width:52px; height:52px;}
+    header{position:sticky; top:5px; z-index:20;}
+    .glass{backdrop-filter:blur(10px); background:rgba(255,255,255,0.6); border:1px solid rgba(255,255,255,0.7); border-radius:16px; box-shadow:0 10px 30px rgba(0,0,0,0.06);}
+    .btn-holo{padding:12px 18px; border-radius:14px; font-weight:700; background:linear-gradient(90deg,#06b6d4,#7c3aed); color:white; display:inline-flex; gap:8px; transition:0.2s;}
+    .btn-holo:hover{transform:translateY(-3px); box-shadow:0 15px 35px rgba(6,182,212,0.15);}
+    .card-btn{padding:8px 14px; border-radius:12px; display:inline-flex; gap:6px; align-items:center; background:rgba(15,23,42,0.06); backdrop-filter:blur(6px); box-shadow:0 6px 20px rgba(0,0,0,0.06); transition:0.2s;}
+    .card-btn:hover{transform:translateY(-3px); box-shadow:0 10px 25px rgba(0,0,0,0.12);}
+    .shimmer{background:linear-gradient(90deg,#0f172a 10%, #06b6d4 30%, #7c3aed 55%, #22d3ee 80%); -webkit-background-clip:text; background-clip:text; color:transparent;}
   </style>
 </head>
-<body class="antialiased">
+<body>
 
 <!-- PRELOADER -->
-<div id="preloader" aria-hidden="true">...</div>
+<div id="preloader" class="flex items-center justify-center fixed inset-0 bg-white z-50">
+  <div class="text-center">
+    <div class="text-sm font-mono text-gray-500 mb-4">Initializing White-Ops Protocol</div>
+    <div class="w-64 h-2 bg-gray-200 rounded-full overflow-hidden mx-auto"><div id="loaderProg" class="h-full bg-gradient-to-r from-cyan-400 to-purple-700 w-0"></div></div>
+  </div>
+</div>
 
 <!-- BACKGROUND CANVAS -->
 <canvas id="bg-canvas"></canvas>
 
 <!-- CUSTOM CURSOR -->
-<div id="cursorOrb" aria-hidden="true"></div>
+<div id="cursorOrb"></div>
 
-<!-- NAV, MAIN, SECTIONS omitted for brevity (keep existing) -->
+<!-- NAVIGATION -->
+<header class="glass p-4 mx-4 mt-4 flex justify-between items-center">
+  <div class="flex items-center gap-3">
+    <div class="text-white font-bold text-xl bg-gradient-to-tr from-cyan-400 to-purple-700 w-12 h-12 flex items-center justify-center rounded-lg">TM</div>
+    <span class="font-semibold">TM.SECURE</span>
+  </div>
+  <div class="flex gap-4">
+    <a href="#profile" class="card-btn"><i class="fa-solid fa-user-shield"></i>Profile</a>
+    <a href="#intel" class="card-btn"><i class="fa-solid fa-earth-americas"></i>Intel</a>
+    <a href="#arsenal" class="card-btn"><i class="fa-solid fa-toolbox"></i>Arsenal</a>
+    <a href="#uplink" class="card-btn"><i class="fa-solid fa-satellite-dish"></i>Uplink</a>
+  </div>
+</header>
+
+<main class="relative z-10 p-6 space-y-12">
+  <!-- HERO -->
+  <section id="hero" class="grid md:grid-cols-2 gap-8 items-center">
+    <h1 class="text-4xl md:text-6xl font-extrabold shimmer">DIGITAL DEFENSE & FINANCIAL CLARITY</h1>
+    <p class="text-gray-700">I am Tauqeer Mustafa — bridging offensive security with financial expertise to protect and optimize assets.</p>
+    <div class="flex gap-4">
+      <button class="btn-holo"><i class="fa-solid fa-bolt"></i> Deploy Arsenal</button>
+      <button class="btn-holo"><i class="fa-solid fa-signal"></i> Open Uplink</button>
+    </div>
+  </section>
+
+  <!-- PROFILE -->
+  <section id="profile" class="glass p-6 rounded-xl floaty">
+    <h2 class="text-xl font-semibold">The Dual Mindset</h2>
+    <p>Education: BS Cyber Security (AIR University) & Chartered Accountancy (ICAP)</p>
+    <div class="space-y-2 mt-4">
+      <div><span>Offensive Security</span><div class="w-full bg-gray-200 h-2 rounded-full mt-1"><div class="skill-bar bg-gradient-to-r from-cyan-400 to-purple-700" style="width:92%"></div></div></div>
+      <div><span>Financial Audit</span><div class="w-full bg-gray-200 h-2 rounded-full mt-1"><div class="skill-bar bg-gradient-to-r from-purple-700 to-cyan-400" style="width:88%"></div></div></div>
+    </div>
+    <div class="mt-4 flex gap-3">
+      <button id="briefBtn" class="card-btn"><i class="fa-solid fa-download"></i> Briefing</button>
+      <button id="downloadBrief" class="card-btn"><i class="fa-solid fa-file-alt"></i> Full Download</button>
+    </div>
+  </section>
+</main>
 
 <script>
-// Preloader, cursor, GSAP, Three.js setup omitted for brevity (keep existing)
+// Preloader
+const preloader = document.getElementById('preloader');
+const loaderProg = document.getElementById('loaderProg');
+let progress = 0;
+const preloaderInterval = setInterval(()=>{
+  progress += Math.random()*10;
+  if(progress>100) progress=100;
+  loaderProg.style.width = progress+'%';
+  if(progress>=100){
+    clearInterval(preloaderInterval);
+    preloader.style.display='none';
+  }
+}, 150);
 
-// Fix: Briefing button
-function downloadFile(filename, content) {
-    const blob = new Blob([content], { type: 'text/plain' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = filename;
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    URL.revokeObjectURL(url);
-}
-
-document.getElementById('briefBtn').addEventListener('click', () => {
-    downloadFile('TM_BRIEFING.txt', 'Tauqeer Mustafa - Briefing File\n\nContact: tauqeermustafaa');
+// Cursor
+const orb = document.getElementById('cursorOrb');
+document.addEventListener('mousemove', e=>{orb.style.left=e.clientX+'px'; orb.style.top=e.clientY+'px';});
+document.querySelectorAll('button,a,.card-btn').forEach(el=>{
+  el.addEventListener('mouseenter', ()=>orb.classList.add('big'));
+  el.addEventListener('mouseleave', ()=>orb.classList.remove('big'));
 });
 
-document.getElementById('downloadBrief').addEventListener('click', () => {
-    const content = `TM_SECURE_BRIEF\nName: Tauqeer Mustafa\nRoles: Strategic Security & Financial Analyst\nContact: tauqeermustafaa`;
-    downloadFile('TM_BRIEFING_FULL.txt', content);
+// GSAP Scroll
+gsap.registerPlugin(ScrollTrigger);
+gsap.utils.toArray('section').forEach((el,i)=>{
+  gsap.from(el, {y:20, autoAlpha:0, duration:1, delay:i*0.1, ease:'power3.out', scrollTrigger:{trigger:el, start:'top 90%'}});
 });
 
+// Skill bar animation
+document.querySelectorAll('.skill-bar').forEach(bar=>{
+  const w=bar.style.width;
+  bar.style.width='0%';
+  gsap.to(bar, {width:w, duration:1.2, ease:'power2.out'});
+});
+
+// Three.js Liquid Mesh Background
+const canvas = document.getElementById('bg-canvas');
+const renderer = new THREE.WebGLRenderer({canvas:canvas, alpha:true});
+renderer.setSize(window.innerWidth, window.innerHeight);
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(50, window.innerWidth/window.innerHeight,0.1,1000);
+camera.position.z=40;
+const geo = new THREE.PlaneGeometry(80,40,50,30);
+const mat = new THREE.MeshBasicMaterial({color:0xcceff6, wireframe:true, transparent:true, opacity:0.06});
+const mesh = new THREE.Mesh(geo,mat);
+mesh.rotation.x=-0.6;
+scene.add(mesh);
+const verts = geo.attributes.position.array;
+function animateMesh(t, factor){for(let i=0;i<verts.length;i+=3){verts[i+2]=Math.sin((verts[i]*0.12)+(t*0.001))*Math.cos((verts[i+1]*0.14)+(t*0.001))*2*factor;}geo.attributes.position.needsUpdate=true;}
+let mouseX=0;
+document.addEventListener('mousemove', e=>{mouseX=(e.clientX/window.innerWidth)-0.5});
+function render(t){animateMesh(t,1+Math.abs(mouseX)*2);renderer.render(scene,camera);requestAnimationFrame(render);}
+render();
+window.addEventListener('resize',()=>{renderer.setSize(window.innerWidth, window.innerHeight); camera.aspect=window.innerWidth/window.innerHeight; camera.updateProjectionMatrix();});
+
+// Download helpers
+function downloadFile(filename, content){const blob=new Blob([content],{type:'text/plain'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=filename;document.body.appendChild(a);a.click();document.body.removeChild(a);URL.revokeObjectURL(url);}
+document.getElementById('briefBtn').addEventListener('click',()=>{downloadFile('TM_BRIEFING.txt','Tauqeer Mustafa - Briefing File\n\nContact: tauqeermustafaa');});
+document.getElementById('downloadBrief').addEventListener('click',()=>{downloadFile('TM_BRIEFING_FULL.txt',`TM_SECURE_BRIEF\nName: Tauqeer Mustafa\nRoles: Strategic Security & Financial Analyst\nContact: tauqeermustafaa`);});
 </script>
+
 </body>
 </html>
-
