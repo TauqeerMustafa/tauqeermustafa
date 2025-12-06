@@ -11,8 +11,7 @@
 
         :root {
             --gold: #FFD700;
-            --gold-bright: #FFE55C;
-            --white-glow: #FFFFFF;
+            --gold-bright: #FFFACD;
             --dark-bg: #050505;
         }
 
@@ -21,227 +20,199 @@
             background-color: var(--dark-bg);
             color: #f8fafc;
             overflow-x: hidden;
+            cursor: none; /* Hide default cursor */
         }
 
-        h1, h2, h3, .brand-font {
-            font-family: 'Space Grotesk', sans-serif;
-        }
-
-        .mono-font {
-            font-family: 'JetBrains Mono', monospace;
-        }
-
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: #000000; }
-        ::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 4px; box-shadow: 0 0 10px var(--gold); }
-        ::-webkit-scrollbar-thumb:hover { background: var(--gold-bright); }
-
-        /* --- ADVANCED GLOW EFFECTS --- */
-        
-        /* Moving Gradient Background */
-        .bg-nebula {
+        /* --- CUSTOM CURSOR --- */
+        .cursor-dot,
+        .cursor-outline {
             position: fixed;
-            top: 0; left: 0; width: 100vw; height: 100vh;
-            background: radial-gradient(circle at 50% 50%, rgba(255, 215, 0, 0.05), transparent 70%),
-                        radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.05), transparent 50%),
-                        radial-gradient(circle at 20% 80%, rgba(100, 100, 100, 0.1), transparent 50%);
-            z-index: -5;
-            animation: nebula-move 20s ease infinite alternate;
-        }
-
-        @keyframes nebula-move {
-            0% { transform: scale(1); }
-            100% { transform: scale(1.1); }
-        }
-
-        /* Intense Text Glows */
-        .text-gold-glow {
-            color: var(--gold);
-            text-shadow: 0 0 10px rgba(255, 215, 0, 0.8), 0 0 20px rgba(255, 215, 0, 0.4);
-        }
-        
-        .text-white-glow {
-            color: white;
-            text-shadow: 0 0 15px rgba(255, 255, 255, 0.8), 0 0 30px rgba(255, 255, 255, 0.4);
-        }
-
-        /* Button Shine Effect */
-        .btn-shine {
-            position: relative;
-            overflow: hidden;
-        }
-        .btn-shine::after {
-            content: '';
-            position: absolute;
-            top: 0; left: -100%;
-            width: 100%; height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
-            transition: 0.5s;
-        }
-        .btn-shine:hover::after {
-            left: 100%;
-            transition: 0.7s ease-in-out;
-        }
-
-        /* Glassmorphism & Borders */
-        .glass {
-            background: rgba(10, 10, 10, 0.6);
-            backdrop-filter: blur(16px);
-            border-bottom: 1px solid rgba(255, 215, 0, 0.15);
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
-        }
-        
-        .glass-card {
-            background: rgba(15, 15, 15, 0.4);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 215, 0, 0.1);
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
-            transform-style: preserve-3d;
-            transform: perspective(1000px);
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            position: relative;
-            overflow: hidden;
-        }
-
-        /* Card Hover Effects */
-        .glass-card:hover {
-            border-color: var(--gold);
-            box-shadow: 0 0 40px rgba(255, 215, 0, 0.2), inset 0 0 20px rgba(255, 215, 0, 0.05);
-            transform: translateY(-5px) scale(1.02);
-        }
-        
-        .glass-card::before {
-            content: '';
-            position: absolute;
-            top: 0; left: -100%; width: 100%; height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.1), transparent);
-            transition: 0.5s;
+            top: 0;
+            left: 0;
+            transform: translate(-50%, -50%);
+            border-radius: 50%;
+            z-index: 9999;
             pointer-events: none;
         }
-        .glass-card:hover::before {
-            left: 100%;
-            transition: 0.6s;
+
+        .cursor-dot {
+            width: 8px;
+            height: 8px;
+            background-color: var(--gold);
+            box-shadow: 0 0 15px var(--gold);
         }
 
-        /* Glitch Effect - Supercharged */
-        .glitch-wrapper { position: relative; display: inline-block; }
+        .cursor-outline {
+            width: 40px;
+            height: 40px;
+            border: 1px solid rgba(255, 215, 0, 0.5);
+            transition: width 0.2s, height 0.2s, background-color 0.2s;
+        }
+
+        body:hover .cursor-outline {
+            width: 60px;
+            height: 60px;
+            background-color: rgba(255, 215, 0, 0.05);
+            border-color: var(--gold);
+            box-shadow: 0 0 30px rgba(255, 215, 0, 0.1);
+        }
+
+        h1, h2, h3, .brand-font { font-family: 'Space Grotesk', sans-serif; }
+        .mono-font { font-family: 'JetBrains Mono', monospace; }
+        
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #000; }
+        ::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 10px; box-shadow: 0 0 10px var(--gold); }
+
+        /* --- CYBER REACTOR ANIMATION --- */
+        .reactor-container {
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: 800px; height: 800px;
+            z-index: -1;
+            opacity: 0.3;
+            pointer-events: none;
+        }
+        .reactor-ring {
+            position: absolute;
+            border-radius: 50%;
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.1);
+        }
+        .r1 { width: 100%; height: 100%; animation: spin 20s linear infinite; border-width: 1px; border-style: dashed; }
+        .r2 { width: 70%; height: 70%; top: 15%; left: 15%; animation: spin-reverse 15s linear infinite; border-color: rgba(255, 255, 255, 0.2); }
+        .r3 { width: 40%; height: 40%; top: 30%; left: 30%; animation: spin 10s linear infinite; border: 2px solid rgba(255, 215, 0, 0.5); box-shadow: 0 0 30px rgba(255, 215, 0, 0.2); }
+        
+        @keyframes spin { 100% { transform: rotate(360deg); } }
+        @keyframes spin-reverse { 100% { transform: rotate(-360deg); } }
+
+        /* --- ROTATING BORDER --- */
+        .rotating-border {
+            position: relative;
+            z-index: 0;
+            overflow: hidden;
+        }
+        .rotating-border::before {
+            content: '';
+            position: absolute;
+            z-index: -2;
+            left: -50%; top: -50%;
+            width: 200%; height: 200%;
+            background-color: transparent;
+            background-repeat: no-repeat;
+            background-size: 50% 50%, 50% 50%;
+            background-position: 0 0, 100% 0, 100% 100%, 0 100%;
+            background-image: linear-gradient(var(--gold), var(--gold));
+            animation: rotate 4s linear infinite;
+        }
+        .rotating-border::after {
+            content: '';
+            position: absolute;
+            z-index: -1;
+            left: 2px; top: 2px;
+            width: calc(100% - 4px); height: calc(100% - 4px);
+            background: #000;
+            border-radius: 8px;
+        }
+        @keyframes rotate { 100% { transform: rotate(1turn); } }
+
+        /* --- SCANLINE EFFECT --- */
+        .scanline-card {
+            position: relative;
+            overflow: hidden;
+        }
+        .scanline-card::after {
+            content: "";
+            position: absolute;
+            top: -100%; left: 0; width: 100%; height: 20px;
+            background: linear-gradient(to bottom, transparent, rgba(255, 215, 0, 0.5), transparent);
+            opacity: 0;
+            transition: 0.3s;
+        }
+        .scanline-card:hover::after {
+            opacity: 1;
+            animation: scan 2s linear infinite;
+        }
+        @keyframes scan { 0% { top: -20%; } 100% { top: 120%; } }
+
+        /* --- TEXT REVEAL (DECODE) --- */
+        .hacker-text {
+            font-family: 'Space Grotesk', sans-serif;
+            opacity: 0; /* Hidden initially */
+        }
+        .hacker-text.visible {
+            opacity: 1;
+        }
+
+        /* --- UTILS --- */
+        .text-glow { text-shadow: 0 0 10px rgba(255, 215, 0, 0.7), 0 0 20px rgba(255, 215, 0, 0.3); }
+        .box-glow { box-shadow: 0 0 20px rgba(255, 215, 0, 0.1); }
+        
+        .glass {
+            background: rgba(10, 10, 10, 0.7);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        /* Glitch Text */
         .glitch {
             position: relative;
             color: white;
             font-weight: 800;
-            z-index: 1;
-            text-shadow: 0 0 10px rgba(255,255,255,0.5);
+            text-shadow: 2px 2px 0px #FFD700, -2px -2px 0px #FFFFFF;
+            animation: glitch-skew 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) both infinite;
         }
-        .glitch::before, .glitch::after {
-            content: attr(data-text);
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: var(--dark-bg);
-        }
-        .glitch::before {
-            left: 2px;
-            text-shadow: -2px 0 #FFD700;
-            clip: rect(44px, 450px, 56px, 0);
-            animation: glitch-anim 4s infinite linear alternate-reverse;
-        }
-        .glitch::after {
-            left: -2px;
-            text-shadow: -2px 0 #FFFFFF;
-            clip: rect(44px, 450px, 56px, 0);
-            animation: glitch-anim2 4s infinite linear alternate-reverse;
-        }
-        @keyframes glitch-anim {
-            0% { clip: rect(31px, 9999px, 94px, 0); transform: skew(0.85deg); }
-            5% { clip: rect(70px, 9999px, 11px, 0); transform: skew(0.2deg); }
-            10% { clip: rect(2px, 9999px, 86px, 0); transform: skew(0.06deg); }
-            15% { clip: rect(6px, 9999px, 60px, 0); transform: skew(0.39deg); }
-            20% { clip: rect(62px, 9999px, 11px, 0); transform: skew(0.97deg); }
-            25% { clip: rect(59px, 9999px, 98px, 0); transform: skew(0.8deg); }
-            30% { clip: rect(31px, 9999px, 63px, 0); transform: skew(0.79deg); }
-            35% { clip: rect(98px, 9999px, 50px, 0); transform: skew(0.66deg); }
-            40% { clip: rect(9px, 9999px, 15px, 0); transform: skew(0.68deg); }
-            45% { clip: rect(33px, 9999px, 26px, 0); transform: skew(0.21deg); }
-            50% { clip: rect(76px, 9999px, 4px, 0); transform: skew(0.79deg); }
-            55% { clip: rect(47px, 9999px, 5px, 0); transform: skew(0.12deg); }
-            60% { clip: rect(35px, 9999px, 65px, 0); transform: skew(0.48deg); }
-            65% { clip: rect(48px, 9999px, 69px, 0); transform: skew(0.2deg); }
-            70% { clip: rect(33px, 9999px, 59px, 0); transform: skew(0.85deg); }
-            75% { clip: rect(5px, 9999px, 92px, 0); transform: skew(0.25deg); }
-            80% { clip: rect(21px, 9999px, 17px, 0); transform: skew(0.04deg); }
-            85% { clip: rect(99px, 9999px, 67px, 0); transform: skew(0.74deg); }
-            90% { clip: rect(38px, 9999px, 55px, 0); transform: skew(0.12deg); }
-            95% { clip: rect(93px, 9999px, 35px, 0); transform: skew(0.96deg); }
-            100% { clip: rect(8px, 9999px, 21px, 0); transform: skew(0.63deg); }
-        }
-        @keyframes glitch-anim2 {
-            0% { clip: rect(65px, 9999px, 100px, 0); transform: skew(0.67deg); }
-            100% { clip: rect(79px, 9999px, 48px, 0); transform: skew(0.3deg); }
+        @keyframes glitch-skew {
+            0% { transform: translate(0); }
+            20% { transform: translate(-2px, 2px); }
+            40% { transform: translate(-2px, -2px); }
+            60% { transform: translate(2px, 2px); }
+            80% { transform: translate(2px, -2px); }
+            100% { transform: translate(0); }
         }
 
-        /* Scroll Reveal */
-        .reveal { opacity: 0; transform: translateY(40px); transition: all 1s cubic-bezier(0.5, 0, 0, 1); }
-        .reveal.active { opacity: 1; transform: translateY(0); }
-
-        /* Terminal Cursor */
-        .cursor { display: inline-block; width: 12px; height: 1.2em; background-color: var(--gold); animation: blink 0.8s step-end infinite; vertical-align: text-bottom; box-shadow: 0 0 15px var(--gold); }
-        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
-
-        /* Gradient Text */
-        .gradient-text {
-            background: linear-gradient(to right, #FFFFFF, #FFD700, #FFFFFF);
-            background-size: 200% auto;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            animation: shine 3s linear infinite;
-            text-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
-        }
-        
-        @keyframes shine {
-            to { background-position: 200% center; }
-        }
-
-        .selection\:bg-gold *::selection {
-            background-color: var(--gold);
-            color: black;
-        }
-        
-        /* Floating Animation */
-        .float { animation: float 6s ease-in-out infinite; }
-        @keyframes float {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-20px); }
-            100% { transform: translateY(0px); }
-        }
+        /* Selection */
+        ::selection { background: var(--gold); color: black; }
     </style>
 </head>
-<body class="selection:bg-yellow-500 selection:text-black">
+<body class="overflow-x-hidden">
 
-    <!-- Dynamic Background Layers -->
-    <div class="bg-nebula"></div>
-    <canvas id="canvas" class="fixed top-0 left-0 w-full h-full -z-1"></canvas>
+    <!-- CUSTOM CURSOR -->
+    <div class="cursor-dot"></div>
+    <div class="cursor-outline"></div>
+
+    <!-- BACKGROUNDS -->
+    <div class="fixed inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-yellow-900/10 via-black to-black -z-50"></div>
+    <canvas id="canvas" class="fixed top-0 left-0 w-full h-full -z-40"></canvas>
 
     <!-- Navigation -->
-    <nav class="fixed w-full z-50 glass transition-all duration-300" id="navbar">
+    <nav class="fixed w-full z-50 glass transition-all duration-300 border-b border-white/5" id="navbar">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-20">
-                <div class="flex items-center gap-3 cursor-pointer group" onclick="window.scrollTo(0,0)">
-                    <div class="w-10 h-10 flex items-center justify-center border border-yellow-500 rounded-lg shadow-[0_0_20px_rgba(255,215,0,0.5)] bg-black group-hover:shadow-[0_0_30px_rgba(255,215,0,0.8)] transition-all duration-300">
-                        <span class="font-bold text-gold text-lg brand-font">TM</span>
+            <div class="flex justify-between items-center h-24">
+                <div class="flex items-center gap-4 cursor-pointer group" onclick="window.scrollTo(0,0)">
+                    <div class="relative w-12 h-12 flex items-center justify-center bg-black border border-yellow-500 rounded-xl overflow-hidden group-hover:scale-110 transition-transform duration-300 shadow-[0_0_20px_#FFD700]">
+                         <div class="absolute inset-0 bg-yellow-500/20 animate-pulse"></div>
+                        <span class="font-bold text-gold text-xl brand-font relative z-10">TM</span>
                     </div>
                     <div>
-                        <span class="font-bold text-lg leading-none block text-white group-hover:text-gold transition-colors text-shadow-sm">Tauqeer M.</span>
-                        <span class="text-[10px] text-gray-400 uppercase tracking-widest font-semibold block mt-0.5">SecOps & Finance</span>
+                        <span class="font-bold text-xl leading-none block text-white group-hover:text-gold transition-colors tracking-wide">Tauqeer M.</span>
+                        <span class="text-[10px] text-gray-400 uppercase tracking-[0.2em] font-bold block mt-1">SecOps & Finance</span>
                     </div>
                 </div>
 
-                <div class="hidden md:flex items-center space-x-8">
-                    <a href="#expertise" class="text-sm font-medium text-gray-300 hover:text-gold hover:text-shadow-lg transition-all uppercase tracking-wider hover:scale-110 duration-300">Expertise</a>
-                    <a href="#projects" class="text-sm font-medium text-gray-300 hover:text-gold hover:text-shadow-lg transition-all uppercase tracking-wider hover:scale-110 duration-300">Projects</a>
-                    <a href="#about" class="text-sm font-medium text-gray-300 hover:text-gold hover:text-shadow-lg transition-all uppercase tracking-wider hover:scale-110 duration-300">About</a>
-                    <a href="#contact" class="btn-shine px-6 py-2.5 text-sm font-bold text-black bg-gradient-to-r from-yellow-400 via-yellow-300 to-yellow-500 rounded-lg hover:from-white hover:to-yellow-200 transition-all shadow-[0_0_25px_rgba(255,215,0,0.6)] transform hover:scale-105">
-                        Hire Me
-                    </a>
+                <div class="hidden md:flex items-center space-x-10">
+                    <a href="#expertise" class="text-sm font-bold text-gray-400 hover:text-white transition-all uppercase tracking-widest hover:scale-110 duration-300 hover:text-shadow-lg">Expertise</a>
+                    <a href="#projects" class="text-sm font-bold text-gray-400 hover:text-white transition-all uppercase tracking-widest hover:scale-110 duration-300 hover:text-shadow-lg">Projects</a>
+                    <a href="#about" class="text-sm font-bold text-gray-400 hover:text-white transition-all uppercase tracking-widest hover:scale-110 duration-300 hover:text-shadow-lg">About</a>
+                    
+                    <!-- Rotating Border Button -->
+                    <div class="rotating-border rounded-lg p-[1px] group cursor-none">
+                        <a href="#contact" class="relative block bg-black text-white px-8 py-3 rounded-lg font-bold uppercase tracking-wider hover:bg-yellow-500 hover:text-black transition-colors z-10">
+                            Hire Me
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -249,201 +220,182 @@
 
     <!-- Hero Section -->
     <section class="min-h-screen flex items-center justify-center pt-20 relative px-4 overflow-hidden">
-        <!-- Intense Abstract Glows -->
-        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-yellow-500/10 rounded-full blur-[120px] animate-pulse"></div>
-        <div class="absolute top-0 right-0 w-[400px] h-[400px] bg-white/5 rounded-full blur-[100px]"></div>
+        
+        <!-- REACTOR CORE ANIMATION -->
+        <div class="reactor-container">
+            <div class="reactor-ring r1"></div>
+            <div class="reactor-ring r2"></div>
+            <div class="reactor-ring r3"></div>
+        </div>
 
         <div class="max-w-7xl mx-auto text-center relative z-10">
-            <div class="float inline-flex items-center gap-3 mb-8 px-5 py-2 rounded-full border border-yellow-500/50 bg-black/60 backdrop-blur-md text-gold text-xs font-bold tracking-widest uppercase reveal active shadow-[0_0_20px_rgba(255,215,0,0.2)]">
-                <span class="relative flex h-3 w-3">
-                  <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-yellow-400 opacity-75"></span>
-                  <span class="relative inline-flex rounded-full h-3 w-3 bg-yellow-500 shadow-[0_0_10px_#FFD700]"></span>
-                </span>
-                Available for Freelance & Contract
+            <div class="inline-flex items-center gap-3 mb-10 px-6 py-2 rounded-full border border-yellow-500/30 bg-black/80 backdrop-blur-xl shadow-[0_0_30px_rgba(255,215,0,0.15)] animate-bounce">
+                <span class="w-2 h-2 rounded-full bg-green-500 shadow-[0_0_10px_#00ff00] animate-pulse"></span>
+                <span class="text-gold text-xs font-bold tracking-[0.2em] uppercase">System Online & Ready</span>
             </div>
             
-            <h1 class="text-6xl md:text-8xl lg:text-9xl font-bold mb-8 tracking-tighter reveal active" style="transition-delay: 100ms">
-                <div class="glitch-wrapper">
-                    <span class="glitch" data-text="Tauqeer Mustafaa">Tauqeer Mustafaa</span>
-                </div>
+            <h1 class="text-6xl md:text-8xl lg:text-9xl font-black mb-8 tracking-tighter text-transparent bg-clip-text bg-gradient-to-b from-white via-gray-200 to-gray-600 drop-shadow-2xl">
+                <span class="hacker-text" data-value="TAUQEER">TAUQEER</span><br>
+                <span class="hacker-text text-gold text-glow" data-value="MUSTAFAA">MUSTAFAA</span>
             </h1>
             
-            <div class="h-20 mb-8 flex items-center justify-center gap-3 text-xl md:text-3xl reveal active" style="transition-delay: 200ms">
-                <i data-lucide="terminal" class="w-8 h-8 text-gold drop-shadow-[0_0_10px_rgba(255,215,0,0.8)]"></i>
-                <span id="typing-text" class="font-mono text-white-glow"></span><span class="cursor"></span>
+            <div class="h-24 flex flex-col items-center justify-center gap-2 mb-8">
+                 <div class="w-1 h-12 bg-gradient-to-b from-transparent via-yellow-500 to-transparent"></div>
+                 <p class="text-xl md:text-2xl text-gray-300 font-light tracking-wide">
+                     The Intersection of <span class="font-bold text-white bg-white/10 px-2 py-0.5 rounded">Security</span> & <span class="font-bold text-white bg-white/10 px-2 py-0.5 rounded">Finance</span>
+                 </p>
             </div>
 
-            <p class="max-w-3xl mx-auto text-gray-300 text-lg md:text-xl mb-12 leading-relaxed reveal active font-light" style="transition-delay: 300ms">
-                I secure digital assets and optimize financial performance. A unique blend of <span class="text-gold-glow font-bold">Cyber Security</span> expertise and <span class="text-gold-glow font-bold">Accountancy</span> precision.
-            </p>
-
-            <div class="flex flex-col sm:flex-row gap-6 justify-center reveal active" style="transition-delay: 400ms">
-                <a href="#projects" class="btn-shine px-10 py-5 bg-transparent border-2 border-yellow-500 text-gold font-bold rounded-xl hover:bg-yellow-500 hover:text-black transition-all shadow-[0_0_20px_rgba(255,215,0,0.3)] hover:shadow-[0_0_50px_rgba(255,215,0,0.6)] flex items-center justify-center gap-3 transform hover:-translate-y-1 text-lg">
-                    View Case Studies
-                    <i data-lucide="briefcase" class="w-5 h-5"></i>
+            <div class="flex flex-col sm:flex-row gap-8 justify-center mt-12">
+                <a href="#projects" class="group relative px-10 py-5 bg-yellow-500 text-black font-black text-lg uppercase tracking-wider rounded-none skew-x-[-10deg] hover:bg-white transition-colors duration-300 shadow-[0_0_30px_rgba(255,215,0,0.4)]">
+                    <span class="block skew-x-[10deg]">View Operations</span>
+                    <div class="absolute inset-0 border-2 border-white opacity-0 group-hover:opacity-100 group-hover:scale-105 transition-all duration-300"></div>
                 </a>
-                <a href="#contact" class="btn-shine px-10 py-5 glass text-white font-bold rounded-xl hover:bg-white/20 transition-all border border-white/30 flex items-center justify-center gap-3 hover:shadow-[0_0_30px_rgba(255,255,255,0.2)] text-lg">
-                    Download CV <i data-lucide="download" class="w-5 h-5 text-white"></i>
+                <a href="#contact" class="group relative px-10 py-5 bg-transparent border border-white/30 text-white font-black text-lg uppercase tracking-wider rounded-none skew-x-[-10deg] hover:bg-white/10 transition-colors duration-300 backdrop-blur-md">
+                    <span class="block skew-x-[10deg] flex items-center gap-2">Initiate Contact <i data-lucide="chevron-right" class="w-5 h-5"></i></span>
                 </a>
             </div>
-        </div>
-        
-        <div class="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce opacity-80">
-            <i data-lucide="chevrons-down" class="w-10 h-10 text-gold drop-shadow-[0_0_10px_rgba(255,215,0,0.8)]"></i>
         </div>
     </section>
 
-    <!-- Stats Section -->
-    <section class="py-16 border-y border-yellow-500/30 bg-black/80 backdrop-blur-sm relative overflow-hidden">
-        <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-20"></div>
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center reveal">
-                <div class="p-6 group hover:bg-white/5 rounded-2xl transition-all duration-500 hover:shadow-[0_0_30px_rgba(255,215,0,0.1)]">
-                    <div class="text-5xl md:text-6xl font-bold text-white mb-2 brand-font flex justify-center items-baseline gap-1 text-white-glow group-hover:scale-110 transition-transform">
-                        <span class="counter" data-target="3">0</span><span>+</span>
-                    </div>
-                    <div class="text-sm text-gold uppercase tracking-widest font-bold">Years Experience</div>
+    <!-- Stats Bar -->
+    <section class="border-y border-white/10 bg-black/80 backdrop-blur-md relative z-20">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="grid grid-cols-2 md:grid-cols-4 divide-x divide-white/10">
+                <div class="py-10 text-center group hover:bg-white/5 transition-colors">
+                    <div class="text-4xl font-black text-white mb-1 group-hover:text-gold transition-colors shadow-black drop-shadow-lg">3+</div>
+                    <div class="text-xs text-gray-500 uppercase tracking-[0.2em] font-bold">Years Active</div>
                 </div>
-                <div class="p-6 group hover:bg-white/5 rounded-2xl transition-all duration-500 hover:shadow-[0_0_30px_rgba(255,215,0,0.1)]">
-                    <div class="text-5xl md:text-6xl font-bold text-white mb-2 brand-font flex justify-center items-baseline gap-1 text-white-glow group-hover:scale-110 transition-transform">
-                        <span class="counter" data-target="15">0</span><span>+</span>
-                    </div>
-                    <div class="text-sm text-gold uppercase tracking-widest font-bold">Projects Delivered</div>
+                <div class="py-10 text-center group hover:bg-white/5 transition-colors">
+                    <div class="text-4xl font-black text-white mb-1 group-hover:text-gold transition-colors shadow-black drop-shadow-lg">15+</div>
+                    <div class="text-xs text-gray-500 uppercase tracking-[0.2em] font-bold">Deployments</div>
                 </div>
-                <div class="p-6 group hover:bg-white/5 rounded-2xl transition-all duration-500 hover:shadow-[0_0_30px_rgba(255,215,0,0.1)]">
-                    <div class="text-5xl md:text-6xl font-bold text-white mb-2 brand-font flex justify-center items-baseline gap-1 text-white-glow group-hover:scale-110 transition-transform">
-                        <span class="counter" data-target="99">0</span><span>%</span>
-                    </div>
-                    <div class="text-sm text-gold uppercase tracking-widest font-bold">Client Satisfaction</div>
+                <div class="py-10 text-center group hover:bg-white/5 transition-colors">
+                    <div class="text-4xl font-black text-white mb-1 group-hover:text-gold transition-colors shadow-black drop-shadow-lg">100%</div>
+                    <div class="text-xs text-gray-500 uppercase tracking-[0.2em] font-bold">Success Rate</div>
                 </div>
-                <div class="p-6 group hover:bg-white/5 rounded-2xl transition-all duration-500 hover:shadow-[0_0_30px_rgba(255,215,0,0.1)]">
-                    <div class="text-5xl md:text-6xl font-bold text-white mb-2 brand-font flex justify-center items-baseline gap-1 text-white-glow group-hover:scale-110 transition-transform">
-                        <span class="counter" data-target="24">0</span><span class="text-gold">/7</span>
-                    </div>
-                    <div class="text-sm text-gold uppercase tracking-widest font-bold">Support</div>
+                <div class="py-10 text-center group hover:bg-white/5 transition-colors">
+                    <div class="text-4xl font-black text-white mb-1 group-hover:text-gold transition-colors shadow-black drop-shadow-lg">24/7</div>
+                    <div class="text-xs text-gray-500 uppercase tracking-[0.2em] font-bold">Monitoring</div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Services / Expertise (3D Tilt Cards) -->
-    <section id="expertise" class="py-24 relative">
+    <!-- Expertise Section -->
+    <section id="expertise" class="py-32 relative">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-24 reveal">
-                <h2 class="text-4xl md:text-6xl font-bold mb-6 text-white text-shadow-lg">Technical <span class="gradient-text">Expertise</span></h2>
-                <div class="w-32 h-1 bg-gradient-to-r from-transparent via-yellow-500 to-transparent mx-auto shadow-[0_0_15px_#FFD700]"></div>
+            <div class="mb-24">
+                <h2 class="text-5xl md:text-7xl font-black text-white mb-6 uppercase tracking-tight hacker-text" data-value="CORE_MODULES">CORE_MODULES</h2>
+                <div class="h-1 w-32 bg-gradient-to-r from-yellow-500 to-transparent"></div>
             </div>
 
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
+            <div class="grid md:grid-cols-3 gap-8">
                 <!-- Card 1 -->
-                <div class="glass-card p-10 rounded-3xl group reveal tilt-card" data-tilt>
-                    <div class="w-16 h-16 rounded-2xl bg-black flex items-center justify-center mb-8 border border-yellow-500 group-hover:scale-110 transition-transform duration-300 shadow-[0_0_20px_rgba(255,215,0,0.4)] group-hover:bg-yellow-500 group-hover:text-black">
-                        <i data-lucide="shield-alert" class="w-8 h-8 text-gold group-hover:text-black transition-colors"></i>
-                    </div>
-                    <h3 class="text-3xl font-bold text-white mb-4 group-hover:text-gold transition-colors text-shadow-sm">Cyber Security</h3>
-                    <p class="text-gray-300 text-sm leading-relaxed mb-8 flex-grow">
-                        Protecting your infrastructure from evolving threats. Specializing in offensive security (Red Teaming) and defensive auditing.
-                    </p>
-                    <div class="border-t border-white/10 pt-6 mt-auto">
-                        <div class="flex flex-wrap gap-2">
-                            <span class="px-3 py-1 bg-yellow-500/10 text-gold text-xs font-bold rounded border border-yellow-500/30">Pen-Testing</span>
-                            <span class="px-3 py-1 bg-yellow-500/10 text-gold text-xs font-bold rounded border border-yellow-500/30">Risk Analysis</span>
+                <div class="scanline-card glass p-8 rounded-none border-l-4 border-yellow-500 hover:bg-white/5 transition-all group">
+                    <div class="mb-8 relative">
+                        <div class="w-16 h-16 bg-yellow-500/10 flex items-center justify-center border border-yellow-500 group-hover:rotate-45 transition-transform duration-500">
+                            <i data-lucide="shield" class="w-8 h-8 text-gold group-hover:-rotate-45 transition-transform duration-500"></i>
                         </div>
                     </div>
+                    <h3 class="text-2xl font-bold text-white mb-4 uppercase tracking-wide group-hover:text-gold transition-colors">Cyber Security</h3>
+                    <p class="text-gray-400 leading-relaxed mb-8">
+                        Offensive and defensive operations. Vulnerability assessment, penetration testing, and infrastructure hardening.
+                    </p>
+                    <ul class="space-y-2 text-sm text-gray-300 font-mono">
+                        <li class="flex items-center gap-2"><span class="text-gold">></span> Pen-Testing</li>
+                        <li class="flex items-center gap-2"><span class="text-gold">></span> Risk Analysis</li>
+                    </ul>
                 </div>
 
                 <!-- Card 2 -->
-                <div class="glass-card p-10 rounded-3xl group reveal tilt-card" data-tilt style="transition-delay: 100ms">
-                    <div class="w-16 h-16 rounded-2xl bg-black flex items-center justify-center mb-8 border border-white group-hover:scale-110 transition-transform duration-300 shadow-[0_0_20px_rgba(255,255,255,0.4)] group-hover:bg-white group-hover:text-black">
-                        <i data-lucide="calculator" class="w-8 h-8 text-white group-hover:text-black transition-colors"></i>
-                    </div>
-                    <h3 class="text-3xl font-bold text-white mb-4 group-hover:text-white-glow transition-colors text-shadow-sm">Accountancy</h3>
-                    <p class="text-gray-300 text-sm leading-relaxed mb-8 flex-grow">
-                        Ensuring financial health and regulatory compliance. From daily bookkeeping to complex financial forecasting and audits.
-                    </p>
-                    <div class="border-t border-white/10 pt-6 mt-auto">
-                        <div class="flex flex-wrap gap-2">
-                            <span class="px-3 py-1 bg-white/10 text-white text-xs font-bold rounded border border-white/30">Bookkeeping</span>
-                            <span class="px-3 py-1 bg-white/10 text-white text-xs font-bold rounded border border-white/30">Auditing</span>
+                <div class="scanline-card glass p-8 rounded-none border-l-4 border-white hover:bg-white/5 transition-all group">
+                    <div class="mb-8 relative">
+                        <div class="w-16 h-16 bg-white/10 flex items-center justify-center border border-white group-hover:rotate-45 transition-transform duration-500">
+                            <i data-lucide="activity" class="w-8 h-8 text-white group-hover:-rotate-45 transition-transform duration-500"></i>
                         </div>
                     </div>
+                    <h3 class="text-2xl font-bold text-white mb-4 uppercase tracking-wide group-hover:text-white transition-colors text-shadow-white">Accountancy</h3>
+                    <p class="text-gray-400 leading-relaxed mb-8">
+                        Financial precision meets regulatory compliance. Auditing, bookkeeping, and strategic financial planning.
+                    </p>
+                    <ul class="space-y-2 text-sm text-gray-300 font-mono">
+                        <li class="flex items-center gap-2"><span class="text-white">></span> Auditing</li>
+                        <li class="flex items-center gap-2"><span class="text-white">></span> Forecasting</li>
+                    </ul>
                 </div>
 
                 <!-- Card 3 -->
-                <div class="glass-card p-10 rounded-3xl group reveal tilt-card" data-tilt style="transition-delay: 200ms">
-                    <div class="w-16 h-16 rounded-2xl bg-black flex items-center justify-center mb-8 border border-yellow-500 group-hover:scale-110 transition-transform duration-300 shadow-[0_0_20px_rgba(255,215,0,0.4)] group-hover:bg-yellow-500 group-hover:text-black">
-                        <i data-lucide="zap" class="w-8 h-8 text-gold group-hover:text-black transition-colors"></i>
-                    </div>
-                    <h3 class="text-3xl font-bold text-white mb-4 group-hover:text-gold transition-colors text-shadow-sm">Freelancing</h3>
-                    <p class="text-gray-300 text-sm leading-relaxed mb-8 flex-grow">
-                        Agile, project-based engagement model. Ideal for startups and SMEs needing high-level expertise without full-time overhead.
-                    </p>
-                    <div class="border-t border-white/10 pt-6 mt-auto">
-                        <div class="flex flex-wrap gap-2">
-                            <span class="px-3 py-1 bg-yellow-500/10 text-gold text-xs font-bold rounded border border-yellow-500/30">Remote</span>
-                            <span class="px-3 py-1 bg-yellow-500/10 text-gold text-xs font-bold rounded border border-yellow-500/30">Contract</span>
+                <div class="scanline-card glass p-8 rounded-none border-l-4 border-yellow-500 hover:bg-white/5 transition-all group">
+                    <div class="mb-8 relative">
+                        <div class="w-16 h-16 bg-yellow-500/10 flex items-center justify-center border border-yellow-500 group-hover:rotate-45 transition-transform duration-500">
+                            <i data-lucide="cpu" class="w-8 h-8 text-gold group-hover:-rotate-45 transition-transform duration-500"></i>
                         </div>
                     </div>
+                    <h3 class="text-2xl font-bold text-white mb-4 uppercase tracking-wide group-hover:text-gold transition-colors">Freelancing</h3>
+                    <p class="text-gray-400 leading-relaxed mb-8">
+                        Agile engagement models for startups and enterprises. Rapid deployment of skills where you need them most.
+                    </p>
+                    <ul class="space-y-2 text-sm text-gray-300 font-mono">
+                        <li class="flex items-center gap-2"><span class="text-gold">></span> Remote Ops</li>
+                        <li class="flex items-center gap-2"><span class="text-gold">></span> Contract</li>
+                    </ul>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Featured Projects (Case Studies) -->
-    <section id="projects" class="py-24 bg-black/80 backdrop-blur-md">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex flex-col md:flex-row justify-between items-end mb-16 reveal">
+    <!-- Projects (Holographic Style) -->
+    <section id="projects" class="py-32 bg-black/90 relative">
+        <div class="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:40px_40px]"></div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-20">
                 <div>
-                    <h2 class="text-4xl md:text-5xl font-bold text-white mb-4">Selected <span class="gradient-text">Projects</span></h2>
-                    <p class="text-gray-400">Real-world application of security and financial principles.</p>
+                    <h2 class="text-5xl md:text-7xl font-black text-white mb-6 uppercase tracking-tight hacker-text" data-value="CASE_LOGS">CASE_LOGS</h2>
+                    <p class="text-gray-400 font-mono max-w-xl">Decrypting challenges through applied security and financial logic.</p>
                 </div>
-                <a href="#" class="hidden md:flex items-center gap-2 text-gold hover:text-white hover:text-shadow-lg transition-all mt-4 md:mt-0 uppercase font-bold text-sm tracking-widest border-b border-gold pb-1 hover:border-white">
-                    View GitHub <i data-lucide="arrow-right" class="w-4 h-4"></i>
-                </a>
             </div>
 
-            <div class="grid md:grid-cols-2 gap-10">
+            <div class="grid md:grid-cols-2 gap-12">
                 <!-- Project 1 -->
-                <div class="glass-card group relative overflow-hidden rounded-3xl aspect-video cursor-pointer hover:border-yellow-500 transition-colors duration-500">
-                    <!-- Placeholder Image Gradient -->
-                    <div class="absolute inset-0 bg-gradient-to-br from-black to-gray-900 group-hover:scale-105 transition-transform duration-700"></div>
-                    <div class="absolute inset-0 bg-[radial-gradient(circle_at_50%_120%,rgba(255,215,0,0.1),transparent)] opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                    
-                    <div class="absolute inset-0 p-10 flex flex-col justify-end bg-gradient-to-t from-black via-black/90 to-transparent">
-                        <div class="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
-                            <div class="flex gap-2 mb-4">
-                                <span class="text-xs font-bold px-3 py-1 bg-yellow-500 text-black rounded shadow-[0_0_10px_#FFD700]">SECURITY</span>
-                            </div>
-                            <h3 class="text-3xl font-bold text-white mb-3 group-hover:text-gold transition-colors text-shadow-sm">E-Commerce Vulnerability Assessment</h3>
-                            <p class="text-gray-400 text-sm mb-6 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100">
-                                Conducted a full penetration test for a mid-sized retail platform, identifying 3 critical SQL injection vulnerabilities and securing customer data.
-                            </p>
-                            <div class="flex items-center gap-4 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-200">
-                                <span class="text-xs text-gray-300 flex items-center gap-2"><i data-lucide="code" class="w-4 h-4 text-gold"></i> SQLMap</span>
-                                <span class="text-xs text-gray-300 flex items-center gap-2"><i data-lucide="shield" class="w-4 h-4 text-gold"></i> OWASP Top 10</span>
-                            </div>
+                <div class="group relative cursor-none">
+                    <div class="absolute -inset-1 bg-gradient-to-r from-yellow-500 to-white rounded-lg blur opacity-25 group-hover:opacity-100 transition duration-1000 group-hover:duration-200"></div>
+                    <div class="relative bg-black border border-white/10 p-1 rounded-lg">
+                        <div class="h-80 bg-gray-900 rounded overflow-hidden relative">
+                             <!-- Abstract UI representation -->
+                             <div class="absolute inset-0 bg-gradient-to-br from-black to-yellow-900/20"></div>
+                             <div class="absolute bottom-0 left-0 w-full p-8 bg-gradient-to-t from-black via-black/90 to-transparent">
+                                 <span class="text-gold font-mono text-xs mb-2 block">> SECURITY_PROTOCOL</span>
+                                 <h3 class="text-3xl font-bold text-white mb-2">E-Commerce Pen-Test</h3>
+                                 <p class="text-gray-400 text-sm mb-4">Identified and patched 3 critical SQLi vulnerabilities.</p>
+                                 <div class="flex gap-2">
+                                     <span class="px-2 py-1 border border-white/20 text-xs text-white uppercase">SQLMap</span>
+                                     <span class="px-2 py-1 border border-white/20 text-xs text-white uppercase">BurpSuite</span>
+                                 </div>
+                             </div>
+                             <!-- Scanline overlay -->
+                             <div class="absolute inset-0 bg-[linear-gradient(transparent_50%,rgba(0,0,0,0.5)_50%)] bg-[size:100%_4px] opacity-20 pointer-events-none"></div>
                         </div>
                     </div>
                 </div>
 
                 <!-- Project 2 -->
-                <div class="glass-card group relative overflow-hidden rounded-3xl aspect-video cursor-pointer hover:border-white transition-colors duration-500" style="transition-delay: 100ms">
-                    <div class="absolute inset-0 bg-gradient-to-br from-black to-gray-800 group-hover:scale-105 transition-transform duration-700"></div>
-                     <div class="absolute inset-0 bg-[radial-gradient(circle_at_50%_120%,rgba(255,255,255,0.1),transparent)] opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                    
-                    <div class="absolute inset-0 p-10 flex flex-col justify-end bg-gradient-to-t from-black via-black/90 to-transparent">
-                        <div class="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
-                            <div class="flex gap-2 mb-4">
-                                <span class="text-xs font-bold px-3 py-1 bg-white text-black rounded shadow-[0_0_10px_white]">FINANCE</span>
-                            </div>
-                            <h3 class="text-3xl font-bold text-white mb-3 group-hover:text-white-glow transition-colors">SME Financial Audit</h3>
-                            <p class="text-gray-400 text-sm mb-6 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100">
-                                Audited 2 years of financial records for a logistics startup, identifying 15% in potential tax savings and streamlining their bookkeeping workflow.
-                            </p>
-                            <div class="flex items-center gap-4 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-200">
-                                <span class="text-xs text-gray-300 flex items-center gap-2"><i data-lucide="file-spreadsheet" class="w-4 h-4"></i> Excel</span>
-                                <span class="text-xs text-gray-300 flex items-center gap-2"><i data-lucide="pie-chart" class="w-4 h-4"></i> QuickBooks</span>
-                            </div>
+                <div class="group relative cursor-none">
+                    <div class="absolute -inset-1 bg-gradient-to-r from-white to-gray-500 rounded-lg blur opacity-25 group-hover:opacity-100 transition duration-1000 group-hover:duration-200"></div>
+                    <div class="relative bg-black border border-white/10 p-1 rounded-lg">
+                        <div class="h-80 bg-gray-900 rounded overflow-hidden relative">
+                             <div class="absolute inset-0 bg-gradient-to-br from-black to-gray-800"></div>
+                             <div class="absolute bottom-0 left-0 w-full p-8 bg-gradient-to-t from-black via-black/90 to-transparent">
+                                 <span class="text-white font-mono text-xs mb-2 block">> FINANCIAL_AUDIT</span>
+                                 <h3 class="text-3xl font-bold text-white mb-2">SME Restructuring</h3>
+                                 <p class="text-gray-400 text-sm mb-4">Optimized tax workflows saving 15% annual revenue.</p>
+                                 <div class="flex gap-2">
+                                     <span class="px-2 py-1 border border-white/20 text-xs text-white uppercase">Excel</span>
+                                     <span class="px-2 py-1 border border-white/20 text-xs text-white uppercase">Xero</span>
+                                 </div>
+                             </div>
+                             <div class="absolute inset-0 bg-[linear-gradient(transparent_50%,rgba(0,0,0,0.5)_50%)] bg-[size:100%_4px] opacity-20 pointer-events-none"></div>
                         </div>
                     </div>
                 </div>
@@ -451,75 +403,67 @@
         </div>
     </section>
 
-    <!-- About & Timeline -->
-    <section id="about" class="py-24">
+    <!-- Terminal Bio -->
+    <section id="about" class="py-32">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex flex-col lg:flex-row gap-20">
-                <!-- Terminal Bio -->
-                <div class="lg:w-5/12 reveal">
-                    <h2 class="text-4xl font-bold text-white mb-10 text-shadow-sm">About <span class="gradient-text">Me</span></h2>
-                    <div class="bg-black rounded-xl overflow-hidden border border-yellow-500/50 shadow-[0_0_50px_rgba(255,215,0,0.2)] hover:shadow-[0_0_70px_rgba(255,215,0,0.3)] transition-shadow duration-500">
-                        <!-- Terminal Header -->
-                        <div class="bg-gray-900 px-4 py-3 flex items-center gap-2 border-b border-gray-800">
-                            <div class="w-3 h-3 rounded-full bg-red-500 shadow-[0_0_8px_red]"></div>
-                            <div class="w-3 h-3 rounded-full bg-yellow-500 shadow-[0_0_8px_orange]"></div>
-                            <div class="w-3 h-3 rounded-full bg-green-500 shadow-[0_0_8px_green]"></div>
-                            <div class="ml-4 text-xs text-gold font-mono opacity-90">root@tauqeer-system:~/bio</div>
-                        </div>
-                        <!-- Terminal Body -->
-                        <div class="p-8 font-mono text-sm leading-relaxed text-gray-300 bg-black min-h-[300px]">
-                            <p class="mb-6"><span class="text-gold font-bold">➜</span> <span class="text-blue-400 font-bold">~</span> whoami</p>
-                            <p class="mb-6 text-white text-lg">
-                                > A disciplined student and professional freelancer bridging the gap between numbers and logic.
-                            </p>
-                            <p class="mb-6"><span class="text-gold font-bold">➜</span> <span class="text-blue-400 font-bold">~</span> cat skills.json</p>
-                            <div class="text-yellow-100 pl-4 border-l-2 border-yellow-500/50">
-                                {<br>
-                                &nbsp;&nbsp;<span class="text-gold">"core"</span>: ["Network Security", "Financial Audit"],<br>
-                                &nbsp;&nbsp;<span class="text-gold">"tools"</span>: ["Wireshark", "Metasploit", "Excel", "Xero"],<br>
-                                &nbsp;&nbsp;<span class="text-gold">"soft_skills"</span>: ["Critical Thinking", "Detail Oriented"]<br>
-                                }
-                            </div>
-                            <p class="mt-6 animate-pulse text-gold font-bold text-xl">_</p>
-                        </div>
-                    </div>
+            <div class="grid lg:grid-cols-2 gap-20 items-center">
+                <div>
+                     <h2 class="text-5xl font-black text-white mb-8 hacker-text" data-value="USER_PROFILE">USER_PROFILE</h2>
+                     <div class="space-y-8">
+                         <div class="pl-6 border-l-2 border-yellow-500">
+                             <h4 class="text-gold font-bold uppercase tracking-widest mb-2">Background</h4>
+                             <p class="text-gray-400 leading-relaxed">
+                                 A disciplined student and professional freelancer. My dual background allows me to understand the "Value" of data (Accountancy) and the "Cost" of losing it (Cyber Security).
+                             </p>
+                         </div>
+                         <div class="pl-6 border-l-2 border-white/30">
+                             <h4 class="text-white font-bold uppercase tracking-widest mb-2">Education</h4>
+                             <ul class="space-y-4">
+                                 <li>
+                                     <div class="text-white font-bold">Cyber Security Certification</div>
+                                     <div class="text-sm text-gray-500">Institute of Information Technology</div>
+                                 </li>
+                                 <li>
+                                     <div class="text-white font-bold">Bachelor of Commerce</div>
+                                     <div class="text-sm text-gray-500">University of Commerce</div>
+                                 </li>
+                             </ul>
+                         </div>
+                     </div>
                 </div>
 
-                <!-- Timeline -->
-                <div class="lg:w-7/12 reveal" style="transition-delay: 200ms">
-                    <h2 class="text-4xl font-bold text-white mb-10 text-shadow-sm">Education & <span class="gradient-text">Experience</span></h2>
-                    <div class="space-y-12 border-l-2 border-white/10 ml-3 pl-10 relative">
-                        <!-- Item 1 -->
-                        <div class="relative group">
-                            <span class="absolute -left-[50px] top-1 h-6 w-6 rounded-full border-4 border-black bg-gold shadow-[0_0_15px_#FFD700] group-hover:scale-150 transition-transform duration-300"></span>
-                            <div class="flex flex-col sm:flex-row sm:items-baseline gap-4 mb-2">
-                                <h3 class="text-2xl font-bold text-white group-hover:text-gold transition-colors text-shadow-sm">Freelance Consultant</h3>
-                                <span class="text-sm text-gold font-mono font-bold px-2 py-1 bg-yellow-500/10 rounded border border-yellow-500/20">2023 - Present</span>
-                            </div>
-                            <p class="text-gray-300 mb-3 font-semibold">Independent Contractor</p>
-                            <p class="text-gray-500 leading-relaxed">Providing security auditing and bookkeeping services to international clients via Upwork and direct contracts.</p>
+                <!-- Live Terminal -->
+                <div class="bg-black border border-white/10 rounded-lg p-2 shadow-2xl relative overflow-hidden group">
+                    <div class="absolute inset-0 bg-yellow-500/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                    <div class="bg-gray-900 rounded-t px-4 py-2 flex items-center gap-2">
+                        <div class="flex gap-2">
+                            <div class="w-3 h-3 rounded-full bg-red-500"></div>
+                            <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+                            <div class="w-3 h-3 rounded-full bg-green-500"></div>
                         </div>
-
-                        <!-- Item 2 -->
-                        <div class="relative group">
-                            <span class="absolute -left-[50px] top-1 h-6 w-6 rounded-full border-4 border-black bg-white shadow-[0_0_15px_white] group-hover:scale-150 transition-transform duration-300"></span>
-                            <div class="flex flex-col sm:flex-row sm:items-baseline gap-4 mb-2">
-                                <h3 class="text-2xl font-bold text-white group-hover:text-white-glow transition-colors">Cyber Security Certification</h3>
-                                <span class="text-sm text-gray-300 font-mono font-bold px-2 py-1 bg-white/10 rounded border border-white/20">2022 - 2023</span>
-                            </div>
-                            <p class="text-gray-300 mb-3 font-semibold">Institute of Information Technology</p>
-                            <p class="text-gray-500 leading-relaxed">Specialized training in Network Defense, Ethical Hacking, and Cryptography.</p>
+                        <div class="text-xs text-gray-500 font-mono ml-4">root@tauqeer-terminal:~</div>
+                    </div>
+                    <div class="p-6 font-mono text-sm min-h-[300px] text-gray-300">
+                        <div class="mb-4">
+                            <span class="text-green-500">➜</span> <span class="text-blue-400">~</span> init_skills_matrix.sh
                         </div>
-
-                        <!-- Item 3 -->
-                        <div class="relative group">
-                            <span class="absolute -left-[50px] top-1 h-6 w-6 rounded-full border-4 border-black bg-yellow-700 shadow-[0_0_15px_#B8860B] group-hover:scale-150 transition-transform duration-300"></span>
-                            <div class="flex flex-col sm:flex-row sm:items-baseline gap-4 mb-2">
-                                <h3 class="text-2xl font-bold text-white group-hover:text-yellow-600 transition-colors">Bachelor of Commerce</h3>
-                                <span class="text-sm text-yellow-700 font-mono font-bold px-2 py-1 bg-yellow-900/10 rounded border border-yellow-900/20">2020 - 2024</span>
+                        <div class="mb-4 text-white">
+                            [OK] Loading Network Protocols...<br>
+                            [OK] Loading Financial Standards...<br>
+                            [OK] Synchronizing Soft Skills...
+                        </div>
+                        <div class="grid grid-cols-2 gap-4 text-xs mt-6">
+                            <div class="border border-white/10 p-2">
+                                <span class="text-gold block mb-1">HARD SKILLS</span>
+                                Wireshark, Metasploit, Python, Excel, QuickBooks, Auditing
                             </div>
-                            <p class="text-gray-300 mb-3 font-semibold">University of Commerce</p>
-                            <p class="text-gray-500 leading-relaxed">Major in Accounting & Finance. Focus on Corporate Finance and Auditing Standards.</p>
+                            <div class="border border-white/10 p-2">
+                                <span class="text-gold block mb-1">SOFT SKILLS</span>
+                                Critical Thinking, Detail Oriented, Crisis Management
+                            </div>
+                        </div>
+                        <div class="mt-6 animate-pulse">
+                            <span class="text-green-500">➜</span> <span class="text-blue-400">~</span> <span class="w-2 h-4 bg-white inline-block align-middle"></span>
                         </div>
                     </div>
                 </div>
@@ -527,53 +471,42 @@
         </div>
     </section>
 
-    <!-- Contact CTA -->
-    <section id="contact" class="py-24 relative overflow-hidden">
-        <div class="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-gold to-transparent opacity-80 shadow-[0_0_20px_#FFD700]"></div>
-        <div class="max-w-4xl mx-auto px-4 text-center reveal">
-            <h2 class="text-5xl md:text-7xl font-bold text-white mb-8 text-shadow-lg">Let's <span class="gradient-text">Collaborate</span></h2>
-            <p class="text-xl text-gray-300 mb-12 max-w-2xl mx-auto font-light">I am currently accepting new freelance projects. Tell me about your security needs or financial goals.</p>
-            
-            <form class="glass p-10 md:p-14 rounded-[2.5rem] max-w-2xl mx-auto border border-yellow-500/30 text-left shadow-[0_0_50px_rgba(255,215,0,0.15)] relative overflow-hidden">
-                <div class="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-yellow-500 via-white to-yellow-500"></div>
+    <!-- Contact -->
+    <section id="contact" class="py-32 relative overflow-hidden">
+        <div class="absolute inset-0 bg-yellow-500/5 transform -skew-y-3 origin-top-left"></div>
+        <div class="max-w-4xl mx-auto px-4 text-center relative z-10">
+            <h2 class="text-6xl font-black text-white mb-8 hacker-text" data-value="ESTABLISH_LINK">ESTABLISH_LINK</h2>
+            <p class="text-xl text-gray-400 mb-12">Secure communications channel open. Ready for deployment.</p>
+
+            <form class="bg-black/80 backdrop-blur-xl border border-white/10 p-12 rounded-none relative">
+                <!-- Corner decorations -->
+                <div class="absolute top-0 left-0 w-4 h-4 border-l-2 border-t-2 border-gold"></div>
+                <div class="absolute top-0 right-0 w-4 h-4 border-r-2 border-t-2 border-gold"></div>
+                <div class="absolute bottom-0 left-0 w-4 h-4 border-l-2 border-bottom-2 border-gold"></div>
+                <div class="absolute bottom-0 right-0 w-4 h-4 border-r-2 border-b-2 border-gold"></div>
+
+                <div class="grid md:grid-cols-2 gap-6 mb-8">
+                    <input type="text" placeholder="IDENTITY" class="bg-transparent border-b border-white/20 py-4 text-white focus:outline-none focus:border-gold transition-colors font-mono placeholder-gray-600">
+                    <input type="email" placeholder="CONTACT_ADDRESS" class="bg-transparent border-b border-white/20 py-4 text-white focus:outline-none focus:border-gold transition-colors font-mono placeholder-gray-600">
+                </div>
+                <textarea rows="4" placeholder="MISSION_BRIEF" class="w-full bg-transparent border-b border-white/20 py-4 text-white focus:outline-none focus:border-gold transition-colors font-mono placeholder-gray-600 mb-8"></textarea>
                 
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
-                    <div class="relative group">
-                        <input type="text" id="name" class="peer w-full bg-black/80 border border-gray-700 rounded-xl px-5 py-4 text-white focus:outline-none focus:border-gold focus:shadow-[0_0_15px_rgba(255,215,0,0.4)] transition-all placeholder-transparent" placeholder="Name">
-                        <label for="name" class="absolute left-4 -top-3 bg-black px-2 text-sm text-gold font-bold transition-all peer-placeholder-shown:top-4 peer-placeholder-shown:text-gray-500 peer-placeholder-shown:text-base peer-placeholder-shown:font-normal peer-focus:-top-3 peer-focus:text-sm peer-focus:text-gold peer-focus:font-bold">Name</label>
-                    </div>
-                    <div class="relative group">
-                        <input type="email" id="email" class="peer w-full bg-black/80 border border-gray-700 rounded-xl px-5 py-4 text-white focus:outline-none focus:border-gold focus:shadow-[0_0_15px_rgba(255,215,0,0.4)] transition-all placeholder-transparent" placeholder="Email">
-                        <label for="email" class="absolute left-4 -top-3 bg-black px-2 text-sm text-gold font-bold transition-all peer-placeholder-shown:top-4 peer-placeholder-shown:text-gray-500 peer-placeholder-shown:text-base peer-placeholder-shown:font-normal peer-focus:-top-3 peer-focus:text-sm peer-focus:text-gold peer-focus:font-bold">Email</label>
-                    </div>
-                </div>
-                <div class="relative mb-10 group">
-                    <textarea id="msg" rows="4" class="peer w-full bg-black/80 border border-gray-700 rounded-xl px-5 py-4 text-white focus:outline-none focus:border-gold focus:shadow-[0_0_15px_rgba(255,215,0,0.4)] transition-all placeholder-transparent" placeholder="Message"></textarea>
-                    <label for="msg" class="absolute left-4 -top-3 bg-black px-2 text-sm text-gold font-bold transition-all peer-placeholder-shown:top-4 peer-placeholder-shown:text-gray-500 peer-placeholder-shown:text-base peer-placeholder-shown:font-normal peer-focus:-top-3 peer-focus:text-sm peer-focus:text-gold peer-focus:font-bold">Project Details</label>
-                </div>
-                <button type="button" class="btn-shine w-full bg-gradient-to-r from-yellow-500 via-yellow-400 to-yellow-600 text-black font-extrabold text-lg py-5 rounded-xl hover:from-white hover:to-gray-200 transition-all transform hover:-translate-y-1 shadow-[0_0_30px_rgba(255,215,0,0.5)] flex items-center justify-center gap-3">
-                    Send Message <i data-lucide="send" class="w-5 h-5 text-black"></i>
+                <button class="w-full bg-white text-black font-black uppercase tracking-widest py-5 hover:bg-gold transition-colors shadow-[0_0_20px_rgba(255,255,255,0.2)]">
+                    Transmit Data
                 </button>
             </form>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="bg-black border-t border-white/10 py-16 relative">
-         <div class="absolute inset-0 bg-gradient-to-t from-yellow-900/10 to-transparent pointer-events-none"></div>
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-8 relative z-10">
-            <div class="flex items-center gap-4">
-                 <div class="w-12 h-12 border-2 border-gold rounded-xl flex items-center justify-center text-gold font-bold text-sm shadow-[0_0_20px_rgba(255,215,0,0.4)] bg-black">TM</div>
-                 <div class="flex flex-col">
-                     <span class="text-white font-bold text-lg text-shadow-sm">Tauqeer Mustafaa</span>
-                     <span class="text-gray-500 text-sm">© 2024 All rights reserved.</span>
-                 </div>
+    <footer class="bg-black border-t border-white/10 py-12">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <div class="flex items-center justify-center gap-4 mb-8">
+                 <div class="w-10 h-10 border border-gold flex items-center justify-center text-gold font-bold">TM</div>
+                 <span class="text-white font-bold tracking-widest uppercase">Tauqeer Mustafaa</span>
             </div>
-            <div class="flex gap-8">
-                <a href="#" class="p-3 bg-white/5 rounded-full text-gray-400 hover:text-black hover:bg-gold transition-all hover:scale-110 shadow-lg hover:shadow-[0_0_20px_#FFD700]"><i data-lucide="github" class="w-5 h-5"></i></a>
-                <a href="#" class="p-3 bg-white/5 rounded-full text-gray-400 hover:text-black hover:bg-white transition-all hover:scale-110 shadow-lg hover:shadow-[0_0_20px_white]"><i data-lucide="linkedin" class="w-5 h-5"></i></a>
-                <a href="#" class="p-3 bg-white/5 rounded-full text-gray-400 hover:text-black hover:bg-gold transition-all hover:scale-110 shadow-lg hover:shadow-[0_0_20px_#FFD700]"><i data-lucide="twitter" class="w-5 h-5"></i></a>
-                <a href="#" class="p-3 bg-white/5 rounded-full text-gray-400 hover:text-black hover:bg-white transition-all hover:scale-110 shadow-lg hover:shadow-[0_0_20px_white]"><i data-lucide="mail" class="w-5 h-5"></i></a>
+            <div class="text-gray-600 text-xs font-mono">
+                SYSTEM_ID: 2024-PORTFOLIO-V9 <span class="mx-2">|</span> ALL SYSTEMS NOMINAL
             </div>
         </div>
     </footer>
@@ -581,44 +514,76 @@
     <script>
         lucide.createIcons();
 
-        // --- Typing Effect ---
-        const typingElement = document.getElementById('typing-text');
-        const roles = ["Cyber Security Specialist", "Financial Auditor", "Student Freelancer", "Data Analyst"];
-        let roleIndex = 0, charIndex = 0, isDeleting = false;
+        // --- CUSTOM CURSOR LOGIC ---
+        const cursorDot = document.querySelector('.cursor-dot');
+        const cursorOutline = document.querySelector('.cursor-outline');
 
-        function type() {
-            const currentRole = roles[roleIndex];
-            if (isDeleting) {
-                typingElement.textContent = currentRole.substring(0, charIndex - 1);
-                charIndex--;
-            } else {
-                typingElement.textContent = currentRole.substring(0, charIndex + 1);
-                charIndex++;
-            }
+        window.addEventListener('mousemove', (e) => {
+            const posX = e.clientX;
+            const posY = e.clientY;
 
-            let typeSpeed = isDeleting ? 40 : 80;
-            if (!isDeleting && charIndex === currentRole.length) {
-                isDeleting = true;
-                typeSpeed = 2000; 
-            } else if (isDeleting && charIndex === 0) {
-                isDeleting = false;
-                roleIndex = (roleIndex + 1) % roles.length;
-                typeSpeed = 500;
-            }
-            setTimeout(type, typeSpeed);
-        }
-        document.addEventListener('DOMContentLoaded', type);
+            // Dot follows instantly
+            cursorDot.style.left = `${posX}px`;
+            cursorDot.style.top = `${posY}px`;
 
-        // --- Interactive Neural Network Canvas (High Brightness) ---
+            // Outline follows with lag
+            cursorOutline.animate({
+                left: `${posX}px`,
+                top: `${posY}px`
+            }, { duration: 500, fill: "forwards" });
+        });
+
+        // --- HACKER TEXT DECODE EFFECT ---
+        const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%&";
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    // Reveal effect
+                    entry.target.classList.add('visible');
+                    
+                    // Decode effect
+                    let iterations = 0;
+                    const target = entry.target;
+                    const originalText = target.dataset.value;
+                    
+                    if(!originalText) return; // Skip if no data-value
+
+                    const interval = setInterval(() => {
+                        target.innerText = originalText
+                            .split("")
+                            .map((letter, index) => {
+                                if(index < iterations) {
+                                    return originalText[index];
+                                }
+                                return letters[Math.floor(Math.random() * 26)];
+                            })
+                            .join("");
+                        
+                        if(iterations >= originalText.length){ 
+                            clearInterval(interval);
+                        }
+                        
+                        iterations += 1/3;
+                    }, 30);
+                    
+                    observer.unobserve(target);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        document.querySelectorAll('.hacker-text').forEach(el => observer.observe(el));
+
+        // --- PARTICLE CANVAS ---
         const canvas = document.getElementById('canvas');
         const ctx = canvas.getContext('2d');
         let width, height;
         let particles = [];
-        const mouse = { x: null, y: null, radius: 200 };
+        const mouse = { x: null, y: null, radius: 250 };
 
-        window.addEventListener('mousemove', (event) => {
-            mouse.x = event.x;
-            mouse.y = event.y;
+        window.addEventListener('mousemove', (e) => {
+            mouse.x = e.x;
+            mouse.y = e.y;
         });
 
         function resize() {
@@ -632,15 +597,16 @@
             constructor() {
                 this.x = Math.random() * width;
                 this.y = Math.random() * height;
-                this.vx = (Math.random() - 0.5) * 0.8; // Faster movement
-                this.vy = (Math.random() - 0.5) * 0.8;
-                this.size = Math.random() * 3 + 1; // Larger particles
-                this.baseColor = Math.random() > 0.5 ? '#FFD700' : '#FFFFFF'; 
+                this.vx = (Math.random() - 0.5) * 1.5;
+                this.vy = (Math.random() - 0.5) * 1.5;
+                this.size = Math.random() * 2 + 1;
+                this.color = Math.random() > 0.5 ? '#FFD700' : '#444444'; 
             }
             update() {
                 this.x += this.vx;
                 this.y += this.vy;
 
+                // Mouse interaction
                 if (mouse.x != null) {
                     let dx = mouse.x - this.x;
                     let dy = mouse.y - this.y;
@@ -649,7 +615,7 @@
                         const forceDirectionX = dx / distance;
                         const forceDirectionY = dy / distance;
                         const force = (mouse.radius - distance) / mouse.radius;
-                        const directionX = forceDirectionX * force * 5; // Stronger reaction
+                        const directionX = forceDirectionX * force * 5; 
                         const directionY = forceDirectionY * force * 5;
                         this.x -= directionX;
                         this.y -= directionY;
@@ -662,102 +628,44 @@
             draw() {
                 ctx.beginPath();
                 ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                ctx.fillStyle = this.baseColor;
-                ctx.shadowBlur = 10; // Glow
-                ctx.shadowColor = this.baseColor;
+                ctx.fillStyle = this.color;
                 ctx.fill();
-                ctx.shadowBlur = 0; // Reset
             }
         }
 
         function initParticles() {
             particles = [];
-            let numberOfParticles = (canvas.width * canvas.height) / 8000;
+            let numberOfParticles = (canvas.width * canvas.height) / 7000;
             for (let i = 0; i < numberOfParticles; i++) {
                 particles.push(new Particle());
             }
         }
 
-        function animateParticles() {
+        function animate() {
             ctx.clearRect(0, 0, width, height);
             for (let i = 0; i < particles.length; i++) {
                 particles[i].update();
                 particles[i].draw();
                 
+                // Connections
                 for (let j = i; j < particles.length; j++) {
                     let dx = particles[i].x - particles[j].x;
                     let dy = particles[i].y - particles[j].y;
                     let distance = Math.sqrt(dx * dx + dy * dy);
-                    if (distance < 120) {
+                    if (distance < 150) {
                         ctx.beginPath();
-                        ctx.strokeStyle = `rgba(255, 215, 0, ${0.4 - distance/400})`; // Gold connections
-                        ctx.lineWidth = 0.8;
+                        ctx.strokeStyle = `rgba(255, 215, 0, ${0.2 - distance/600})`;
+                        ctx.lineWidth = 0.5;
                         ctx.moveTo(particles[i].x, particles[i].y);
                         ctx.lineTo(particles[j].x, particles[j].y);
                         ctx.stroke();
                     }
                 }
             }
-            requestAnimationFrame(animateParticles);
+            requestAnimationFrame(animate);
         }
         resize();
-        animateParticles();
-
-        // --- 3D Tilt Effect ---
-        const cards = document.querySelectorAll('.tilt-card');
-        cards.forEach(card => {
-            card.addEventListener('mousemove', (e) => {
-                const rect = card.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
-                
-                const centerX = rect.width / 2;
-                const centerY = rect.height / 2;
-                
-                const rotateX = ((y - centerY) / centerY) * -15; // More intense tilt
-                const rotateY = ((x - centerX) / centerX) * 15;
-
-                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.05)`;
-            });
-
-            card.addEventListener('mouseleave', () => {
-                card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)`;
-            });
-        });
-
-        // --- Scroll Reveal & Counter ---
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('active');
-                    if(entry.target.querySelector('.counter')) {
-                        startCounters(entry.target);
-                    }
-                }
-            });
-        }, { threshold: 0.1 });
-
-        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-
-        function startCounters(section) {
-            section.querySelectorAll('.counter').forEach(counter => {
-                const target = +counter.getAttribute('data-target');
-                const duration = 2000;
-                const increment = target / (duration / 16);
-                
-                let current = 0;
-                const updateCounter = () => {
-                    current += increment;
-                    if (current < target) {
-                        counter.innerText = Math.ceil(current);
-                        requestAnimationFrame(updateCounter);
-                    } else {
-                        counter.innerText = target;
-                    }
-                };
-                updateCounter();
-            });
-        }
+        animate();
     </script>
 </body>
 </html>
