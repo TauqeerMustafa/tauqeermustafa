@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Work | Tauqeer Mustafa</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root { --primary: #00ff9d; --bg: #050505; --card: #101010; --text: #fff; }
+        body { background: var(--bg); color: var(--text); margin:0; font-family:'Segoe UI', sans-serif; }
+        nav { padding: 20px 40px; border-bottom: 1px solid #222; display:flex; justify-content:space-between; align-items:center; }
+        .logo { font-size: 1.5rem; font-weight: bold; color: #fff; text-decoration: none; text-transform: uppercase; }
+        .logo span { color: var(--primary); }
+        .btn { padding: 10px 25px; background: var(--primary); color: #000; text-decoration: none; font-weight: bold; border-radius: 4px; }
+
+        .container { max-width: 800px; margin: 0 auto; padding: 60px 20px; }
+        
+        /* Timeline Styles */
+        .timeline { border-left: 2px solid var(--primary); padding-left: 40px; }
+        .timeline-item { position: relative; margin-bottom: 50px; }
+        .timeline-item::before { content: ''; position: absolute; left: -49px; top: 0; width: 16px; height: 16px; background: var(--primary); border-radius: 50%; box-shadow: 0 0 10px var(--primary); }
+        .date { font-weight: bold; color: var(--primary); font-size: 1.1rem; }
+        .role { font-size: 2rem; margin: 10px 0; }
+        .place { color: #ccc; font-size: 1.1rem; margin-bottom: 15px; display: block; font-style: italic; }
+        .desc { color: #888; line-height: 1.6; }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="index.html" class="logo">Tauqeer <span>Mustafa</span></a>
+        <a href="index.html" class="btn">Back Home</a>
+    </nav>
+
+    <div class="container">
+        <h1 style="text-align:center; font-size:3rem; margin-bottom:60px;">Career Timeline</h1>
+
+        <div class="timeline">
+            <div class="timeline-item">
+                <span class="date">2025 - Present</span>
+                <h2 class="role">BS Cyber Security Student</h2>
+                <span class="place">Air University, Islamabad</span>
+                <p class="desc">Currently pursuing a bachelor's degree focused on Network Defense, Cryptography, and Ethical Hacking. Active member of the university tech society.</p>
+            </div>
+
+            <div class="timeline-item">
+                <span class="date">2024</span>
+                <h2 class="role">Freelance Web Developer</h2>
+                <span class="place">Remote / Upwork</span>
+                <p class="desc">Specializing in creating animated, responsive portfolios for clients. Also handling domain registration and DNS management (GoDaddy, Namecheap).</p>
+            </div>
+
+            <div class="timeline-item">
+                <span class="date">2023</span>
+                <h2 class="role">Accountancy Intern</h2>
+                <span class="place">Islamabad Finance Firm</span>
+                <p class="desc">Assisted in managing financial ledgers, bookkeeping, and preparing monthly financial reports using Excel and accounting software.</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
