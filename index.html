@@ -21,18 +21,19 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
 
   <style>
-    /* FULL STYLES IMPLEMENTATION */
     html, body {margin:0; padding:0; height:100%; font-family:'Outfit', sans-serif; background:#f8fafc; color:#0f172a;}
     #bg-canvas{position:fixed; inset:0; z-index:0;}
     #cursorOrb{position:fixed; z-index:9999; pointer-events:none; width:18px; height:18px; border-radius:50%; background:radial-gradient(circle, rgba(255,255,255,0.9), rgba(6,182,212,0.3)); box-shadow:0 0 20px rgba(6,182,212,0.4); transform:translate(-50%, -50%); transition:0.2s;}
     #cursorOrb.big{width:52px; height:52px;}
     header{position:sticky; top:5px; z-index:20;}
-    .glass{backdrop-filter:blur(10px); background:rgba(255,255,255,0.6); border:1px solid rgba(255,255,255,0.7); border-radius:16px; box-shadow:0 10px 30px rgba(0,0,0,0.06);}
-    .btn-holo{padding:12px 18px; border-radius:14px; font-weight:700; background:linear-gradient(90deg,#06b6d4,#7c3aed); color:white; display:inline-flex; gap:8px; transition:0.2s;}
-    .btn-holo:hover{transform:translateY(-3px); box-shadow:0 15px 35px rgba(6,182,212,0.15);}
-    .card-btn{padding:8px 14px; border-radius:12px; display:inline-flex; gap:6px; align-items:center; background:rgba(15,23,42,0.06); backdrop-filter:blur(6px); box-shadow:0 6px 20px rgba(0,0,0,0.06); transition:0.2s;}
-    .card-btn:hover{transform:translateY(-3px); box-shadow:0 10px 25px rgba(0,0,0,0.12);}
+    .glass{backdrop-filter:blur(12px); background:rgba(255,255,255,0.5); border:1px solid rgba(255,255,255,0.6); border-radius:16px; box-shadow:0 12px 35px rgba(0,0,0,0.08);}
+    .btn-holo{padding:14px 20px; border-radius:16px; font-weight:700; background:linear-gradient(90deg,#06b6d4,#7c3aed); color:white; display:inline-flex; gap:10px; transition:0.25s;}
+    .btn-holo:hover{transform:translateY(-4px) scale(1.05); box-shadow:0 20px 40px rgba(6,182,212,0.25);}
+    .card-btn{padding:10px 16px; border-radius:14px; display:inline-flex; gap:8px; align-items:center; background:rgba(15,23,42,0.08); backdrop-filter:blur(8px); box-shadow:0 8px 24px rgba(0,0,0,0.08); transition:0.25s;}
+    .card-btn:hover{transform:translateY(-3px) scale(1.05); box-shadow:0 12px 30px rgba(0,0,0,0.15);}
     .shimmer{background:linear-gradient(90deg,#0f172a 10%, #06b6d4 30%, #7c3aed 55%, #22d3ee 80%); -webkit-background-clip:text; background-clip:text; color:transparent;}
+    .floaty{animation:floatyAnim 4s ease-in-out infinite alternate;}
+    @keyframes floatyAnim{0%{transform:translateY(0px);}100%{transform:translateY(-10px);}}
   </style>
 </head>
 <body>
@@ -54,7 +55,7 @@
 <!-- NAVIGATION -->
 <header class="glass p-4 mx-4 mt-4 flex justify-between items-center">
   <div class="flex items-center gap-3">
-    <div class="text-white font-bold text-xl bg-gradient-to-tr from-cyan-400 to-purple-700 w-12 h-12 flex items-center justify-center rounded-lg">TM</div>
+    <div class="text-white font-bold text-xl bg-gradient-to-tr from-cyan-400 to-purple-700 w-14 h-14 flex items-center justify-center rounded-lg">TM</div>
     <span class="font-semibold">TM.SECURE</span>
   </div>
   <div class="flex gap-4">
