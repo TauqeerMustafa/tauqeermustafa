@@ -1,115 +1,390 @@
-<!-- New redesigned portfolio with updated buttons/icons and mixed styles (Option B) -->
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Tauqeer Mustafa — TM.SECURE</title>
-<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;700;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
-<script src="https://cdn.tailwindcss.com"></script>
-<script>tailwind.config={theme:{extend:{colors:{ops:'#0f172a',whiteops:'#f8fafc',blue:'#00c6ff',vio:'#7c3aed'},fontFamily:{outfit:['Outfit'],mono:['Space Mono']}}}};</script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-<style>
-body{background:#f8fafc;color:#0f172a;font-family:'Outfit'}
-.glass{backdrop-filter:blur(12px);background:rgba(255,255,255,0.55);border:1px solid rgba(255,255,255,0.7);box-shadow:0 8px 30px rgba(0,0,0,0.06)}
-.holo-btn{background:linear-gradient(90deg,#00c6ff,#7c3aed);color:white;box-shadow:0 0 15px rgba(124,58,237,0.35);transition:.25s;padding:.75rem 1.4rem;border-radius:12px;font-weight:700}
-.holo-btn:hover{transform:translateY(-3px) scale(1.03);box-shadow:0 0 20px rgba(0,198,255,0.6)}
-.nav-btn{padding:.5rem 1rem;border-radius:10px;font-weight:600;transition:.25s}
-.nav-btn:hover{background:rgba(0,0,0,0.06);transform:translateY(-2px)}
-.card-btn{padding:.4rem .9rem;font-size:.75rem;border-radius:8px;background:rgba(255,255,255,0.5);border:1px solid rgba(0,0,0,0.06);transition:.25s}
-.card-btn:hover{background:white;transform:translateY(-2px)}
-.contact-btn{padding:1rem;border-radius:14px;background:white;border:2px solid #00c6ff;transition:.25s;font-weight:700}
-.contact-btn:hover{background:#00c6ff;color:white;transform:translateY(-3px)}
-</style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Tauqeer Mustafa — TM.SECURE | Digital Defense & Financial Clarity</title>
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&family=Space+Mono:ital,wght@0,400;0,700&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'ops-slate': '#0f172a',
+            'ops-bg': '#f8fafc',
+            'electric-blue': '#06b6d4',
+            'deep-purple': '#7c3aed',
+            'cyanic': '#22d3ee',
+            'glass-border': 'rgba(255,255,255,0.65)'
+          },
+          fontFamily: {
+            outfit: ['Outfit', 'system-ui', 'sans-serif'],
+            mono: ['Space Mono', 'ui-monospace', 'monospace']
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Font Awesome (icons) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- Three.js -->
+  <script src="https://unpkg.com/three@0.152.2/build/three.min.js"></script>
+  <!-- GSAP + ScrollTrigger -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+  <style>
+    :root{--bg:#f8fafc;--fg:#0f172a;--glass:rgba(255,255,255,0.55);--glass-strong:rgba(255,255,255,0.75)}
+    html,body,#bg-canvas{height:100%}
+    body{font-family:Inter, 'Outfit', system-ui, -apple-system, 'Segoe UI', Roboto; background:var(--bg); color:var(--fg);}
+
+    /* Glass base */
+    .glass{backdrop-filter:blur(10px) saturate(120%);-webkit-backdrop-filter:blur(10px);background:linear-gradient(180deg, rgba(255,255,255,0.62), rgba(248,250,252,0.55));border:1px solid var(--glass-strong);box-shadow:0 8px 30px rgba(2,6,23,0.06)}
+
+    /* Shimmer heading */
+    .shimmer{background:linear-gradient(90deg,#0f172a 10%, #06b6d4 30%, #7c3aed 55%, #22d3ee 80%);-webkit-background-clip:text;background-clip:text;color:transparent}
+
+    /* Cursor orb */
+    #cursorOrb{position:fixed;z-index:9999;pointer-events:none;width:18px;height:18px;border-radius:50%;transform:translate(-50%,-50%);mix-blend-mode:screen;background:radial-gradient(circle at 30% 30%, rgba(255,255,255,0.9), rgba(6,182,212,0.38));box-shadow:0 0 18px rgba(6,182,212,0.45), inset 0 -6px 12px rgba(124,58,237,0.12);transition:width .18s, height .18s, transform .18s, opacity .18s}
+    #cursorOrb.big{width:48px;height:48px}
+
+    /* Preloader */
+    #preloader{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:linear-gradient(180deg,#ffffff,#f3f7fb);z-index:9998}
+    .loader{width:360px}
+    .loader .bar{height:8px;background:rgba(15,23,42,0.06);border-radius:999px;overflow:hidden}
+    .loader .prog{height:100%;width:0;background:linear-gradient(90deg,#06b6d4,#7c3aed,#22d3ee);border-radius:999px}
+
+    /* Background canvas */
+    #bg-canvas{position:fixed;inset:0;z-index:0;opacity:0.9}
+
+    /* Marquee */
+    .marquee{white-space:nowrap;overflow:hidden}
+    .marquee-track{display:inline-block;padding-left:100%;animation:marq 20s linear infinite}
+    @keyframes marq{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+    /* Floating */
+    .floaty{animation:floaty 6s ease-in-out infinite}
+    @keyframes floaty{0%{transform:translateY(-6px)}50%{transform:translateY(6px)}100%{transform:translateY(-6px)}}
+
+    /* Skill bars */
+    .skill-bar{height:10px;border-radius:999px}
+
+    /* Responsive small adjustments */
+    @media (max-width:640px){#cursorOrb{display:none}}
+  </style>
 </head>
-<body>
+<body class="antialiased">
 
-<!-- NAVBAR -->
-<header class="sticky top-4 z-50 px-6">
-<nav class="glass rounded-2xl p-4 flex justify-between max-w-6xl mx-auto items-center">
-  <div class="flex items-center gap-3">
-    <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-blue to-vio text-white flex items-center justify-center text-xl font-black">TM</div>
-    <div>
-      <div class="text-sm font-bold">TM.SECURE</div>
-      <div class="text-xs opacity-60">Cyber & Financial Intelligence</div>
-    </div>
-  </div>
-  <ul class="hidden md:flex gap-6 font-semibold text-sm items-center">
-    <li><a class="nav-btn" href="#hero"><i class="fa-solid fa-house"></i> Home</a></li>
-    <li><a class="nav-btn" href="#profile"><i class="fa-solid fa-user-shield"></i> Profile</a></li>
-    <li><a class="nav-btn" href="#intel"><i class="fa-solid fa-globe"></i> Intel</a></li>
-    <li><a class="nav-btn" href="#arsenal"><i class="fa-solid fa-terminal"></i> Arsenal</a></li>
-    <li><a class="nav-btn" href="#uplink"><i class="fa-solid fa-satellite"></i> Uplink</a></li>
-  </ul>
-  <button class="nav-btn font-mono"><i class="fa-solid fa-circle-half-stroke"></i> Ops Mode</button>
-</nav>
-</header>
-
-<!-- HERO SECTION -->
-<section id="hero" class="max-w-6xl mx-auto px-6 py-24 grid md:grid-cols-2 gap-12">
-  <div class="space-y-6">
-    <h1 class="text-5xl font-black leading-tight bg-gradient-to-r from-blue to-vio bg-clip-text text-transparent">
-      DIGITAL DEFENSE<br> & FINANCIAL CLARITY
-    </h1>
-    <p class="text-ops/70 text-lg">Tauqeer Mustafa — Strategic Security & Financial Analyst. I blend offensive security with financial intelligence to create airtight, future-proof organizational resilience.</p>
-
-    <div class="flex gap-4 pt-4">
-      <a href="#arsenal" class="holo-btn text-sm"><i class="fa-solid fa-bolt"></i> Deploy Toolkit</a>
-      <a href="#uplink" class="holo-btn text-sm"><i class="fa-solid fa-shield"></i> Open Secure Channel</a>
+  <!-- PRELOADER -->
+  <div id="preloader" aria-hidden="true">
+    <div class="loader text-center">
+      <div class="text-sm font-mono text-ops-slate/70 mb-4">Initializing White-Ops Protocol</div>
+      <div class="bar mx-auto rounded-full"><div class="prog" id="loaderProg"></div></div>
+      <div class="text-xs text-ops-slate/60 mt-3">Bootstrapping assets • Calibrating mesh • Securing channels</div>
     </div>
   </div>
 
-  <div class="glass rounded-2xl p-6 space-y-4">
-    <h3 class="font-bold text-lg flex items-center gap-2"><i class="fa-solid fa-brain"></i> The Dual Mindset</h3>
-    <p class="text-sm opacity-70">Offensive Security + Chartered Accountancy: a high-clarity hybrid discipline.</p>
+  <!-- BACKGROUND CANVAS -->
+  <canvas id="bg-canvas"></canvas>
 
-    <div class="space-y-3">
-      <div>
-        <div class="flex justify-between text-xs font-mono"><span>Offensive Security</span><span>92%</span></div>
-        <div class="w-full bg-black/10 h-3 rounded-full overflow-hidden"><div class="h-full bg-blue" style="width:92%"></div></div>
+  <!-- CUSTOM CURSOR -->
+  <div id="cursorOrb"></div>
+
+  <!-- NAV -->
+  <header class="sticky top-4 z-40 px-6">
+    <nav class="glass rounded-3xl p-3 max-w-7xl mx-auto flex items-center justify-between gap-6">
+      <div class="flex items-center gap-3">
+        <div class="w-12 h-12 rounded-lg flex items-center justify-center bg-gradient-to-tr from-electric-blue to-deep-purple text-white font-bold">TM</div>
+        <div>
+          <div class="text-sm font-semibold">TM.SECURE</div>
+          <div class="text-xs text-ops-slate/60">Strategic Security & Financial Analyst</div>
+        </div>
       </div>
-      <div>
-        <div class="flex justify-between text-xs font-mono"><span>Financial Audit</span><span>88%</span></div>
-        <div class="w-full bg-black/10 h-3 rounded-full overflow-hidden"><div class="h-full bg-vio" style="width:88%"></div></div>
+
+      <ul class="hidden md:flex items-center gap-6 text-sm font-medium">
+        <li><a class="nav-link hover:scale-105 transition" href="#profile"><i class="fa-solid fa-user-shield mr-2"></i>Profile</a></li>
+        <li><a class="nav-link hover:scale-105 transition" href="#intel"><i class="fa-solid fa-globe mr-2"></i>Intel</a></li>
+        <li><a class="nav-link hover:scale-105 transition" href="#arsenal"><i class="fa-solid fa-terminal mr-2"></i>Arsenal</a></li>
+        <li><a class="nav-link hover:scale-105 transition" href="#uplink"><i class="fa-solid fa-satellite-dish mr-2"></i>Uplink</a></li>
+      </ul>
+
+      <div class="flex items-center gap-3">
+        <button id="briefBtn" class="px-3 py-1.5 rounded-md text-sm glass flex items-center gap-2"><i class="fa-solid fa-file-lines"></i><span class="hidden sm:inline">Access Briefing File</span></button>
+        <button id="opsBtn" class="px-3 py-1.5 rounded-md text-sm font-mono glass">Ops Mode</button>
       </div>
-      <div>
-        <div class="flex justify-between text-xs font-mono"><span>Python / SQL</span><span>85%</span></div>
-        <div class="w-full bg-black/10 h-3 rounded-full overflow-hidden"><div class="h-full bg-blue" style="width:85%"></div></div>
+    </nav>
+  </header>
+
+  <main class="relative z-20 max-w-7xl mx-auto px-6 py-12 space-y-20">
+
+    <!-- HERO -->
+    <section id="hero" class="grid md:grid-cols-2 gap-8 items-center">
+      <div class="space-y-6">
+        <h1 class="text-4xl md:text-6xl leading-tight font-extrabold shimmer">DIGITAL DEFENSE &amp; FINANCIAL CLARITY</h1>
+        <p class="text-ops-slate/80 max-w-xl">I am <strong>Tauqeer Mustafa</strong> — combining offensive cyber operations with rigorous financial assurance to produce defensible, investable, and auditable outcomes. I help organizations harden systems and reconcile complexity with measurable financial controls.</p>
+
+        <div class="flex gap-3 mt-4">
+          <a href="#arsenal" class="inline-flex items-center gap-2 px-5 py-3 rounded-xl text-sm font-semibold" style="background:linear-gradient(90deg,#06b6d4,#7c3aed);color:white;box-shadow:0 10px 30px rgba(124,58,237,0.12);"> <i class="fa-solid fa-bolt"></i> Deploy Arsenal</a>
+          <a href="#uplink" class="inline-flex items-center gap-2 px-5 py-3 rounded-xl text-sm font-semibold glass"> <i class="fa-solid fa-signal"></i> Open Secure Channel</a>
+        </div>
+
+        <div class="mt-6 glass rounded-full p-3 max-w-md">
+          <div class="flex items-center gap-4">
+            <div class="w-12 h-12 rounded-lg flex items-center justify-center bg-gradient-to-tr from-electric-blue to-deep-purple text-white">★</div>
+            <div>
+              <div class="text-xs text-ops-slate/70">Mission Status</div>
+              <div class="text-sm font-semibold">Greenlight — Ready for Deployment</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Marquee -->
+        <div class="mt-6">
+          <div class="marquee glass rounded-full py-3 px-4">
+            <div class="marquee-track text-sm font-mono text-ops-slate/70">Penetration Testing • Financial Audit • Python • SQL • Financial Modeling • Risk Assessment • SOC Design • Fraud Forensics • Red Teaming • Incident Response • Threat Intelligence</div>
+          </div>
+        </div>
       </div>
-      <div>
-        <div class="flex justify-between text-xs font-mono"><span>Financial Modeling</span><span>82%</span></div>
-        <div class="w-full bg-black/10 h-3 rounded-full overflow-hidden"><div class="h-full bg-vio" style="width:82%"></div></div>
+
+      <!-- RIGHT: PROFILE CARD -->
+      <aside id="profile" class="glass rounded-2xl p-6 floaty">
+        <h3 class="text-lg font-semibold">The Dual Mindset</h3>
+        <p class="text-sm text-ops-slate/70">Education: <span class="font-semibold">BS Cyber Security</span> (AIR University) • <span class="font-semibold">Chartered Accountancy</span> (ICAP)</p>
+
+        <div class="mt-4 space-y-4">
+          <div>
+            <div class="flex justify-between text-xs font-mono"><span>Offensive Security</span><span>92%</span></div>
+            <div class="w-full bg-ops-slate/6 rounded-full h-3 mt-1 overflow-hidden"><div class="skill-bar bg-gradient-to-r from-electric-blue to-cyanic" style="width:92%"></div></div>
+          </div>
+
+          <div>
+            <div class="flex justify-between text-xs font-mono"><span>Financial Audit</span><span>88%</span></div>
+            <div class="w-full bg-ops-slate/6 rounded-full h-3 mt-1 overflow-hidden"><div class="skill-bar bg-gradient-to-r from-deep-purple to-electric-blue" style="width:88%"></div></div>
+          </div>
+
+          <div>
+            <div class="flex justify-between text-xs font-mono"><span>Python / SQL</span><span>85%</span></div>
+            <div class="w-full bg-ops-slate/6 rounded-full h-3 mt-1 overflow-hidden"><div class="skill-bar bg-gradient-to-r from-cyanic to-deep-purple" style="width:85%"></div></div>
+          </div>
+
+          <div>
+            <div class="flex justify-between text-xs font-mono"><span>Financial Modeling</span><span>82%</span></div>
+            <div class="w-full bg-ops-slate/6 rounded-full h-3 mt-1 overflow-hidden"><div class="skill-bar bg-gradient-to-r from-electric-blue to-deep-purple" style="width:82%"></div></div>
+          </div>
+        </div>
+
+        <div class="mt-6 flex gap-3">
+          <button class="card-btn flex items-center gap-2"><i class="fa-solid fa-download"></i> Access Briefing</button>
+          <button class="card-btn flex items-center gap-2"><i class="fa-solid fa-calendar-check"></i> Schedule Audit</button>
+        </div>
+      </aside>
+    </section>
+
+    <!-- GLOBAL INTELLIGENCE -->
+    <section id="intel" class="space-y-6">
+      <div class="flex items-center justify-between">
+        <div>
+          <h2 class="text-2xl font-bold shimmer">Global Intelligence</h2>
+          <p class="text-sm text-ops-slate/70">Remote operations & advisory posture across strategic regions. Active statuses indicate remote readiness for engagements.</p>
+        </div>
+        <div class="text-sm font-mono text-ops-slate/60">Live • Passive • Scheduled</div>
       </div>
-    </div>
-  </div>
-</section>
 
-<!-- CONTACT -->
-<section id="uplink" class="max-w-6xl mx-auto px-6 py-24">
-  <h2 class="text-3xl font-black mb-6 bg-gradient-to-r from-blue to-vio bg-clip-text text-transparent">Initialize Contact</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div class="glass rounded-xl p-4">
+          <div class="flex items-center justify-between">
+            <div>
+              <div class="text-sm font-semibold">Europe</div>
+              <div class="text-xs text-ops-slate/60">Cyber Audit & Incident Response</div>
+            </div>
+            <div class="flex items-center gap-2"><span class="w-3 h-3 rounded-full bg-green-400 shadow-lg"></span><div class="text-xs font-mono">Active</div></div>
+          </div>
+        </div>
 
-  <div class="grid md:grid-cols-2 gap-8">
-    <button class="contact-btn"><i class="fa-solid fa-envelope"></i> Email</button>
-    <button class="contact-btn"><i class="fa-brands fa-linkedin"></i> LinkedIn</button>
-  </div>
+        <div class="glass rounded-xl p-4">
+          <div class="flex items-center justify-between">
+            <div>
+              <div class="text-sm font-semibold">North America</div>
+              <div class="text-xs text-ops-slate/60">Red Team & Financial Forensics</div>
+            </div>
+            <div class="flex items-center gap-2"><span class="w-3 h-3 rounded-full bg-green-400 shadow-lg"></span><div class="text-xs font-mono">Active</div></div>
+          </div>
+        </div>
 
-  <div class="grid grid-cols-3 md:grid-cols-6 gap-6 mt-10 text-center text-2xl opacity-70">
-    <i class="fa-brands fa-github"></i>
-    <i class="fa-brands fa-x-twitter"></i>
-    <i class="fa-brands fa-instagram"></i>
-    <i class="fa-brands fa-facebook"></i>
-    <i class="fa-brands fa-youtube"></i>
-    <i class="fa-brands fa-whatsapp"></i>
-    <i class="fa-brands fa-reddit"></i>
-    <i class="fa-brands fa-tiktok"></i>
-    <i class="fa-brands fa-snapchat"></i>
-    <i class="fa-brands fa-telegram"></i>
-    <i class="fa-brands fa-twitch"></i>
-    <i class="fa-brands fa-medium"></i>
-  </div>
+        <div class="glass rounded-xl p-4">
+          <div class="flex items-center justify-between">
+            <div>
+              <div class="text-sm font-semibold">Middle East</div>
+              <div class="text-xs text-ops-slate/60">Compliance & Risk Assessment</div>
+            </div>
+            <div class="flex items-center gap-2"><span class="w-3 h-3 rounded-full bg-yellow-400 shadow-lg"></span><div class="text-xs font-mono">Passive</div></div>
+          </div>
+        </div>
 
-  <p class="mt-4 text-xs text-center opacity-50 font-mono">@tauqeermustafaa</p>
-</section>
+        <div class="glass rounded-xl p-4">
+          <div class="flex items-center justify-between">
+            <div>
+              <div class="text-sm font-semibold">Asia Pacific</div>
+              <div class="text-xs text-ops-slate/60">SOC & Fraud Forensics</div>
+            </div>
+            <div class="flex items-center gap-2"><span class="w-3 h-3 rounded-full bg-yellow-400 shadow-lg"></span><div class="text-xs font-mono">Scheduled</div></div>
+          </div>
+        </div>
+      </div>
+    </section>
 
+    <!-- ARSENAL -->
+    <section id="arsenal" class="space-y-6">
+      <h2 class="text-2xl font-bold shimmer">Arsenal</h2>
+      <p class="text-sm text-ops-slate/70">Tools & frameworks I operate with — grouped by Offensive Ops and Financial Ops.</p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="glass rounded-xl p-6">
+          <h3 class="font-semibold mb-3">Offensive Ops</h3>
+          <div class="flex flex-wrap gap-3">
+            <span class="card-btn"><i class="fa-brands fa-python"></i> Python</span>
+            <span class="card-btn"><i class="fa-solid fa-shield-halved"></i> Kali Linux</span>
+            <span class="card-btn"><i class="fa-solid fa-bug"></i> Burp Suite</span>
+            <span class="card-btn"><i class="fa-solid fa-network-wired"></i> Wireshark</span>
+            <span class="card-btn"><i class="fa-solid fa-terminal"></i> Nmap</span>
+          </div>
+        </div>
+
+        <div class="glass rounded-xl p-6">
+          <h3 class="font-semibold mb-3">Financial Ops</h3>
+          <div class="flex flex-wrap gap-3">
+            <span class="card-btn"><i class="fa-solid fa-file-invoice-dollar"></i> Excel</span>
+            <span class="card-btn"><i class="fa-solid fa-calculator"></i> Financial Modeling</span>
+            <span class="card-btn"><i class="fa-brands fa-square-js"></i> QuickBooks</span>
+            <span class="card-btn"><i class="fa-solid fa-balance-scale"></i> Audit Frameworks</span>
+            <span class="card-btn"><i class="fa-brands fa-js"></i> SQL</span>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- CONTACT / UPLINK -->
+    <section id="uplink" class="space-y-6">
+      <h2 class="text-3xl font-black shimmer">Initialize Contact</h2>
+      <p class="text-sm text-ops-slate/70">Secure channels available: Email, LinkedIn. Social handles consolidated below.</p>
+
+      <div class="flex flex-wrap gap-4 mt-4">
+        <a href="mailto:tauqeermustafaa@example.com" class="inline-flex items-center gap-3 px-6 py-3 rounded-2xl text-sm font-semibold" style="background:linear-gradient(90deg,#06b6d4,#7c3aed);color:white;"> <i class="fa-solid fa-envelope"></i> Email</a>
+        <a href="https://www.linkedin.com/in/tauqeermustafaa" class="inline-flex items-center gap-3 px-6 py-3 rounded-2xl text-sm font-semibold glass"> <i class="fa-brands fa-linkedin"></i> LinkedIn</a>
+      </div>
+
+      <div class="mt-6 glass rounded-xl p-4">
+        <div class="grid grid-cols-4 sm:grid-cols-8 gap-4 text-center text-xl opacity-80">
+          <a href="https://github.com/tauqeermustafaa" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+          <a href="https://x.com/tauqeermustafaa" aria-label="X"><i class="fa-brands fa-x-twitter"></i></a>
+          <a href="https://www.instagram.com/tauqeermustafaa" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+          <a href="https://www.facebook.com/tauqeermustafaa" aria-label="Facebook"><i class="fa-brands fa-facebook"></i></a>
+          <a href="https://www.youtube.com/@tauqeermustafaa" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+          <a href="https://wa.me/" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+          <a href="https://medium.com/@tauqeermustafaa" aria-label="Medium"><i class="fa-brands fa-medium"></i></a>
+          <a href="https://t.me/tauqeermustafaa" aria-label="Telegram"><i class="fa-brands fa-telegram"></i></a>
+        </div>
+        <p class="mt-3 text-xs text-center font-mono opacity-60">@tauqeermustafaa — username across socials</p>
+      </div>
+    </section>
+
+    <footer class="text-center text-xs text-ops-slate/60 pb-8">© Tauqeer Mustafa • TM.SECURE • Built with White‑Ops UI</footer>
+
+  </main>
+
+  <!-- SCRIPTS: Preloader, Cursor, GSAP reveals, skill-bar anim, Three.js liquid mesh -->
+  <script>
+    // Preloader animation
+    const preloader = document.getElementById('preloader');
+    const prog = document.getElementById('loaderProg');
+    let p = 0;
+    const id = setInterval(()=>{
+      p+=Math.random()*12;
+      if(p>100) p=100;
+      prog.style.width = p + '%';
+      if(p>=100){ clearInterval(id); gsap.to(preloader,{autoAlpha:0, duration:0.6, pointerEvents:'none'}); }
+    },220);
+
+    // Custom Cursor
+    const orb = document.getElementById('cursorOrb');
+    window.addEventListener('mousemove', e=>{ orb.style.left = e.clientX + 'px'; orb.style.top = e.clientY + 'px'; });
+    document.querySelectorAll('a,button,.card-btn').forEach(el=>{
+      el.addEventListener('mouseenter', ()=>orb.classList.add('big'));
+      el.addEventListener('mouseleave', ()=>orb.classList.remove('big'));
+    });
+
+    // GSAP reveals
+    gsap.registerPlugin(ScrollTrigger);
+    gsap.utils.toArray('section, .glass').forEach((el,i)=>{
+      gsap.from(el,{y:20, autoAlpha:0, duration:0.9, delay:i*0.08, ease:'power3.out', scrollTrigger:{trigger:el, start:'top 90%'}});
+    });
+
+    // Skill bar fill animation
+    document.querySelectorAll('.skill-bar').forEach((bar)=>{
+      const w = bar.style.width || '50%';
+      bar.style.width = '0%';
+      gsap.to(bar,{width:w, duration:1.4, ease:'power2.out', delay:0.6});
+    });
+
+    // Simple floating animation for floaty class
+    gsap.to('.floaty',{y:-8, repeat:-1, yoyo:true, ease:'sine.inOut', duration:4});
+
+    // Three.js - Liquid Mesh Background (subtle, performant)
+    const canvas = document.getElementById('bg-canvas');
+    const renderer = new THREE.WebGLRenderer({canvas:canvas, antialias:true, alpha:true});
+    renderer.setPixelRatio(window.devicePixelRatio);
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(50, innerWidth/innerHeight, 0.1, 1000);
+    camera.position.z = 40;
+
+    const geo = new THREE.PlaneGeometry(80,40,80,40);
+    const mat = new THREE.MeshBasicMaterial({color:0xcceff6,wireframe:true,opacity:0.06,transparent:true});
+    const mesh = new THREE.Mesh(geo, mat);
+    mesh.rotation.x = -0.6;
+    scene.add(mesh);
+
+    // make vertices move
+    const verts = geo.attributes.position.array;
+    function animateMesh(timeX, mouseFactor){
+      for(let i=0;i<verts.length;i+=3){
+        const x = verts[i], y = verts[i+1];
+        const s = Math.sin((x*0.12)+(timeX*0.001)) * Math.cos((y*0.14)+(timeX*0.001));
+        verts[i+2] = s * 2 * mouseFactor;
+      }
+      geo.attributes.position.needsUpdate = true;
+    }
+
+    let mouseX = 0;
+    window.addEventListener('mousemove', (e)=>{ mouseX = (e.clientX / innerWidth) - 0.5; });
+
+    function onResize(){ renderer.setSize(innerWidth, innerHeight); camera.aspect = innerWidth/innerHeight; camera.updateProjectionMatrix(); }
+    window.addEventListener('resize', onResize); onResize();
+
+    function render(t){
+      const mf = 1 + Math.abs(mouseX)*2;
+      animateMesh(t, mf);
+      renderer.render(scene, camera);
+      requestAnimationFrame(render);
+    }
+    requestAnimationFrame(render);
+
+    // Small helper: open briefing (download simulated)
+    document.getElementById('briefBtn').addEventListener('click', ()=>{
+      const blob = new Blob(['Tauqeer Mustafa - Briefing File
+
+Contact: tauqeermustafaa'],{type:'text/plain'});
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a'); a.href = url; a.download = 'TM_BRIEFING.txt'; a.click(); URL.revokeObjectURL(url);
+    });
+
+  </script>
 </body>
 </html>
