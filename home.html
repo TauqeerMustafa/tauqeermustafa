@@ -1,372 +1,698 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tauqeer Mustafa | Professional Portfolio</title>
-    <!-- FontAwesome Icons for modern look -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
+    <title>Tauqeer Mustafaa | Security & Finance Professional</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
     <style>
-        /* --- 1. CORE STYLES & COLOR PALETTE --- */
+        @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap');
+
         :root {
-            --bg-light: #ffffff;
-            --bg-card: #f9fafb;
-            --text-dark: #1f2937;
-            --text-muted: #6b7280;
-            --accent-blue: #3b82f6; /* Primary Action */
-            --accent-teal: #14b8a6; /* Secondary Info */
-            --shadow-light: #e5e7eb;
+            --gold: #FFD700;
+            --gold-dim: #C5A059;
+            --white-glow: #FFFFFF;
+            --dark-bg: #000000;
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; scroll-behavior: smooth; }
-        
         body {
-            background-color: var(--bg-light);
-            color: var(--text-dark);
-            line-height: 1.6;
+            font-family: 'Inter', sans-serif;
+            background-color: var(--dark-bg);
+            color: #f8fafc;
             overflow-x: hidden;
         }
 
-        /* --- 2. CUSTOM ANIMATIONS --- */
-        @keyframes fadeInSlide {
-            from { opacity: 0; transform: translateY(40px); }
-            to { opacity: 1; transform: translateY(0); }
+        h1, h2, h3, .brand-font {
+            font-family: 'Space Grotesk', sans-serif;
         }
 
-        /* The scroll trigger class for sectional reveals */
-        .reveal {
-            opacity: 0; 
-            transform: translateY(50px);
-            transition: all 1s cubic-bezier(0.2, 0.8, 0.2, 1);
-        }
-        .reveal.active {
-            opacity: 1;
-            transform: translateY(0);
+        .mono-font {
+            font-family: 'JetBrains Mono', monospace;
         }
 
-        /* --- 3. LAYOUT & NAVIGATION --- */
-        .container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
-        section { padding: 80px 0; border-bottom: 1px solid var(--shadow-light); }
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #000000; }
+        ::-webkit-scrollbar-thumb { background: #333; border-radius: 4px; border: 1px solid #FFD700; }
+        ::-webkit-scrollbar-thumb:hover { background: #FFD700; }
 
-        nav {
-            padding: 15px 40px; border-bottom: 1px solid var(--shadow-light);
-            background: rgba(255, 255, 255, 0.95);
-            position: sticky; top: 0; z-index: 1000;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-            display: flex; justify-content: space-between; align-items: center;
+        /* Neon Utilities */
+        .text-gold {
+            color: var(--gold);
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
         }
-        .logo { font-size: 1.5rem; font-weight: bold; color: var(--text-dark); text-decoration: none; }
-        .logo span { color: var(--accent-blue); }
         
-        /* Internal Nav Links (Do NOT use target="_blank") */
-        .nav-links a { color: var(--text-muted); text-decoration: none; margin-left: 25px; transition: 0.3s; font-size: 0.9rem; }
-        .nav-links a:hover { color: var(--accent-blue); }
-
-        /* Buttons */
-        .btn {
-            padding: 12px 28px; background: var(--accent-blue); color: white;
-            font-weight: 600; text-decoration: none; border-radius: 6px;
-            transition: 0.3s;
+        .text-glow-white {
+            color: white;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5), 0 0 20px rgba(255, 255, 255, 0.3);
         }
-        .btn:hover { background: #2563eb; box-shadow: 0 4px 10px rgba(59, 130, 246, 0.4); }
-        .btn-outline { background: none; border: 1px solid var(--accent-teal); color: var(--accent-teal); margin-left: 10px; }
-        .btn-outline:hover { background: var(--accent-teal); color: white; }
 
-        /* Section Headers */
-        h2 { font-size: 2.8rem; margin-bottom: 10px; color: var(--text-dark); }
-        .subtitle { color: var(--accent-teal); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 40px; display: block; font-weight: 600; }
+        .border-gold-glow {
+            border-color: rgba(255, 215, 0, 0.5);
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.2);
+        }
 
-        /* --- HOME SECTION --- */
-        .hero { height: 90vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
-        .hero h1 { font-size: 4.5rem; line-height: 1.1; margin-bottom: 20px; }
-        .hero-content { animation: fadeInSlide 1.5s ease-out; }
+        /* Glassmorphism */
+        .glass {
+            background: rgba(10, 10, 10, 0.8);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 215, 0, 0.2);
+        }
         
-        /* --- ABOUT & CARDS --- */
-        .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: start; }
-        .about-text p { font-size: 1.1rem; color: var(--text-muted); line-height: 1.8; margin-bottom: 25px; text-align: justify; }
-        .about-img { width: 100%; border-radius: 10px; box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1); }
-        .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: 30px; }
+        .glass-card {
+            background: rgba(20, 20, 20, 0.6);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 215, 0, 0.1);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+            transform-style: preserve-3d;
+            transform: perspective(1000px);
+            transition: all 0.3s ease;
+        }
         
-        .card { background: var(--bg-card); padding: 30px; border-radius: 8px; border: 1px solid var(--shadow-light); transition: 0.4s; }
-        .card:hover { transform: translateY(-8px); box-shadow: 0 10px 20px rgba(59, 130, 246, 0.1); border-color: var(--accent-blue); }
-        .card i { font-size: 2.5rem; color: var(--accent-teal); margin-bottom: 15px; }
+        .glass-card:hover {
+            border-color: var(--gold);
+            box-shadow: 0 0 30px rgba(255, 215, 0, 0.15);
+        }
 
-        /* --- CAREER TIMELINE --- */
-        .timeline { max-width: 800px; margin: 50px auto 0; position: relative; }
-        .timeline::before { content: ''; position: absolute; left: 50%; top: 0; width: 4px; height: 100%; background: var(--shadow-light); transform: translateX(-50%); }
-        .timeline-item { width: 50%; padding: 10px 40px; position: relative; }
-        .timeline-item:nth-child(odd) { left: 0; text-align: right; }
-        .timeline-item:nth-child(even) { left: 50%; text-align: left; }
-        .timeline-dot { position: absolute; width: 18px; height: 18px; background: var(--accent-blue); border: 4px solid var(--bg-light); border-radius: 50%; top: 15px; }
-        .timeline-item:nth-child(odd) .timeline-dot { right: -9px; }
-        .timeline-item:nth-child(even) .timeline-dot { left: -9px; }
-        .date { color: var(--accent-blue); font-weight: bold; margin-bottom: 5px; }
+        /* Glitch Effect - GOLD Version */
+        .glitch-wrapper { position: relative; display: inline-block; }
+        .glitch {
+            position: relative;
+            color: white;
+            z-index: 1;
+        }
+        .glitch::before, .glitch::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: var(--dark-bg);
+        }
+        .glitch::before {
+            left: 2px;
+            text-shadow: -1px 0 #FFD700;
+            clip: rect(44px, 450px, 56px, 0);
+            animation: glitch-anim 5s infinite linear alternate-reverse;
+        }
+        .glitch::after {
+            left: -2px;
+            text-shadow: -1px 0 #FFFFFF;
+            clip: rect(44px, 450px, 56px, 0);
+            animation: glitch-anim2 5s infinite linear alternate-reverse;
+        }
+        @keyframes glitch-anim {
+            0% { clip: rect(31px, 9999px, 94px, 0); transform: skew(0.85deg); }
+            5% { clip: rect(70px, 9999px, 11px, 0); transform: skew(0.2deg); }
+            10% { clip: rect(2px, 9999px, 86px, 0); transform: skew(0.06deg); }
+            15% { clip: rect(6px, 9999px, 60px, 0); transform: skew(0.39deg); }
+            20% { clip: rect(62px, 9999px, 11px, 0); transform: skew(0.97deg); }
+            25% { clip: rect(59px, 9999px, 98px, 0); transform: skew(0.8deg); }
+            30% { clip: rect(31px, 9999px, 63px, 0); transform: skew(0.79deg); }
+            35% { clip: rect(98px, 9999px, 50px, 0); transform: skew(0.66deg); }
+            40% { clip: rect(9px, 9999px, 15px, 0); transform: skew(0.68deg); }
+            45% { clip: rect(33px, 9999px, 26px, 0); transform: skew(0.21deg); }
+            50% { clip: rect(76px, 9999px, 4px, 0); transform: skew(0.79deg); }
+            55% { clip: rect(47px, 9999px, 5px, 0); transform: skew(0.12deg); }
+            60% { clip: rect(35px, 9999px, 65px, 0); transform: skew(0.48deg); }
+            65% { clip: rect(48px, 9999px, 69px, 0); transform: skew(0.2deg); }
+            70% { clip: rect(33px, 9999px, 59px, 0); transform: skew(0.85deg); }
+            75% { clip: rect(5px, 9999px, 92px, 0); transform: skew(0.25deg); }
+            80% { clip: rect(21px, 9999px, 17px, 0); transform: skew(0.04deg); }
+            85% { clip: rect(99px, 9999px, 67px, 0); transform: skew(0.74deg); }
+            90% { clip: rect(38px, 9999px, 55px, 0); transform: skew(0.12deg); }
+            95% { clip: rect(93px, 9999px, 35px, 0); transform: skew(0.96deg); }
+            100% { clip: rect(8px, 9999px, 21px, 0); transform: skew(0.63deg); }
+        }
+        @keyframes glitch-anim2 {
+            0% { clip: rect(65px, 9999px, 100px, 0); transform: skew(0.67deg); }
+            100% { clip: rect(79px, 9999px, 48px, 0); transform: skew(0.3deg); }
+        }
 
-        /* --- PROJECTS --- */
-        .project-img { width: 100%; height: 200px; object-fit: cover; }
+        /* Scroll Reveal */
+        .reveal { opacity: 0; transform: translateY(40px); transition: all 1s cubic-bezier(0.5, 0, 0, 1); }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+
+        /* Terminal Cursor */
+        .cursor { display: inline-block; width: 10px; height: 1.2em; background-color: #FFD700; animation: blink 1s step-end infinite; vertical-align: text-bottom; box-shadow: 0 0 10px #FFD700; }
+        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+
+        /* Gradient Text */
+        .gradient-text {
+            background: linear-gradient(to right, #FFFFFF, #FFD700);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+        }
         
-        /* --- FOOTER --- */
-        footer { padding: 40px; text-align: center; background-color: var(--bg-card); color: var(--text-muted); }
-        .social-icons a { color: var(--text-muted); font-size: 1.5rem; margin: 0 15px; transition: 0.3s; }
-        .social-icons a:hover { color: var(--accent-blue); transform: scale(1.1); }
-
-        /* Mobile Adjustments */
-        @media (max-width: 768px) {
-            .hero h1 { font-size: 3rem; }
-            .about-grid { grid-template-columns: 1fr; }
-            .nav-links { display: none; }
-            .timeline::before { left: 20px; }
-            .timeline-item { width: 100%; padding: 10px 20px; text-align: left !important; }
-            .timeline-item:nth-child(odd) { left: 0; }
-            .timeline-item:nth-child(even) { left: 0; }
-            .timeline-item:nth-child(odd) .timeline-dot { left: 11px; right: auto; }
-            .timeline-item:nth-child(even) .timeline-dot { left: 11px; }
+        .selection\:bg-gold *::selection {
+            background-color: #FFD700;
+            color: black;
         }
     </style>
 </head>
-<body>
+<body class="selection:bg-yellow-500 selection:text-black">
 
-    <!-- NAVIGATION -->
-    <nav>
-        <div class="container" style="display:flex; justify-content:space-between; align-items:center;">
-            <a href="#home" class="logo">Tauqeer <span>Mustafa</span></a>
-            <div class="nav-links">
-                <!-- Internal Navigation (Same Page Scroll) -->
-                <a href="#about">About</a>
-                <a href="#fields">Fields</a>
-                <a href="#services">Services</a>
-                <a href="#projects">Projects</a>
-                <a href="#career">Career</a>
-                <a href="#contact">Contact</a>
+    <!-- Canvas Background -->
+    <canvas id="canvas" class="fixed top-0 left-0 w-full h-full -z-10"></canvas>
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 glass transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <div class="flex items-center gap-3 cursor-pointer group" onclick="window.scrollTo(0,0)">
+                    <div class="w-10 h-10 flex items-center justify-center border border-yellow-500/50 rounded-lg shadow-[0_0_15px_rgba(255,215,0,0.3)] group-hover:bg-yellow-500/10 transition-all">
+                        <span class="font-bold text-gold text-lg brand-font">TM</span>
+                    </div>
+                    <div>
+                        <span class="font-bold text-lg leading-none block text-white group-hover:text-gold transition-colors">Tauqeer M.</span>
+                        <span class="text-[10px] text-gray-400 uppercase tracking-widest font-semibold block mt-0.5">SecOps & Finance</span>
+                    </div>
+                </div>
+
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#expertise" class="text-sm font-medium text-gray-400 hover:text-gold hover:drop-shadow-[0_0_5px_rgba(255,215,0,0.8)] transition-all uppercase tracking-wider">Expertise</a>
+                    <a href="#projects" class="text-sm font-medium text-gray-400 hover:text-gold hover:drop-shadow-[0_0_5px_rgba(255,215,0,0.8)] transition-all uppercase tracking-wider">Projects</a>
+                    <a href="#about" class="text-sm font-medium text-gray-400 hover:text-gold hover:drop-shadow-[0_0_5px_rgba(255,215,0,0.8)] transition-all uppercase tracking-wider">About</a>
+                    <a href="#contact" class="px-6 py-2.5 text-sm font-bold text-black bg-gradient-to-r from-yellow-400 to-yellow-600 rounded-lg hover:from-yellow-300 hover:to-yellow-500 transition-all shadow-[0_0_20px_rgba(255,215,0,0.3)]">
+                        Hire Me
+                    </a>
+                </div>
             </div>
-            <!-- External Link (Opens new tab) -->
-            <a href="mailto:contact@tauqeermustafa.live" class="btn" target="_blank" rel="noopener noreferrer">Hire Me</a>
         </div>
     </nav>
 
-    <!-- 1. HOME SECTION -->
-    <section id="home" class="hero">
-        <div class="container hero-content">
-            <p style="color:var(--accent-teal); letter-spacing:3px; font-weight:600; margin-bottom:10px;">WELCOME TO MY PROFESSIONAL PORTFOLIO</p>
-            <h1>Securing Digital Assets, <br> Mastering <span style="color:var(--accent-blue);">Precision.</span></h1>
+    <!-- Hero Section -->
+    <section class="min-h-screen flex items-center justify-center pt-20 relative px-4 overflow-hidden">
+        <!-- Abstract Background Glows -->
+        <div class="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-yellow-600/10 rounded-full blur-[120px] animate-pulse"></div>
+        <div class="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] bg-white/5 rounded-full blur-[100px] animate-pulse" style="animation-delay: 2s"></div>
+
+        <div class="max-w-7xl mx-auto text-center relative z-10">
+            <div class="inline-flex items-center gap-2 mb-8 px-4 py-2 rounded-full border border-yellow-500/30 bg-black/50 text-gold text-xs font-semibold tracking-widest uppercase reveal active shadow-[0_0_15px_rgba(255,215,0,0.1)]">
+                <span class="relative flex h-2 w-2">
+                  <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-yellow-400 opacity-75"></span>
+                  <span class="relative inline-flex rounded-full h-2 w-2 bg-yellow-500"></span>
+                </span>
+                Available for Freelance & Contract
+            </div>
             
-            <p style="color:var(--text-muted); font-size:1.2rem; max-width: 800px; margin-bottom: 40px; ">
-                I am a Freelancer and student at Air University. I bridge Cyber Security and Accountancy to deliver secure, accurate digital solutions.
+            <h1 class="text-5xl md:text-7xl lg:text-8xl font-bold mb-6 tracking-tight reveal active" style="transition-delay: 100ms">
+                <div class="glitch-wrapper">
+                    <span class="glitch" data-text="Tauqeer Mustafaa">Tauqeer Mustafaa</span>
+                </div>
+            </h1>
+            
+            <div class="h-16 mb-8 flex items-center justify-center gap-3 text-lg md:text-2xl text-slate-400 reveal active" style="transition-delay: 200ms">
+                <i data-lucide="terminal" class="w-6 h-6 text-gold"></i>
+                <span id="typing-text" class="font-mono text-white text-shadow-lg"></span><span class="cursor"></span>
+            </div>
+
+            <p class="max-w-2xl mx-auto text-gray-400 text-lg mb-12 leading-relaxed reveal active" style="transition-delay: 300ms">
+                I secure digital assets and optimize financial performance. A unique blend of <span class="text-gold font-medium">Cyber Security</span> expertise and <span class="text-gold font-medium">Accountancy</span> precision.
             </p>
-            <div class="cta-buttons" style="animation: fadeInSlide 2s;">
-                <a href="#projects" class="btn">Explore Portfolio</a>
-                <!-- Link to contact section, but set to open a new tab just for testing purposes, which is not ideal for UX -->
-                <a href="mailto:contact@tauqeermustafa.live" class="btn btn-outline" target="_blank" rel="noopener noreferrer">Let's Connect</a>
+
+            <div class="flex flex-col sm:flex-row gap-4 justify-center reveal active" style="transition-delay: 400ms">
+                <a href="#projects" class="px-8 py-4 bg-transparent border border-yellow-500 text-gold font-bold rounded-lg hover:bg-yellow-500 hover:text-black transition-all shadow-[0_0_15px_rgba(255,215,0,0.2)] flex items-center justify-center gap-2 transform hover:-translate-y-1">
+                    View Case Studies
+                    <i data-lucide="briefcase" class="w-4 h-4"></i>
+                </a>
+                <a href="#contact" class="px-8 py-4 glass text-white font-medium rounded-lg hover:bg-white/10 transition-all border border-white/20 flex items-center justify-center gap-2">
+                    Download CV <i data-lucide="download" class="w-4 h-4 text-white"></i>
+                </a>
             </div>
+        </div>
+        
+        <div class="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce opacity-50">
+            <i data-lucide="mouse" class="w-6 h-6 text-gold"></i>
         </div>
     </section>
 
-    <!-- 2. ABOUT SECTION -->
-    <section id="about">
-        <div class="container">
-            <span class="subtitle reveal">MY BIOGRAPHY</span>
-            <h2 class="reveal">A Unique Blend of Skills</h2>
-            
-            <div class="about-grid" style="margin-top: 40px;">
-                <!-- Left: Text Content -->
-                <div class="about-text">
-                    <p class="reveal">
-                        <strong>The Academic Foundation (Air University):</strong><br>
-                        My current focus is the Bachelor of Science in Cyber Security at Air University, Islamabad. This rigorous program has trained me in the art of network defense, ethical hacking, and creating secure infrastructures. My training ensures that any digital solution I build, from simple websites to complex applications, is designed with security as the number one priority.
-                    </p>
-                    <p class="reveal" style="transition-delay: 0.2s;">
-                        <strong>The Analytical Advantage (Accountancy):</strong><br>
-                        What sets me apart from a typical developer is my strong background in Accountancy and finance. I bring the same rigor and attention to detail required for auditing a balance sheet to troubleshooting a security protocol or developing a project timeline. I understand the "business value" of security measures.
-                    </p>
-                    <p class="reveal" style="transition-delay: 0.4s;">
-                        <strong>My Freelance Mission:</strong><br>
-                        As a professional freelancer, I offer clients a rare combination: technical execution paired with a deep understanding of business value. Whether I am auditing a company's ledger or building an animated portfolio website, I guarantee precision. I aim to be the bridge between secure technology and profitable business operations.
-                    </p>
-                    
-                    <a href="#career" class="btn btn-outline reveal" style="margin-top: 20px; transition-delay: 0.6s;">View My Timeline &rarr;</a>
+    <!-- Stats Section -->
+    <section class="py-12 border-y border-yellow-500/20 bg-black relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center reveal">
+                <div class="p-6 group hover:bg-yellow-900/10 rounded-xl transition-colors">
+                    <div class="text-4xl md:text-5xl font-bold text-white mb-2 brand-font flex justify-center items-baseline gap-1 text-glow-white">
+                        <span class="counter" data-target="3">0</span><span>+</span>
+                    </div>
+                    <div class="text-xs text-gold uppercase tracking-widest font-semibold">Years Experience</div>
                 </div>
-
-                <!-- Right: Image -->
-                <div class="reveal" style="transition-delay: 0.8s;">
-                    <!-- Placeholder image of a secure server/network -->
-                    <img src="https://placehold.co/800x600/3b82f6/FFFFFF?text=Security+%26+Finance" alt="Tauqeer Mustafa - Cyber Security & Finance" class="about-img">
+                <div class="p-6 group hover:bg-yellow-900/10 rounded-xl transition-colors">
+                    <div class="text-4xl md:text-5xl font-bold text-white mb-2 brand-font flex justify-center items-baseline gap-1 text-glow-white">
+                        <span class="counter" data-target="15">0</span><span>+</span>
+                    </div>
+                    <div class="text-xs text-gold uppercase tracking-widest font-semibold">Projects Delivered</div>
                 </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- 3. MY FIELDS -->
-    <section id="fields" style="background: var(--bg-card);">
-        <div class="container">
-            <span class="subtitle reveal" style="text-align:center;">MY SKILLSET</span>
-            <h2 style="text-align:center;">Three Core Fields</h2>
-            <div class="grid-3">
-                <div class="card reveal">
-                    <i class="fas fa-shield-alt" style="color:var(--accent-blue);"></i>
-                    <h3>Cyber Security</h3>
-                    <p>Network defense, ethical hacking basics, secure coding, and vulnerability auditing.</p>
+                <div class="p-6 group hover:bg-yellow-900/10 rounded-xl transition-colors">
+                    <div class="text-4xl md:text-5xl font-bold text-white mb-2 brand-font flex justify-center items-baseline gap-1 text-glow-white">
+                        <span class="counter" data-target="99">0</span><span>%</span>
+                    </div>
+                    <div class="text-xs text-gold uppercase tracking-widest font-semibold">Client Satisfaction</div>
                 </div>
-                <div class="card reveal" style="transition-delay: 0.2s;">
-                    <i class="fas fa-chart-line" style="color:var(--accent-teal);"></i>
-                    <h3>Accountancy</h3>
-                    <p>Bookkeeping, financial statement analysis, and cost management principles.</p>
-                </div>
-                <div class="card reveal" style="transition-delay: 0.4s;">
-                    <i class="fas fa-laptop-code" style="color:var(--accent-blue);"></i>
-                    <h3>Freelancing</h3>
-                    <p>Custom HTML/CSS development, advanced animations, and domain management.</p>
+                <div class="p-6 group hover:bg-yellow-900/10 rounded-xl transition-colors">
+                    <div class="text-4xl md:text-5xl font-bold text-white mb-2 brand-font flex justify-center items-baseline gap-1 text-glow-white">
+                        <span class="counter" data-target="24">0</span><span class="text-gold">/7</span>
+                    </div>
+                    <div class="text-xs text-gold uppercase tracking-widest font-semibold">Support</div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- 4. SERVICES -->
-    <section id="services">
-        <div class="container">
-            <span class="subtitle reveal">WHAT I DELIVER</span>
-            <h2 class="reveal">Professional Services</h2>
-            <div class="grid-3">
-                <div class="card reveal">
-                    <i class="fas fa-search-dollar" style="color:var(--accent-teal);"></i>
-                    <h3>Financial Security Audit</h3>
-                    <p>Scanning financial data systems for structural weaknesses and reporting errors.</p>
+    <!-- Services / Expertise (3D Tilt Cards) -->
+    <section id="expertise" class="py-24 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-20 reveal">
+                <h2 class="text-3xl md:text-5xl font-bold mb-6 text-white">Technical <span class="gradient-text">Expertise</span></h2>
+                <div class="w-24 h-1 bg-gradient-to-r from-transparent via-yellow-500 to-transparent mx-auto"></div>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Card 1 -->
+                <div class="glass-card p-8 rounded-2xl group reveal tilt-card" data-tilt>
+                    <div class="absolute -inset-0.5 bg-gradient-to-r from-yellow-600 to-yellow-300 rounded-2xl opacity-0 group-hover:opacity-30 transition duration-500 blur"></div>
+                    <div class="relative h-full flex flex-col">
+                        <div class="w-14 h-14 rounded-xl bg-black flex items-center justify-center mb-6 border border-yellow-500/50 group-hover:scale-110 transition-transform duration-300 shadow-[0_0_15px_rgba(255,215,0,0.2)]">
+                            <i data-lucide="shield-alert" class="w-7 h-7 text-gold"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-white mb-4 group-hover:text-gold transition-colors">Cyber Security</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed mb-6 flex-grow">
+                            Protecting your infrastructure from evolving threats. Specializing in offensive security (Red Teaming) and defensive auditing.
+                        </p>
+                        <div class="border-t border-white/10 pt-4 mt-auto">
+                            <div class="flex flex-wrap gap-2">
+                                <span class="px-2 py-1 bg-yellow-500/10 text-gold text-xs rounded border border-yellow-500/20">Pen-Testing</span>
+                                <span class="px-2 py-1 bg-yellow-500/10 text-gold text-xs rounded border border-yellow-500/20">Risk Analysis</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="card reveal" style="transition-delay: 0.2s;">
-                    <i class="fas fa-paint-brush" style="color:var(--accent-blue);"></i>
-                    <h3>Animated Portfolio Design</h3>
-                    <p>Building high-impact, single-page scroll websites with custom CSS animations.</p>
+
+                <!-- Card 2 -->
+                <div class="glass-card p-8 rounded-2xl group reveal tilt-card" data-tilt style="transition-delay: 100ms">
+                    <div class="absolute -inset-0.5 bg-gradient-to-r from-white to-gray-400 rounded-2xl opacity-0 group-hover:opacity-20 transition duration-500 blur"></div>
+                    <div class="relative h-full flex flex-col">
+                        <div class="w-14 h-14 rounded-xl bg-black flex items-center justify-center mb-6 border border-white/30 group-hover:scale-110 transition-transform duration-300 shadow-[0_0_15px_rgba(255,255,255,0.2)]">
+                            <i data-lucide="calculator" class="w-7 h-7 text-white"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-white mb-4 group-hover:text-gray-300 transition-colors">Accountancy</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed mb-6 flex-grow">
+                            Ensuring financial health and regulatory compliance. From daily bookkeeping to complex financial forecasting and audits.
+                        </p>
+                        <div class="border-t border-white/10 pt-4 mt-auto">
+                            <div class="flex flex-wrap gap-2">
+                                <span class="px-2 py-1 bg-white/10 text-white text-xs rounded border border-white/20">Bookkeeping</span>
+                                <span class="px-2 py-1 bg-white/10 text-white text-xs rounded border border-white/20">Auditing</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="card reveal" style="transition-delay: 0.4s;">
-                    <i class="fas fa-headset" style="color:var(--accent-teal);"></i>
-                    <h3>Technical Consulting</h3>
-                    <p>Guidance on DNS, hosting, and setting up secure cloud storage solutions.</p>
-                </p>
+
+                <!-- Card 3 -->
+                <div class="glass-card p-8 rounded-2xl group reveal tilt-card" data-tilt style="transition-delay: 200ms">
+                    <div class="absolute -inset-0.5 bg-gradient-to-r from-yellow-500 to-white rounded-2xl opacity-0 group-hover:opacity-20 transition duration-500 blur"></div>
+                    <div class="relative h-full flex flex-col">
+                        <div class="w-14 h-14 rounded-xl bg-black flex items-center justify-center mb-6 border border-yellow-500/50 group-hover:scale-110 transition-transform duration-300 shadow-[0_0_15px_rgba(255,215,0,0.2)]">
+                            <i data-lucide="zap" class="w-7 h-7 text-gold"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-white mb-4 group-hover:text-gold transition-colors">Freelancing</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed mb-6 flex-grow">
+                            Agile, project-based engagement model. Ideal for startups and SMEs needing high-level expertise without full-time overhead.
+                        </p>
+                        <div class="border-t border-white/10 pt-4 mt-auto">
+                            <div class="flex flex-wrap gap-2">
+                                <span class="px-2 py-1 bg-yellow-500/10 text-gold text-xs rounded border border-yellow-500/20">Remote</span>
+                                <span class="px-2 py-1 bg-yellow-500/10 text-gold text-xs rounded border border-yellow-500/20">Contract</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- 5. PROJECTS -->
-    <section id="projects" style="background: var(--bg-card);">
-        <div class="container">
-            <span class="subtitle reveal" style="text-align:center;">MY WORK</span>
-            <h2 style="text-align:center;">Authentic Projects</h2>
-            <div class="grid-3">
-                
+    <!-- Featured Projects (Case Studies) -->
+    <section id="projects" class="py-24 bg-black">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-16 reveal">
+                <div>
+                    <h2 class="text-3xl md:text-5xl font-bold text-white mb-4">Selected <span class="gradient-text">Projects</span></h2>
+                    <p class="text-gray-400">Real-world application of security and financial principles.</p>
+                </div>
+                <a href="#" class="hidden md:flex items-center gap-2 text-gold hover:text-white transition-colors mt-4 md:mt-0 uppercase font-bold text-sm tracking-widest">
+                    View GitHub <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                </a>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8">
                 <!-- Project 1 -->
-                <div class="card project-card reveal">
-                    <img src="https://placehold.co/800x400/3b82f6/FFFFFF?text=SecureFin+Tool" class="project-img" alt="SecureFin Tool">
-                    <div class="project-content">
-                        <h3>SecureFin Audit Tool</h3>
-                        <p style="color:var(--text-muted); margin-top:10px;">Python script that scans financial sheets for data errors (Finance/Security).</p>
-                        <!-- EXTERNAL LINK (Opens in new tab) -->
-                        <a href="https://github.com/tauqeermustafa" target="_blank" rel="noopener noreferrer" style="color:var(--accent-blue); display:block; margin-top:15px; text-decoration:none;">View Source &rarr;</a>
+                <div class="group relative overflow-hidden rounded-2xl aspect-video glass border border-white/10 reveal cursor-pointer hover:border-yellow-500/50 transition-colors">
+                    <!-- Placeholder Image Gradient -->
+                    <div class="absolute inset-0 bg-gradient-to-br from-black to-gray-900 group-hover:scale-105 transition-transform duration-700"></div>
+                    
+                    <div class="absolute inset-0 p-8 flex flex-col justify-end bg-gradient-to-t from-black via-black/80 to-transparent">
+                        <div class="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+                            <div class="flex gap-2 mb-3">
+                                <span class="text-xs font-bold px-2 py-1 bg-yellow-500 text-black rounded">SECURITY</span>
+                            </div>
+                            <h3 class="text-2xl font-bold text-white mb-2 group-hover:text-gold transition-colors">E-Commerce Vulnerability Assessment</h3>
+                            <p class="text-gray-400 text-sm mb-4 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100">
+                                Conducted a full penetration test for a mid-sized retail platform, identifying 3 critical SQL injection vulnerabilities and securing customer data.
+                            </p>
+                            <div class="flex items-center gap-4 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-200">
+                                <span class="text-xs text-gray-300 flex items-center gap-1"><i data-lucide="code" class="w-3 h-3 text-gold"></i> SQLMap</span>
+                                <span class="text-xs text-gray-300 flex items-center gap-1"><i data-lucide="shield" class="w-3 h-3 text-gold"></i> OWASP Top 10</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
                 <!-- Project 2 -->
-                <div class="card project-card reveal" style="transition-delay: 0.2s;">
-                    <img src="https://placehold.co/800x400/14b8a6/FFFFFF?text=Network+Sniffer" class="project-img" alt="Packet Sniffer">
-                    <div class="project-content">
-                        <h3>Network Packet Sniffer</h3>
-                        <p style="color:var(--text-muted); margin-top:10px;">Custom analysis tool for monitoring and reporting unusual network traffic.</p>
-                        <!-- EXTERNAL LINK (Opens in new tab) -->
-                        <a href="https://github.com/tauqeermustafa" target="_blank" rel="noopener noreferrer" style="color:var(--accent-blue); display:block; margin-top:15px; text-decoration:none;">View Code &rarr;</a>
-                    </div>
-                </div>
-
-                <!-- Project 3 -->
-                <div class="card project-card reveal" style="transition-delay: 0.4s;">
-                    <img src="https://placehold.co/800x400/000000/3b82f6?text=Portfolio+V3" class="project-img" alt="Portfolio Website">
-                    <div class="project-content">
-                        <h3>Portfolio Website V3</h3>
-                        <p style="color:var(--text-muted); margin-top:10px;">The source code for this highly animated and responsive website.</p>
-                        <!-- EXTERNAL LINK (Opens in new tab) -->
-                        <a href="https://github.com/tauqeermustafa" target="_blank" rel="noopener noreferrer" style="color:var(--accent-blue); display:block; margin-top:15px; text-decoration:none;">View Source &rarr;</a>
+                <div class="group relative overflow-hidden rounded-2xl aspect-video glass border border-white/10 reveal cursor-pointer hover:border-white/50 transition-colors" style="transition-delay: 100ms">
+                    <div class="absolute inset-0 bg-gradient-to-br from-black to-gray-800 group-hover:scale-105 transition-transform duration-700"></div>
+                    
+                    <div class="absolute inset-0 p-8 flex flex-col justify-end bg-gradient-to-t from-black via-black/80 to-transparent">
+                        <div class="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+                            <div class="flex gap-2 mb-3">
+                                <span class="text-xs font-bold px-2 py-1 bg-white text-black rounded">FINANCE</span>
+                            </div>
+                            <h3 class="text-2xl font-bold text-white mb-2 group-hover:text-gray-300 transition-colors">SME Financial Audit</h3>
+                            <p class="text-gray-400 text-sm mb-4 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100">
+                                Audited 2 years of financial records for a logistics startup, identifying 15% in potential tax savings and streamlining their bookkeeping workflow.
+                            </p>
+                            <div class="flex items-center gap-4 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-200">
+                                <span class="text-xs text-gray-300 flex items-center gap-1"><i data-lucide="file-spreadsheet" class="w-3 h-3"></i> Excel</span>
+                                <span class="text-xs text-gray-300 flex items-center gap-1"><i data-lucide="pie-chart" class="w-3 h-3"></i> QuickBooks</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- 6. CAREER (TIMELINE) -->
-    <section id="career">
-        <div class="container">
-            <span class="subtitle reveal" style="text-align:center;">MY JOURNEY</span>
-            <h2 style="text-align:center;">Career & Education</h2>
+    <!-- About & Timeline -->
+    <section id="about" class="py-24">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col lg:flex-row gap-16">
+                <!-- Terminal Bio -->
+                <div class="lg:w-5/12 reveal">
+                    <h2 class="text-3xl font-bold text-white mb-8">About <span class="gradient-text">Me</span></h2>
+                    <div class="bg-black rounded-xl overflow-hidden border border-yellow-500/30 shadow-[0_0_30px_rgba(255,215,0,0.15)]">
+                        <!-- Terminal Header -->
+                        <div class="bg-gray-900 px-4 py-2 flex items-center gap-2 border-b border-gray-800">
+                            <div class="w-3 h-3 rounded-full bg-red-500 shadow-[0_0_5px_red]"></div>
+                            <div class="w-3 h-3 rounded-full bg-yellow-500 shadow-[0_0_5px_orange]"></div>
+                            <div class="w-3 h-3 rounded-full bg-green-500 shadow-[0_0_5px_green]"></div>
+                            <div class="ml-4 text-xs text-gold font-mono opacity-80">root@tauqeer:~/bio</div>
+                        </div>
+                        <!-- Terminal Body -->
+                        <div class="p-6 font-mono text-sm leading-relaxed text-gray-300 bg-black">
+                            <p class="mb-4"><span class="text-gold">➜</span> <span class="text-blue-400">~</span> whoami</p>
+                            <p class="mb-4 text-white">
+                                > A disciplined student and professional freelancer bridging the gap between numbers and logic.
+                            </p>
+                            <p class="mb-4"><span class="text-gold">➜</span> <span class="text-blue-400">~</span> cat skills.json</p>
+                            <div class="text-yellow-100 pl-4 border-l-2 border-yellow-500/30">
+                                {<br>
+                                &nbsp;&nbsp;"core": ["Network Security", "Financial Audit"],<br>
+                                &nbsp;&nbsp;"tools": ["Wireshark", "Metasploit", "Excel", "Xero"],<br>
+                                &nbsp;&nbsp;"soft_skills": ["Critical Thinking", "Detail Oriented"]<br>
+                                }
+                            </div>
+                            <p class="mt-4 animate-pulse text-gold">_</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Timeline -->
+                <div class="lg:w-7/12 reveal" style="transition-delay: 200ms">
+                    <h2 class="text-3xl font-bold text-white mb-8">Education & <span class="gradient-text">Experience</span></h2>
+                    <div class="space-y-8 border-l border-white/20 ml-3 pl-8 relative">
+                        <!-- Item 1 -->
+                        <div class="relative group">
+                            <span class="absolute -left-[41px] top-1 h-5 w-5 rounded-full border-4 border-black bg-gold shadow-[0_0_10px_#FFD700] group-hover:scale-125 transition-transform"></span>
+                            <div class="flex flex-col sm:flex-row sm:items-baseline gap-2 mb-2">
+                                <h3 class="text-xl font-bold text-white group-hover:text-gold transition-colors">Freelance Consultant</h3>
+                                <span class="text-sm text-gold font-mono">2023 - Present</span>
+                            </div>
+                            <p class="text-gray-400 mb-2">Independent Contractor</p>
+                            <p class="text-sm text-gray-500">Providing security auditing and bookkeeping services to international clients via Upwork and direct contracts.</p>
+                        </div>
+
+                        <!-- Item 2 -->
+                        <div class="relative group">
+                            <span class="absolute -left-[41px] top-1 h-5 w-5 rounded-full border-4 border-black bg-white shadow-[0_0_10px_white] group-hover:scale-125 transition-transform"></span>
+                            <div class="flex flex-col sm:flex-row sm:items-baseline gap-2 mb-2">
+                                <h3 class="text-xl font-bold text-white group-hover:text-gray-300 transition-colors">Cyber Security Certification</h3>
+                                <span class="text-sm text-gray-400 font-mono">2022 - 2023</span>
+                            </div>
+                            <p class="text-gray-400 mb-2">Institute of Information Technology</p>
+                            <p class="text-sm text-gray-500">Specialized training in Network Defense, Ethical Hacking, and Cryptography.</p>
+                        </div>
+
+                        <!-- Item 3 -->
+                        <div class="relative group">
+                            <span class="absolute -left-[41px] top-1 h-5 w-5 rounded-full border-4 border-black bg-yellow-700 shadow-[0_0_10px_#B8860B] group-hover:scale-125 transition-transform"></span>
+                            <div class="flex flex-col sm:flex-row sm:items-baseline gap-2 mb-2">
+                                <h3 class="text-xl font-bold text-white group-hover:text-yellow-600 transition-colors">Bachelor of Commerce</h3>
+                                <span class="text-sm text-yellow-700 font-mono">2020 - 2024</span>
+                            </div>
+                            <p class="text-gray-400 mb-2">University of Commerce</p>
+                            <p class="text-sm text-gray-500">Major in Accounting & Finance. Focus on Corporate Finance and Auditing Standards.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact CTA -->
+    <section id="contact" class="py-24 relative overflow-hidden">
+        <div class="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-gold to-transparent opacity-50"></div>
+        <div class="max-w-4xl mx-auto px-4 text-center reveal">
+            <h2 class="text-4xl md:text-6xl font-bold text-white mb-6">Let's <span class="gradient-text">Collaborate</span></h2>
+            <p class="text-xl text-gray-400 mb-12 max-w-2xl mx-auto">I am currently accepting new freelance projects. Tell me about your security needs or financial goals.</p>
             
-            <div class="timeline">
-                <!-- Item 1 -->
-                <div class="timeline-item reveal">
-                    <div class="timeline-dot"></div>
-                    <span class="date">2025 - Present</span>
-                    <h3>BS Cyber Security Student</h3>
-                    <p style="color:var(--text-muted);">Air University, Islamabad. Focusing on ethical hacking and secure systems development.</p>
+            <form class="glass p-8 md:p-12 rounded-3xl max-w-2xl mx-auto border border-yellow-500/20 text-left shadow-[0_0_30px_rgba(0,0,0,0.5)]">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                    <div class="relative">
+                        <input type="text" id="name" class="peer w-full bg-black border border-gray-800 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-gold focus:shadow-[0_0_10px_rgba(255,215,0,0.3)] transition-all placeholder-transparent" placeholder="Name">
+                        <label for="name" class="absolute left-4 -top-2.5 bg-black px-1 text-xs text-gold transition-all peer-placeholder-shown:top-3.5 peer-placeholder-shown:text-gray-500 peer-placeholder-shown:text-base peer-focus:-top-2.5 peer-focus:text-xs peer-focus:text-gold">Name</label>
+                    </div>
+                    <div class="relative">
+                        <input type="email" id="email" class="peer w-full bg-black border border-gray-800 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-gold focus:shadow-[0_0_10px_rgba(255,215,0,0.3)] transition-all placeholder-transparent" placeholder="Email">
+                        <label for="email" class="absolute left-4 -top-2.5 bg-black px-1 text-xs text-gold transition-all peer-placeholder-shown:top-3.5 peer-placeholder-shown:text-gray-500 peer-placeholder-shown:text-base peer-focus:-top-2.5 peer-focus:text-xs peer-focus:text-gold">Email</label>
+                    </div>
                 </div>
-                <!-- Item 2 -->
-                <div class="timeline-item reveal" style="transition-delay: 0.2s;">
-                    <div class="timeline-dot"></div>
-                    <span class="date">2024</span>
-                    <h3>Freelance Developer/Consultant</h3>
-                    <p style="color:var(--text-muted);">Built custom web solutions and provided security guidance to small businesses.</p>
+                <div class="relative mb-8">
+                    <textarea id="msg" rows="4" class="peer w-full bg-black border border-gray-800 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-gold focus:shadow-[0_0_10px_rgba(255,215,0,0.3)] transition-all placeholder-transparent" placeholder="Message"></textarea>
+                    <label for="msg" class="absolute left-4 -top-2.5 bg-black px-1 text-xs text-gold transition-all peer-placeholder-shown:top-3.5 peer-placeholder-shown:text-gray-500 peer-placeholder-shown:text-base peer-focus:-top-2.5 peer-focus:text-xs peer-focus:text-gold">Project Details</label>
                 </div>
-                <!-- Item 3 -->
-                <div class="timeline-item reveal" style="transition-delay: 0.4s;">
-                    <div class="timeline-dot"></div>
-                    <span class="date">2023</span>
-                    <h3>Accountancy & Financial Training</h3>
-                    <p style="color:var(--text-muted);">Mastered bookkeeping principles and financial reporting standards.</p>
-                </div>
+                <button type="button" class="w-full bg-gradient-to-r from-yellow-500 to-yellow-700 text-black font-bold py-4 rounded-lg hover:from-yellow-400 hover:to-yellow-600 transition-all transform hover:-translate-y-1 shadow-[0_0_20px_rgba(255,215,0,0.3)] flex items-center justify-center gap-2">
+                    Send Message <i data-lucide="send" class="w-4 h-4 text-black"></i>
+                </button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black border-t border-white/10 py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-6">
+            <div class="flex items-center gap-3">
+                 <div class="w-8 h-8 border border-gold rounded flex items-center justify-center text-gold font-bold text-xs shadow-[0_0_10px_rgba(255,215,0,0.2)]">TM</div>
+                 <div class="flex flex-col">
+                     <span class="text-white font-bold text-sm">Tauqeer Mustafaa</span>
+                     <span class="text-gray-600 text-xs">© 2024 All rights reserved.</span>
+                 </div>
+            </div>
+            <div class="flex gap-6">
+                <a href="#" class="p-2 bg-white/5 rounded-full text-gray-400 hover:text-black hover:bg-gold transition-all"><i data-lucide="github" class="w-4 h-4"></i></a>
+                <a href="#" class="p-2 bg-white/5 rounded-full text-gray-400 hover:text-black hover:bg-white transition-all"><i data-lucide="linkedin" class="w-4 h-4"></i></a>
+                <a href="#" class="p-2 bg-white/5 rounded-full text-gray-400 hover:text-black hover:bg-gold transition-all"><i data-lucide="twitter" class="w-4 h-4"></i></a>
+                <a href="#" class="p-2 bg-white/5 rounded-full text-gray-400 hover:text-black hover:bg-white transition-all"><i data-lucide="mail" class="w-4 h-4"></i></a>
             </div>
         </div>
-    </section>
-
-    <!-- 7. CONTACT -->
-    <section id="contact" style="background: var(--bg-card);">
-        <div class="container" style="text-align:center;">
-            <span class="subtitle reveal">GET IN TOUCH</span>
-            <h2 class="reveal">Let's Connect & Collaborate</h2>
-            <p style="color:var(--text-muted); max-width: 600px; margin: 20px auto 40px;">
-                I am currently open for freelance opportunities in both the technical and financial domains. Send me an email and let's discuss your project requirements.
-            </p>
-            <!-- EMAIL LINK (Opens new tab) -->
-            <a href="mailto:contact@tauqeermustafa.live" class="btn reveal" style="padding: 15px 40px; font-size:1.1rem; transition-delay: 0.2s;" target="_blank" rel="noopener noreferrer">
-                <i class="fas fa-envelope"></i> Email Me Now
-            </a>
-        </div>
-    </section>
-
-    <!-- FOOTER -->
-    <footer>
-        <div class="social-icons">
-            <!-- SOCIAL LINKS (Opens new tab) -->
-            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin"></i></a>
-            <a href="https://github.com/tauqeermustafa" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i></a>
-            <a href="https://twitter.com" target="_blank" rel="noopener noreferrer"><i class="fab fa-twitter"></i></a>
-            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
-        </div>
-        <p style="margin-top: 15px;">&copy; 2025 Tauqeer Mustafa. All Rights Reserved.</p>
-        <p style="font-size: 0.8rem; margin-top: 5px;">Built with precision and modern design standards.</p>
     </footer>
 
-    <!-- JAVASCRIPT FOR SCROLL REVEAL -->
     <script>
-        // This script handles the 'reveal' animation as you scroll
-        window.addEventListener('scroll', reveal);
-        document.addEventListener('DOMContentLoaded', reveal); // Run on load
+        lucide.createIcons();
 
-        function reveal() {
-            var reveals = document.querySelectorAll('.reveal');
-            for (var i = 0; i < reveals.length; i++) {
-                var windowHeight = window.innerHeight;
-                var elementTop = reveals[i].getBoundingClientRect().top;
-                var elementVisible = 150; // Triggers when element is 150px from the bottom of the viewport
+        // --- Typing Effect ---
+        const typingElement = document.getElementById('typing-text');
+        const roles = ["Cyber Security Specialist", "Financial Auditor", "Student Freelancer", "Data Analyst"];
+        let roleIndex = 0, charIndex = 0, isDeleting = false;
 
-                if (elementTop < windowHeight - elementVisible) {
-                    reveals[i].classList.add('active');
+        function type() {
+            const currentRole = roles[roleIndex];
+            if (isDeleting) {
+                typingElement.textContent = currentRole.substring(0, charIndex - 1);
+                charIndex--;
+            } else {
+                typingElement.textContent = currentRole.substring(0, charIndex + 1);
+                charIndex++;
+            }
+
+            let typeSpeed = isDeleting ? 50 : 100;
+            if (!isDeleting && charIndex === currentRole.length) {
+                isDeleting = true;
+                typeSpeed = 2000; 
+            } else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                roleIndex = (roleIndex + 1) % roles.length;
+                typeSpeed = 500;
+            }
+            setTimeout(type, typeSpeed);
+        }
+        document.addEventListener('DOMContentLoaded', type);
+
+        // --- Interactive Neural Network Canvas (Updated Colors) ---
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+        let width, height;
+        let particles = [];
+        const mouse = { x: null, y: null, radius: 150 };
+
+        window.addEventListener('mousemove', (event) => {
+            mouse.x = event.x;
+            mouse.y = event.y;
+        });
+
+        function resize() {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+            initParticles();
+        }
+        window.addEventListener('resize', resize);
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * width;
+                this.y = Math.random() * height;
+                this.vx = (Math.random() - 0.5) * 0.5;
+                this.vy = (Math.random() - 0.5) * 0.5;
+                this.size = Math.random() * 2;
+                // Gold or White
+                this.baseColor = Math.random() > 0.5 ? '#FFD700' : '#FFFFFF'; 
+            }
+            update() {
+                this.x += this.vx;
+                this.y += this.vy;
+
+                if (mouse.x != null) {
+                    let dx = mouse.x - this.x;
+                    let dy = mouse.y - this.y;
+                    let distance = Math.sqrt(dx * dx + dy * dy);
+                    if (distance < mouse.radius) {
+                        const forceDirectionX = dx / distance;
+                        const forceDirectionY = dy / distance;
+                        const force = (mouse.radius - distance) / mouse.radius;
+                        const directionX = forceDirectionX * force * 3;
+                        const directionY = forceDirectionY * force * 3;
+                        this.x -= directionX;
+                        this.y -= directionY;
+                    }
+                }
+
+                if (this.x < 0 || this.x > width) this.vx *= -1;
+                if (this.y < 0 || this.y > height) this.vy *= -1;
+            }
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fillStyle = this.baseColor;
+                ctx.fill();
+            }
+        }
+
+        function initParticles() {
+            particles = [];
+            let numberOfParticles = (canvas.width * canvas.height) / 9000;
+            for (let i = 0; i < numberOfParticles; i++) {
+                particles.push(new Particle());
+            }
+        }
+
+        function animateParticles() {
+            ctx.clearRect(0, 0, width, height);
+            for (let i = 0; i < particles.length; i++) {
+                particles[i].update();
+                particles[i].draw();
+                
+                for (let j = i; j < particles.length; j++) {
+                    let dx = particles[i].x - particles[j].x;
+                    let dy = particles[i].y - particles[j].y;
+                    let distance = Math.sqrt(dx * dx + dy * dy);
+                    if (distance < 100) {
+                        ctx.beginPath();
+                        // Connection line color (White/Gray with opacity)
+                        ctx.strokeStyle = `rgba(150, 150, 150, ${1 - distance/100})`;
+                        ctx.lineWidth = 0.5;
+                        ctx.moveTo(particles[i].x, particles[i].y);
+                        ctx.lineTo(particles[j].x, particles[j].y);
+                        ctx.stroke();
+                    }
                 }
             }
+            requestAnimationFrame(animateParticles);
+        }
+        resize();
+        animateParticles();
+
+        // --- 3D Tilt Effect ---
+        const cards = document.querySelectorAll('.tilt-card');
+        cards.forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                
+                const rotateX = ((y - centerY) / centerY) * -10;
+                const rotateY = ((x - centerX) / centerX) * 10;
+
+                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.02)`;
+            });
+
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)`;
+            });
+        });
+
+        // --- Scroll Reveal & Counter ---
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    if(entry.target.querySelector('.counter')) {
+                        startCounters(entry.target);
+                    }
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+        function startCounters(section) {
+            section.querySelectorAll('.counter').forEach(counter => {
+                const target = +counter.getAttribute('data-target');
+                const duration = 2000;
+                const increment = target / (duration / 16);
+                
+                let current = 0;
+                const updateCounter = () => {
+                    current += increment;
+                    if (current < target) {
+                        counter.innerText = Math.ceil(current);
+                        requestAnimationFrame(updateCounter);
+                    } else {
+                        counter.innerText = target;
+                    }
+                };
+                updateCounter();
+            });
         }
     </script>
 </body>
