@@ -1,374 +1,61 @@
-I have fixed all three issues you mentioned:
-
-1.  **Home Section:** I have made a massive, full-screen **Home Section** with a typing effect and a "Cyber Grid" background so it is impossible to miss.
-2.  **Lengthy About Section:** I have expanded the About section into **three detailed paragraphs** covering your background at Air University, your unique mix of Accountancy/Security, and your future goals.
-3.  **Fixed Animations:** I removed the external library (which might have been blocked on your computer) and wrote **Custom CSS Animations**. These are built directly into the code, so they will **100% work** even without internet.
-
-### **Instructions:**
-
-1.  Open your `index.html` file.
-2.  **Delete everything.**
-3.  **Copy and Paste** this new code.
-4.  Upload to GitHub.
-
-<!-- end list -->
-
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tauqeer Mustafa | Cyber Security & Finance</title>
+    <title>Work | Tauqeer Mustafa</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
     <style>
-        /* --- 1. CORE STYLES --- */
-        :root {
-            --primary: #00ff9d; /* Cyber Green */
-            --primary-dark: #00cc7d;
-            --bg: #050505;
-            --card-bg: #101010;
-            --text: #ffffff;
-            --text-gray: #a1a1aa;
-        }
+        :root { --primary: #00ff9d; --bg: #050505; --card: #101010; --text: #fff; }
+        body { background: var(--bg); color: var(--text); margin:0; font-family:'Segoe UI', sans-serif; }
+        nav { padding: 20px 40px; border-bottom: 1px solid #222; display:flex; justify-content:space-between; align-items:center; }
+        .logo { font-size: 1.5rem; font-weight: bold; color: #fff; text-decoration: none; text-transform: uppercase; }
+        .logo span { color: var(--primary); }
+        .btn { padding: 10px 25px; background: var(--primary); color: #000; text-decoration: none; font-weight: bold; border-radius: 4px; }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; scroll-behavior: smooth; }
+        .container { max-width: 800px; margin: 0 auto; padding: 60px 20px; }
         
-        body {
-            background-color: var(--bg);
-            color: var(--text);
-            overflow-x: hidden;
-        }
-
-        /* --- 2. CUSTOM ANIMATIONS (Built-in) --- */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        @keyframes glowing {
-            0% { box-shadow: 0 0 5px var(--primary); }
-            50% { box-shadow: 0 0 20px var(--primary); }
-            100% { box-shadow: 0 0 5px var(--primary); }
-        }
-
-        @keyframes slideInLeft {
-            from { opacity: 0; transform: translateX(-100px); }
-            to { opacity: 1; transform: translateX(0); }
-        }
-
-        @keyframes slideInRight {
-            from { opacity: 0; transform: translateX(100px); }
-            to { opacity: 1; transform: translateX(0); }
-        }
-
-        /* The class we add with JS to trigger animations on scroll */
-        .reveal {
-            opacity: 0; 
-            transform: translateY(50px);
-            transition: all 1s ease-out;
-        }
-        .reveal.active {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* --- 3. NAVIGATION --- */
-        nav {
-            display: flex; justify-content: space-between; align-items: center;
-            padding: 20px 40px;
-            background: rgba(5, 5, 5, 0.95);
-            border-bottom: 1px solid #222;
-            position: sticky; top: 0; z-index: 1000;
-        }
-        .logo { font-size: 1.8rem; font-weight: bold; text-transform: uppercase; color: #fff; text-decoration: none; }
-        .logo span { color: var(--primary); text-shadow: 0 0 10px var(--primary); }
-        
-        .nav-links { display: flex; gap: 30px; }
-        .nav-links a { color: var(--text-gray); text-decoration: none; font-size: 0.95rem; transition: 0.3s; text-transform: uppercase; letter-spacing: 1px; }
-        .nav-links a:hover { color: var(--primary); }
-
-        .hire-btn {
-            padding: 10px 25px; background: var(--primary); color: #000;
-            font-weight: bold; text-decoration: none; border-radius: 4px;
-            animation: glowing 2s infinite;
-        }
-
-        /* --- 4. HOME SECTION (Restored & Huge) --- */
-        .hero {
-            height: 100vh; /* Full Screen Height */
-            display: flex; flex-direction: column; justify-content: center; align-items: center;
-            text-align: center;
-            background: radial-gradient(circle at center, #1a1a1a 0%, #000 100%);
-            position: relative;
-            padding: 0 20px;
-        }
-        
-        /* Cyber Grid Background Effect */
-        .hero::before {
-            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background-image: linear-gradient(rgba(0, 255, 157, 0.03) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(0, 255, 157, 0.03) 1px, transparent 1px);
-            background-size: 50px 50px;
-            z-index: 0;
-        }
-
-        .hero-content { position: relative; z-index: 1; animation: fadeIn 1.5s ease-out; }
-        
-        .hero h1 { font-size: 5rem; line-height: 1.1; margin-bottom: 20px; font-weight: 800; }
-        .hero h1 span { color: var(--primary); }
-        
-        .hero p { font-size: 1.5rem; color: var(--text-gray); margin-bottom: 40px; max-width: 800px; margin-left: auto; margin-right: auto; }
-
-        .cta-buttons { display: flex; gap: 20px; justify-content: center; }
-        .btn { padding: 15px 40px; font-size: 1rem; font-weight: bold; text-decoration: none; border-radius: 5px; transition: 0.3s; }
-        .btn-primary { background: var(--primary); color: #000; }
-        .btn-primary:hover { background: #fff; transform: scale(1.05); }
-        .btn-outline { border: 1px solid var(--primary); color: var(--primary); }
-        .btn-outline:hover { background: var(--primary); color: #000; }
-
-        /* --- 5. ABOUT SECTION (Lengthy) --- */
-        section { padding: 100px 10%; border-bottom: 1px solid #111; }
-        
-        .section-title { font-size: 3rem; margin-bottom: 10px; }
-        .section-subtitle { color: var(--primary); letter-spacing: 2px; text-transform: uppercase; display: block; margin-bottom: 40px; }
-
-        .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: start; }
-        
-        .about-text p {
-            font-size: 1.1rem; color: #ccc; line-height: 1.8; margin-bottom: 25px;
-            text-align: justify;
-        }
-        
-        .about-img { width: 100%; border-radius: 10px; box-shadow: 0 0 30px rgba(0,255,157,0.1); border: 1px solid #333; }
-
-        /* --- 6. SERVICES & FIELDS --- */
-        .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
-        
-        .card {
-            background: var(--card-bg); padding: 40px; border-radius: 15px;
-            border: 1px solid #222; transition: 0.3s;
-        }
-        .card:hover { transform: translateY(-10px); border-color: var(--primary); }
-        .card i { font-size: 2.5rem; color: var(--primary); margin-bottom: 20px; }
-        .card h3 { font-size: 1.5rem; margin-bottom: 15px; }
-        .card p { color: var(--text-gray); }
-
-        /* --- 7. TIMELINE --- */
-        .timeline-item {
-            border-left: 2px solid var(--primary); padding-left: 30px; margin-bottom: 40px; position: relative;
-        }
-        .timeline-item::before {
-            content: ''; position: absolute; left: -9px; top: 0; width: 16px; height: 16px;
-            background: var(--primary); border-radius: 50%; box-shadow: 0 0 10px var(--primary);
-        }
-        .date { color: var(--primary); font-weight: bold; margin-bottom: 5px; display: block; }
-
-        /* --- 8. FOOTER --- */
-        footer { padding: 50px; text-align: center; background: #000; border-top: 1px solid #222; }
-        .social-icons { margin-bottom: 20px; }
-        .social-icons a { color: #fff; font-size: 1.5rem; margin: 0 15px; transition: 0.3s; }
-        .social-icons a:hover { color: var(--primary); transform: scale(1.2); }
-
-        /* Mobile */
-        @media (max-width: 768px) {
-            .hero h1 { font-size: 3rem; }
-            .about-grid { grid-template-columns: 1fr; }
-            .nav-links { display: none; }
-        }
+        /* Timeline Styles */
+        .timeline { border-left: 2px solid var(--primary); padding-left: 40px; }
+        .timeline-item { position: relative; margin-bottom: 50px; }
+        .timeline-item::before { content: ''; position: absolute; left: -49px; top: 0; width: 16px; height: 16px; background: var(--primary); border-radius: 50%; box-shadow: 0 0 10px var(--primary); }
+        .date { font-weight: bold; color: var(--primary); font-size: 1.1rem; }
+        .role { font-size: 2rem; margin: 10px 0; }
+        .place { color: #ccc; font-size: 1.1rem; margin-bottom: 15px; display: block; font-style: italic; }
+        .desc { color: #888; line-height: 1.6; }
     </style>
 </head>
 <body>
-
     <nav>
-        <a href="#home" class="logo">Tauqeer <span>Mustafa</span></a>
-        <div class="nav-links">
-            <a href="#home">Home</a>
-            <a href="#about">About</a>
-            <a href="#fields">Fields</a>
-            <a href="#career">Career</a>
-            <a href="#projects">Projects</a>
-            <a href="#contact">Contact</a>
-        </div>
-        <a href="#contact" class="hire-btn">Hire Me</a>
+        <a href="index.html" class="logo">Tauqeer <span>Mustafa</span></a>
+        <a href="index.html" class="btn">Back Home</a>
     </nav>
 
-    <section id="home" class="hero">
-        <div class="hero-content">
-            <p style="color:var(--primary); letter-spacing:3px; font-weight:bold; margin-bottom:10px;">WELCOME TO MY WORLD</p>
-            <h1>Cyber Security <br> & <span>Accountancy</span></h1>
-            <p>
-                I am Tauqeer Mustafa, a student at Air University. 
-                I combine the precision of numbers with the security of digital assets to create 
-                flawless, secure web solutions.
-            </p>
-            <div class="cta-buttons">
-                <a href="#projects" class="btn btn-primary">View My Work</a>
-                <a href="#about" class="btn btn-outline">Read My Story</a>
+    <div class="container">
+        <h1 style="text-align:center; font-size:3rem; margin-bottom:60px;">Career Timeline</h1>
+
+        <div class="timeline">
+            <div class="timeline-item">
+                <span class="date">2025 - Present</span>
+                <h2 class="role">BS Cyber Security Student</h2>
+                <span class="place">Air University, Islamabad</span>
+                <p class="desc">Currently pursuing a bachelor's degree focused on Network Defense, Cryptography, and Ethical Hacking. Active member of the university tech society.</p>
+            </div>
+
+            <div class="timeline-item">
+                <span class="date">2024</span>
+                <h2 class="role">Freelance Web Developer</h2>
+                <span class="place">Remote / Upwork</span>
+                <p class="desc">Specializing in creating animated, responsive portfolios for clients. Also handling domain registration and DNS management (GoDaddy, Namecheap).</p>
+            </div>
+
+            <div class="timeline-item">
+                <span class="date">2023</span>
+                <h2 class="role">Accountancy Intern</h2>
+                <span class="place">Islamabad Finance Firm</span>
+                <p class="desc">Assisted in managing financial ledgers, bookkeeping, and preparing monthly financial reports using Excel and accounting software.</p>
             </div>
         </div>
-    </section>
-
-    <section id="about">
-        <div class="reveal">
-            <span class="section-subtitle">MY BIOGRAPHY</span>
-            <h2 class="section-title">About Me</h2>
-            
-            <div class="about-grid">
-                <div style="animation: slideInLeft 1s;">
-                    <img src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=800&q=80" alt="Hacker Code" class="about-img">
-                    
-                    <div style="margin-top: 30px; display:flex; gap:20px;">
-                        <div class="card" style="padding:20px; text-align:center;">
-                            <h3 style="color:var(--primary); font-size:2rem;">3+</h3>
-                            <p>Years in Finance</p>
-                        </div>
-                        <div class="card" style="padding:20px; text-align:center;">
-                            <h3 style="color:var(--primary); font-size:2rem;">10+</h3>
-                            <p>Web Projects</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="about-text" style="animation: slideInRight 1s;">
-                    <p>
-                        <strong>The Academic Foundation:</strong><br>
-                        My journey began at <strong>Air University, Islamabad</strong>, where I am currently pursuing my Bachelor of Science in Cyber Security. This rigorous program has trained me in the art of network defense, ethical hacking, and cryptography. I don't just learn theory; I apply it to real-world scenarios, testing systems for vulnerabilities and securing them against potential threats.
-                    </p>
-                    <p>
-                        <strong>The Unique Hybrid Skillset:</strong><br>
-                        What sets me apart from a typical developer is my strong background in <strong>Accountancy</strong>. Before diving into code, I mastered the logic of business finance. This means I understand the "business value" of security. I don't just write code; I write code that protects financial assets and ensures business continuity. I bring the same level of accuracy to my coding as I do to a balance sheet.
-                    </p>
-                    <p>
-                        <strong>The Freelance Mission:</strong><br>
-                        As a professional freelancer, my goal is simple: to provide high-quality, secure, and visually stunning digital solutions. Whether I am auditing a company's ledger or building an animated portfolio website, I guarantee precision. I am passionate about helping clients navigate the complex digital world safely and efficiently.
-                    </p>
-                    
-                    <a href="#contact" class="btn btn-outline" style="margin-top:20px; display:inline-block;">Download CV</a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="fields" style="background: #0a0a0a;">
-        <div class="reveal">
-            <span class="section-subtitle">AREAS OF EXPERTISE</span>
-            <h2 class="section-title">My Fields</h2>
-            <div class="grid-3">
-                <div class="card">
-                    <i class="fas fa-user-secret"></i>
-                    <h3>Cyber Security</h3>
-                    <p>Penetration testing, secure coding audits, and network infrastructure protection.</p>
-                </div>
-                <div class="card">
-                    <i class="fas fa-calculator"></i>
-                    <h3>Accountancy</h3>
-                    <p>Financial statement analysis, auditing, and tax compliance assistance.</p>
-                </div>
-                <div class="card">
-                    <i class="fas fa-laptop-code"></i>
-                    <h3>Freelancing</h3>
-                    <p>Full-stack web development, custom animations, and domain management.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="career">
-        <div class="reveal">
-            <span class="section-subtitle">MY PATH</span>
-            <h2 class="section-title">Career Timeline</h2>
-            <div style="max-width: 800px; margin-top: 50px;">
-                <div class="timeline-item">
-                    <span class="date">2025 - Present</span>
-                    <h3>BS Cyber Security Student</h3>
-                    <p style="color:#aaa;">Air University, Islamabad. Focusing on Network Security and Forensics.</p>
-                </div>
-                <div class="timeline-item">
-                    <span class="date">2024</span>
-                    <h3>Freelance Web Developer</h3>
-                    <p style="color:#aaa;">Started offering high-end animated websites (HTML/CSS/JS) on freelance platforms.</p>
-                </div>
-                <div class="timeline-item">
-                    <span class="date">2023</span>
-                    <h3>Accountancy & Finance</h3>
-                    <p style="color:#aaa;">Managed bookkeeping and financial records for local businesses.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="projects" style="background: #0a0a0a;">
-        <div class="reveal">
-            <span class="section-subtitle">MY WORK</span>
-            <h2 class="section-title">Authentic Projects</h2>
-            <div class="grid-3">
-                <div class="card">
-                    <i class="fas fa-file-excel"></i>
-                    <h3>SecureFin Audit Tool</h3>
-                    <p>A Python script that scans Excel financial sheets for fraud patterns and data errors.</p>
-                    <a href="#" style="color:var(--primary); display:block; margin-top:15px;">View Code &rarr;</a>
-                </div>
-                <div class="card">
-                    <i class="fas fa-wifi"></i>
-                    <h3>Packet Sniffer</h3>
-                    <p>A network analysis tool built to monitor traffic and detect unauthorized packets.</p>
-                    <a href="#" style="color:var(--primary); display:block; margin-top:15px;">View Code &rarr;</a>
-                </div>
-                <div class="card">
-                    <i class="fas fa-globe"></i>
-                    <h3>Portfolio V2</h3>
-                    <p>This website! Built with advanced CSS animations and SEO optimization.</p>
-                    <a href="#" style="color:var(--primary); display:block; margin-top:15px;">View Source &rarr;</a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="contact">
-        <div class="reveal" style="text-align: center;">
-            <h2 class="section-title">Let's Connect</h2>
-            <p style="color:#aaa; margin-bottom: 30px;">
-                I am always open to discussing new projects, creative ideas, or opportunities.
-            </p>
-            <a href="mailto:contact@tauqeermustafa.live" class="hire-btn" style="font-size:1.2rem; padding: 15px 40px;">
-                <i class="fas fa-envelope"></i> Send Email
-            </a>
-        </div>
-    </section>
-
-    <footer>
-        <div class="social-icons">
-            <a href="https://linkedin.com" target="_blank"><i class="fab fa-linkedin"></i></a>
-            <a href="https://github.com/tauqeermustafa" target="_blank"><i class="fab fa-github"></i></a>
-            <a href="https://twitter.com" target="_blank"><i class="fab fa-twitter"></i></a>
-            <a href="https://instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
-        </div>
-        <p style="color:#666;">&copy; 2025 Tauqeer Mustafa. All Rights Reserved.</p>
-    </footer>
-
-    <script>
-        // This simple script triggers the '.reveal' class when you scroll
-        window.addEventListener('scroll', reveal);
-
-        function reveal() {
-            var reveals = document.querySelectorAll('.reveal');
-
-            for (var i = 0; i < reveals.length; i++) {
-                var windowHeight = window.innerHeight;
-                var elementTop = reveals[i].getBoundingClientRect().top;
-                var elementVisible = 150;
-
-                if (elementTop < windowHeight - elementVisible) {
-                    reveals[i].classList.add('active');
-                }
-            }
-        }
-        // Trigger once on load to show top elements
-        reveal();
-    </script>
-
+    </div>
 </body>
 </html>
-```
