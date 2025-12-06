@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Services | Tauqeer Mustafa</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root { --primary: #00ff9d; --bg: #050505; --card: #101010; --text: #fff; }
+        body { background: var(--bg); color: var(--text); margin:0; font-family:'Segoe UI', sans-serif; }
+        nav { padding: 20px 40px; border-bottom: 1px solid #222; display:flex; justify-content:space-between; align-items:center; }
+        .logo { font-size: 1.5rem; font-weight: bold; color: #fff; text-decoration: none; text-transform: uppercase; }
+        .logo span { color: var(--primary); }
+        .btn { padding: 10px 25px; background: var(--primary); color: #000; text-decoration: none; font-weight: bold; border-radius: 4px; }
+        
+        .container { max-width: 1000px; margin: 0 auto; padding: 60px 20px; }
+        .service-row { display: flex; gap: 40px; margin-bottom: 60px; align-items: center; border-bottom: 1px solid #222; padding-bottom: 40px; }
+        .service-row:last-child { border: none; }
+        .service-icon { font-size: 3rem; color: var(--primary); }
+        .service-img { width: 300px; height: 200px; object-fit: cover; border-radius: 10px; border: 1px solid #333; }
+        h2 { font-size: 2.5rem; margin-bottom: 15px; }
+        p { color: #aaa; line-height: 1.6; }
+        ul { list-style: none; padding: 0; margin-top: 20px; }
+        ul li { margin-bottom: 10px; color: #ccc; }
+        ul li::before { content: "✓"; color: var(--primary); margin-right: 10px; }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="index.html" class="logo">Tauqeer <span>Mustafa</span></a>
+        <a href="index.html" class="btn">Back Home</a>
+    </nav>
+
+    <div class="container">
+        <h1 style="text-align:center; font-size:3rem; margin-bottom:60px;">Detailed Services</h1>
+
+        <div class="service-row">
+            <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=400&q=80" class="service-img" alt="Security">
+            <div>
+                <h2>Cyber Security Audits</h2>
+                <p>I provide comprehensive security assessments for small businesses and personal websites. My goal is to identify vulnerabilities before hackers do.</p>
+                <ul>
+                    <li>Vulnerability Scanning & Penetration Testing</li>
+                    <li>Secure Code Review</li>
+                    <li>Phishing Simulation & Awareness</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="service-row">
+            <img src="https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&w=400&q=80" class="service-img" alt="Finance">
+            <div>
+                <h2>Accountancy & Finance</h2>
+                <p>With a strong background in finance, I help businesses maintain accurate records. I bridge the gap between technical data and financial health.</p>
+                <ul>
+                    <li>Bookkeeping & Ledger Maintenance</li>
+                    <li>Financial Statement Preparation</li>
+                    <li>Cost Analysis & Budgeting</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="service-row">
+            <img src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=400&q=80" class="service-img" alt="Web">
+            <div>
+                <h2>Web Development</h2>
+                <p>I build high-performance, animated websites. I specialize in custom domain setups and creating professional portfolios for students and professionals.</p>
+                <ul>
+                    <li>Custom HTML/CSS/JS Development</li>
+                    <li>Domain & DNS Configuration</li>
+                    <li>Responsive & Mobile Design</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
