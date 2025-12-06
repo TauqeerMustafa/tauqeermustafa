@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects | Tauqeer Mustafa</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root { --primary: #00ff9d; --bg: #050505; --card: #101010; --text: #fff; }
+        body { background: var(--bg); color: var(--text); margin:0; font-family:'Segoe UI', sans-serif; }
+        nav { padding: 20px 40px; border-bottom: 1px solid #222; display:flex; justify-content:space-between; align-items:center; }
+        .logo { font-size: 1.5rem; font-weight: bold; color: #fff; text-decoration: none; text-transform: uppercase; }
+        .logo span { color: var(--primary); }
+        .btn { padding: 10px 25px; background: var(--primary); color: #000; text-decoration: none; font-weight: bold; border-radius: 4px; }
+
+        .container { max-width: 1000px; margin: 0 auto; padding: 60px 20px; }
+        .project-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+        
+        .project-card { background: var(--card); border: 1px solid #222; border-radius: 10px; overflow: hidden; transition: 0.3s; }
+        .project-card:hover { transform: translateY(-10px); border-color: var(--primary); }
+        .project-img { width: 100%; height: 200px; object-fit: cover; }
+        .content { padding: 20px; }
+        .tag { background: #222; padding: 5px 10px; font-size: 0.8rem; border-radius: 4px; color: #ccc; margin-right: 5px; }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="index.html" class="logo">Tauqeer <span>Mustafa</span></a>
+        <a href="index.html" class="btn">Back Home</a>
+    </nav>
+
+    <div class="container">
+        <h1 style="text-align:center; font-size:3rem; margin-bottom:60px;">Authentic Projects</h1>
+
+        <div class="project-grid">
+            <div class="project-card">
+                <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=500&q=80" class="project-img">
+                <div class="content">
+                    <h3>SecureFin Audit Tool</h3>
+                    <div style="margin:10px 0;">
+                        <span class="tag">Python</span><span class="tag">Finance</span><span class="tag">Security</span>
+                    </div>
+                    <p style="color:#aaa;">An automated script that scans financial Excel sheets to detect data integrity errors and potential fraud patterns.</p>
+                    <a href="#" style="color:var(--primary); display:block; margin-top:15px; text-decoration:none;">View Code &rarr;</a>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <img src="https://images.unsplash.com/photo-1558494949-efdeb6bf80c1?auto=format&fit=crop&w=500&q=80" class="project-img">
+                <div class="content">
+                    <h3>Network Packet Sniffer</h3>
+                    <div style="margin:10px 0;">
+                        <span class="tag">Python</span><span class="tag">Networking</span>
+                    </div>
+                    <p style="color:#aaa;">A custom tool designed to capture and analyze network traffic to identify unauthorized access attempts.</p>
+                    <a href="#" style="color:var(--primary); display:block; margin-top:15px; text-decoration:none;">View Code &rarr;</a>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <img src="https://images.unsplash.com/photo-1547658719-da2b51169166?auto=format&fit=crop&w=500&q=80" class="project-img">
+                <div class="content">
+                    <h3>Portfolio Website V2</h3>
+                    <div style="margin:10px 0;">
+                        <span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">Animation</span>
+                    </div>
+                    <p style="color:#aaa;">A high-performance personal portfolio website featuring custom CSS animations and dark mode design.</p>
+                    <a href="#" style="color:var(--primary); display:block; margin-top:15px; text-decoration:none;">View Code &rarr;</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
