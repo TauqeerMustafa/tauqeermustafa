@@ -175,6 +175,149 @@
 
         /* Selection */
         ::selection { background: var(--gold); color: black; }
+
+        /* AI Chat Styles */
+        .ai-fab {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: black;
+            border: 2px solid var(--gold);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: none;
+            z-index: 1000;
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.4);
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .ai-fab:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 40px rgba(255, 215, 0, 0.8);
+        }
+        .ai-modal {
+            position: fixed;
+            bottom: 100px;
+            right: 30px;
+            width: 350px;
+            height: 500px;
+            background: rgba(5, 5, 5, 0.95);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--gold);
+            border-radius: 12px;
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 0 50px rgba(0,0,0,0.8);
+            transform-origin: bottom right;
+            transition: all 0.3s ease;
+            opacity: 0;
+            pointer-events: none;
+            transform: scale(0.9);
+        }
+        .ai-modal.active {
+            opacity: 1;
+            pointer-events: all;
+            transform: scale(1);
+        }
+        .chat-messages {
+            flex-grow: 1;
+            padding: 20px;
+            overflow-y: auto;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .chat-bubble {
+            padding: 10px 14px;
+            border-radius: 8px;
+            max-width: 85%;
+            word-wrap: break-word;
+        }
+        .chat-user {
+            align-self: flex-end;
+            background: rgba(255, 215, 0, 0.1);
+            border: 1px solid var(--gold);
+            color: white;
+            border-bottom-right-radius: 2px;
+        }
+        .chat-ai {
+            align-self: flex-start;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #d1d5db;
+            border-bottom-left-radius: 2px;
+        }
+        .ai-typing span {
+            display: inline-block;
+            width: 4px;
+            height: 4px;
+            background: var(--gold);
+            border-radius: 50%;
+            margin: 0 2px;
+            animation: typing 1s infinite;
+        }
+        .ai-typing span:nth-child(2) { animation-delay: 0.2s; }
+        .ai-typing span:nth-child(3) { animation-delay: 0.4s; }
+        @keyframes typing { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
+
+        /* AI Shine Button */
+        .btn-ai-shine {
+            position: relative;
+            overflow: hidden;
+        }
+        .btn-ai-shine::after {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%;
+            width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            transition: 0.5s;
+        }
+        .btn-ai-shine:hover::after {
+            left: 100%;
+        }
+
+        /* --- MARQUEE ANIMATION --- */
+        @keyframes scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        .animate-scroll {
+            animation: scroll 30s linear infinite;
+        }
+        .animate-scroll:hover {
+            animation-play-state: paused;
+        }
+
+        /* --- PROCESS STEPS --- */
+        .step-card {
+            transition: all 0.3s ease;
+        }
+        .step-card:hover {
+            transform: translateY(-10px);
+        }
+        .step-icon {
+            transition: all 0.3s ease;
+        }
+        .step-card:hover .step-icon {
+            color: var(--gold);
+            border-color: var(--gold);
+            box-shadow: 0 0 20px var(--gold);
+            transform: scale(1.1);
+        }
+        
+        /* --- SOCIAL GLOWS --- */
+        .hover-glow-linkedin:hover { box-shadow: 0 0 15px #0077b5; border-color: #0077b5; color: #0077b5; }
+        .hover-glow-github:hover { box-shadow: 0 0 15px #ffffff; border-color: #ffffff; color: #ffffff; }
+        .hover-glow-twitter:hover { box-shadow: 0 0 15px #1DA1F2; border-color: #1DA1F2; color: #1DA1F2; }
+        .hover-glow-instagram:hover { box-shadow: 0 0 15px #E1306C; border-color: #E1306C; color: #E1306C; }
+        .hover-glow-mail:hover { box-shadow: 0 0 15px #FFD700; border-color: #FFD700; color: #FFD700; }
     </style>
 </head>
 <body class="overflow-x-hidden">
@@ -220,8 +363,7 @@
 
     <!-- Hero Section -->
     <section class="min-h-screen flex items-center justify-center pt-20 relative px-4 overflow-hidden">
-        
-        <!-- REACTOR CORE ANIMATION -->
+        <!-- ... (Existing Hero Content) ... -->
         <div class="reactor-container">
             <div class="reactor-ring r1"></div>
             <div class="reactor-ring r2"></div>
@@ -278,6 +420,37 @@
                     <div class="text-4xl font-black text-white mb-1 group-hover:text-gold transition-colors shadow-black drop-shadow-lg">24/7</div>
                     <div class="text-xs text-gray-500 uppercase tracking-[0.2em] font-bold">Monitoring</div>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- THE ARSENAL (Marquee) -->
+    <section class="py-8 border-b border-white/5 bg-black overflow-hidden relative z-20">
+        <div class="absolute inset-0 bg-yellow-500/5 pointer-events-none"></div>
+        <div class="max-w-7xl mx-auto px-4 mb-4 text-center">
+             <h3 class="text-gold text-xs font-bold tracking-[0.3em] uppercase opacity-70">Operational Arsenal</h3>
+        </div>
+        <div class="relative w-full overflow-hidden">
+            <div class="flex gap-16 items-center animate-scroll whitespace-nowrap py-4">
+                <!-- Set 1 -->
+                <span class="text-lg font-bold text-gray-500 font-mono flex items-center gap-2 hover:text-white transition-colors cursor-default"><i data-lucide="terminal" class="w-5 h-5 text-gold"></i> Kali Linux</span>
+                <span class="text-lg font-bold text-gray-500 font-mono flex items-center gap-2 hover:text-white transition-colors cursor-default"><i data-lucide="code" class="w-5 h-5 text-gold"></i> Python</span>
+                <span class="text-lg font-bold text-gray-500 font-mono flex items-center gap-2 hover:text-white transition-colors cursor-default"><i data-lucide="shield-alert" class="w-5 h-5 text-gold"></i> Metasploit</span>
+                <span class="text-lg font-bold text-gray-500 font-mono flex items-center gap-2 hover:text-white transition-colors cursor-default"><i data-lucide="network" class="w-5 h-5 text-gold"></i> Wireshark</span>
+                <span class="text-lg font-bold text-gray-500 font-mono flex items-center gap-2 hover:text-white transition-colors cursor-default"><i data-lucide="file-spreadsheet" class="w-5 h-5 text-gold"></i> Excel (Adv)</span>
+                <span class="text-lg font-bold text-gray-500 font-mono flex items-center gap-2 hover:text-white transition-colors cursor-default"><i data-lucide="database" class="w-5 h-5 text-gold"></i> SQL</span>
+                <span class="text-lg font-bold text-gray-500 font-mono flex items-center gap-2 hover:text-white transition-colors cursor-default"><i data-lucide="lock" class="w-5 h-5 text-gold"></i> Cryptography</span>
+                <span class="text-lg font-bold text-gray-500 font-mono flex items-center gap-2 hover:text-white transition-colors cursor-default"><i data-lucide="pie-chart" class="w-5 h-5 text-gold"></i> QuickBooks</span>
+                
+                <!-- Duplicate Set -->
+                <span class="text-lg font-bold text-gray-500 font-mono flex items-center gap-2 hover:text-white transition-colors cursor-default"><i data-lucide="terminal" class="w-5 h-5 text-gold"></i> Kali Linux</span>
+                <span class="text-lg font-bold text-gray-500 font-mono flex items-center gap-2 hover:text-white transition-colors cursor-default"><i data-lucide="code" class="w-5 h-5 text-gold"></i> Python</span>
+                <span class="text-lg font-bold text-gray-500 font-mono flex items-center gap-2 hover:text-white transition-colors cursor-default"><i data-lucide="shield-alert" class="w-5 h-5 text-gold"></i> Metasploit</span>
+                <span class="text-lg font-bold text-gray-500 font-mono flex items-center gap-2 hover:text-white transition-colors cursor-default"><i data-lucide="network" class="w-5 h-5 text-gold"></i> Wireshark</span>
+                <span class="text-lg font-bold text-gray-500 font-mono flex items-center gap-2 hover:text-white transition-colors cursor-default"><i data-lucide="file-spreadsheet" class="w-5 h-5 text-gold"></i> Excel (Adv)</span>
+                <span class="text-lg font-bold text-gray-500 font-mono flex items-center gap-2 hover:text-white transition-colors cursor-default"><i data-lucide="database" class="w-5 h-5 text-gold"></i> SQL</span>
+                <span class="text-lg font-bold text-gray-500 font-mono flex items-center gap-2 hover:text-white transition-colors cursor-default"><i data-lucide="lock" class="w-5 h-5 text-gold"></i> Cryptography</span>
+                <span class="text-lg font-bold text-gray-500 font-mono flex items-center gap-2 hover:text-white transition-colors cursor-default"><i data-lucide="pie-chart" class="w-5 h-5 text-gold"></i> QuickBooks</span>
             </div>
         </div>
     </section>
@@ -345,6 +518,55 @@
         </div>
     </section>
 
+    <!-- MISSION PROTOCOL (Process) -->
+    <section class="py-32 relative bg-black/80">
+        <div class="absolute inset-0 bg-grid-white/[0.02]"></div>
+        <div class="max-w-7xl mx-auto px-4 relative z-10">
+            <h2 class="text-4xl md:text-5xl font-black text-white mb-20 uppercase tracking-tight hacker-text text-center" data-value="MISSION_PROTOCOL">MISSION_PROTOCOL</h2>
+            
+            <div class="grid md:grid-cols-4 gap-8">
+                <!-- Step 1 -->
+                <div class="step-card group text-center relative">
+                    <div class="absolute top-8 right-[-50%] w-full h-[1px] bg-white/10 hidden md:block"></div>
+                    <div class="step-icon w-20 h-20 bg-black border border-white/20 rounded-full flex items-center justify-center mx-auto mb-6 relative z-10">
+                        <i data-lucide="search" class="w-8 h-8 text-gray-400 group-hover:text-gold transition-colors"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">1. Reconnaissance</h3>
+                    <p class="text-sm text-gray-500 font-mono">Deep dive analysis of your security posture or financial data.</p>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="step-card group text-center relative">
+                     <div class="absolute top-8 right-[-50%] w-full h-[1px] bg-white/10 hidden md:block"></div>
+                    <div class="step-icon w-20 h-20 bg-black border border-white/20 rounded-full flex items-center justify-center mx-auto mb-6 relative z-10">
+                        <i data-lucide="crosshair" class="w-8 h-8 text-gray-400 group-hover:text-gold transition-colors"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">2. Strategy</h3>
+                    <p class="text-sm text-gray-500 font-mono">Formulating a tactical plan to mitigate risks and optimize assets.</p>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="step-card group text-center relative">
+                     <div class="absolute top-8 right-[-50%] w-full h-[1px] bg-white/10 hidden md:block"></div>
+                    <div class="step-icon w-20 h-20 bg-black border border-white/20 rounded-full flex items-center justify-center mx-auto mb-6 relative z-10">
+                        <i data-lucide="zap" class="w-8 h-8 text-gray-400 group-hover:text-gold transition-colors"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">3. Deployment</h3>
+                    <p class="text-sm text-gray-500 font-mono">Executing the audit, pentest, or financial restructuring.</p>
+                </div>
+
+                <!-- Step 4 -->
+                <div class="step-card group text-center relative">
+                    <div class="step-icon w-20 h-20 bg-black border border-white/20 rounded-full flex items-center justify-center mx-auto mb-6 relative z-10">
+                        <i data-lucide="check-circle" class="w-8 h-8 text-gray-400 group-hover:text-gold transition-colors"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">4. Debrief</h3>
+                    <p class="text-sm text-gray-500 font-mono">Comprehensive reporting and future-proofing recommendations.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Projects (Holographic Style) -->
     <section id="projects" class="py-32 bg-black/90 relative">
         <div class="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:40px_40px]"></div>
@@ -403,7 +625,7 @@
         </div>
     </section>
 
-    <!-- Terminal Bio -->
+    <!-- Terminal Bio & Philosophy -->
     <section id="about" class="py-32">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid lg:grid-cols-2 gap-20 items-center">
@@ -428,6 +650,21 @@
                                      <div class="text-sm text-gray-500">University of Commerce</div>
                                  </li>
                              </ul>
+                         </div>
+                     </div>
+
+                     <!-- NEW: PHILOSOPHY -->
+                     <div class="mt-16 border-t border-white/10 pt-10">
+                         <h3 class="text-2xl font-bold text-white mb-6 uppercase tracking-wider">My Philosophy</h3>
+                         <div class="grid md:grid-cols-2 gap-8">
+                             <div class="bg-white/5 p-6 rounded-lg border-l-2 border-gold">
+                                 <h4 class="text-gold font-bold mb-2">Zero Trust Architecture</h4>
+                                 <p class="text-gray-400 text-sm">"Never trust, always verify." I apply this not just to networks, but to financial audits. Every data point must be validated.</p>
+                             </div>
+                             <div class="bg-white/5 p-6 rounded-lg border-l-2 border-white">
+                                 <h4 class="text-white font-bold mb-2">Fiscal Resilience</h4>
+                                 <p class="text-gray-400 text-sm">Security is an investment, not a cost. I help businesses understand the ROI of robust defense mechanisms.</p>
+                             </div>
                          </div>
                      </div>
                 </div>
@@ -471,6 +708,54 @@
         </div>
     </section>
 
+    <!-- ENCRYPTED TRANSMISSIONS (Testimonials) -->
+    <section class="py-32 bg-black relative border-t border-white/5">
+        <div class="max-w-7xl mx-auto px-4">
+            <h2 class="text-4xl md:text-5xl font-black text-white mb-16 uppercase tracking-tight hacker-text text-center" data-value="ENCRYPTED_COMMS">ENCRYPTED_COMMS</h2>
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- Testimonial 1 -->
+                <div class="bg-white/5 border border-white/10 p-8 rounded-lg relative overflow-hidden group hover:border-gold transition-colors">
+                    <div class="absolute top-0 right-0 p-4 opacity-50"><i data-lucide="quote" class="w-10 h-10 text-white/20"></i></div>
+                    <div class="mb-6 flex gap-1">
+                        <i data-lucide="star" class="w-4 h-4 text-gold fill-gold"></i>
+                        <i data-lucide="star" class="w-4 h-4 text-gold fill-gold"></i>
+                        <i data-lucide="star" class="w-4 h-4 text-gold fill-gold"></i>
+                        <i data-lucide="star" class="w-4 h-4 text-gold fill-gold"></i>
+                        <i data-lucide="star" class="w-4 h-4 text-gold fill-gold"></i>
+                    </div>
+                    <p class="text-gray-300 italic mb-6 leading-relaxed">"Tauqeer identified a logic flaw in our payment gateway that 2 previous audits missed. His financial background gave him the edge to spot the discrepancy."</p>
+                    <div class="flex items-center gap-4">
+                        <div class="w-10 h-10 bg-gray-700 rounded-full flex items-center justify-center font-bold text-white">JD</div>
+                        <div>
+                            <div class="text-white font-bold text-sm">John D.</div>
+                            <div class="text-xs text-gray-500 uppercase tracking-wider">CTO, FinTech Startup</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testimonial 2 -->
+                <div class="bg-white/5 border border-white/10 p-8 rounded-lg relative overflow-hidden group hover:border-gold transition-colors">
+                    <div class="absolute top-0 right-0 p-4 opacity-50"><i data-lucide="quote" class="w-10 h-10 text-white/20"></i></div>
+                    <div class="mb-6 flex gap-1">
+                        <i data-lucide="star" class="w-4 h-4 text-gold fill-gold"></i>
+                        <i data-lucide="star" class="w-4 h-4 text-gold fill-gold"></i>
+                        <i data-lucide="star" class="w-4 h-4 text-gold fill-gold"></i>
+                        <i data-lucide="star" class="w-4 h-4 text-gold fill-gold"></i>
+                        <i data-lucide="star" class="w-4 h-4 text-gold fill-gold"></i>
+                    </div>
+                    <p class="text-gray-300 italic mb-6 leading-relaxed">"We needed a rapid audit of our books before a funding round. Tauqeer delivered a spotless report in 48 hours. Absolute professional."</p>
+                    <div class="flex items-center gap-4">
+                        <div class="w-10 h-10 bg-gray-700 rounded-full flex items-center justify-center font-bold text-white">AS</div>
+                        <div>
+                            <div class="text-white font-bold text-sm">Sarah A.</div>
+                            <div class="text-xs text-gray-500 uppercase tracking-wider">Founder, Logistics Co.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Contact -->
     <section id="contact" class="py-32 relative overflow-hidden">
         <div class="absolute inset-0 bg-yellow-500/5 transform -skew-y-3 origin-top-left"></div>
@@ -486,10 +771,15 @@
                 <div class="absolute bottom-0 right-0 w-4 h-4 border-r-2 border-b-2 border-gold"></div>
 
                 <div class="grid md:grid-cols-2 gap-6 mb-8">
-                    <input type="text" placeholder="IDENTITY" class="bg-transparent border-b border-white/20 py-4 text-white focus:outline-none focus:border-gold transition-colors font-mono placeholder-gray-600">
+                    <input type="text" id="contact-name" placeholder="IDENTITY" class="bg-transparent border-b border-white/20 py-4 text-white focus:outline-none focus:border-gold transition-colors font-mono placeholder-gray-600">
                     <input type="email" placeholder="CONTACT_ADDRESS" class="bg-transparent border-b border-white/20 py-4 text-white focus:outline-none focus:border-gold transition-colors font-mono placeholder-gray-600">
                 </div>
-                <textarea rows="4" placeholder="MISSION_BRIEF" class="w-full bg-transparent border-b border-white/20 py-4 text-white focus:outline-none focus:border-gold transition-colors font-mono placeholder-gray-600 mb-8"></textarea>
+                <div class="relative mb-8">
+                    <textarea id="contact-message" rows="4" placeholder="MISSION_BRIEF (Type draft here...)" class="w-full bg-transparent border-b border-white/20 py-4 text-white focus:outline-none focus:border-gold transition-colors font-mono placeholder-gray-600"></textarea>
+                    <button type="button" id="btn-polish" class="absolute bottom-4 right-2 text-xs text-gold border border-gold px-2 py-1 rounded hover:bg-gold hover:text-black transition-colors flex items-center gap-1 cursor-none">
+                        <i data-lucide="sparkles" class="w-3 h-3"></i> AI Polish
+                    </button>
+                </div>
                 
                 <button class="w-full bg-white text-black font-black uppercase tracking-widest py-5 hover:bg-gold transition-colors shadow-[0_0_20px_rgba(255,255,255,0.2)]">
                     Transmit Data
@@ -498,21 +788,113 @@
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="bg-black border-t border-white/10 py-12">
-        <div class="max-w-7xl mx-auto px-4 text-center">
-            <div class="flex items-center justify-center gap-4 mb-8">
-                 <div class="w-10 h-10 border border-gold flex items-center justify-center text-gold font-bold">TM</div>
-                 <span class="text-white font-bold tracking-widest uppercase">Tauqeer Mustafaa</span>
+    <!-- NEW EXPANDED FOOTER -->
+    <footer class="bg-black border-t border-white/10 pt-20 pb-10">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="grid md:grid-cols-4 gap-12 mb-16">
+                <!-- Column 1: Brand -->
+                <div class="col-span-1 md:col-span-1">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-10 h-10 border border-gold flex items-center justify-center text-gold font-bold">TM</div>
+                        <span class="text-white font-bold tracking-widest uppercase">Tauqeer M.</span>
+                    </div>
+                    <p class="text-gray-500 text-sm leading-relaxed mb-6">
+                        Securing digital assets and balancing financial ledgers with military-grade precision.
+                    </p>
+                </div>
+
+                <!-- Column 2: Quick Links -->
+                <div>
+                    <h4 class="text-white font-bold uppercase tracking-wider mb-6">Navigation</h4>
+                    <ul class="space-y-3 text-sm text-gray-400">
+                        <li><a href="#" class="hover:text-gold transition-colors">Home</a></li>
+                        <li><a href="#expertise" class="hover:text-gold transition-colors">Expertise</a></li>
+                        <li><a href="#projects" class="hover:text-gold transition-colors">Case Logs</a></li>
+                        <li><a href="#about" class="hover:text-gold transition-colors">Profile</a></li>
+                    </ul>
+                </div>
+
+                <!-- Column 3: Expertise -->
+                <div>
+                    <h4 class="text-white font-bold uppercase tracking-wider mb-6">Services</h4>
+                    <ul class="space-y-3 text-sm text-gray-400">
+                        <li><a href="#" class="hover:text-gold transition-colors">Penetration Testing</a></li>
+                        <li><a href="#" class="hover:text-gold transition-colors">Financial Audits</a></li>
+                        <li><a href="#" class="hover:text-gold transition-colors">Risk Assessment</a></li>
+                        <li><a href="#" class="hover:text-gold transition-colors">Bookkeeping</a></li>
+                    </ul>
+                </div>
+
+                <!-- Column 4: Socials (GLOWING ICONS) -->
+                <div>
+                    <h4 class="text-white font-bold uppercase tracking-wider mb-6">Connect</h4>
+                    <div class="flex gap-4">
+                        <!-- LinkedIn (Blue) -->
+                        <a href="#" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center transition-all hover:scale-110 hover:bg-black group border border-transparent hover:border-[#0077b5] hover:shadow-[0_0_15px_#0077b5] cursor-none">
+                            <i data-lucide="linkedin" class="w-5 h-5 text-gray-400 group-hover:text-[#0077b5] transition-colors"></i>
+                        </a>
+                        <!-- GitHub (White) -->
+                        <a href="#" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center transition-all hover:scale-110 hover:bg-black group border border-transparent hover:border-white hover:shadow-[0_0_15px_white] cursor-none">
+                            <i data-lucide="github" class="w-5 h-5 text-gray-400 group-hover:text-white transition-colors"></i>
+                        </a>
+                        <!-- Twitter (Blue) -->
+                        <a href="#" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center transition-all hover:scale-110 hover:bg-black group border border-transparent hover:border-[#1DA1F2] hover:shadow-[0_0_15px_#1DA1F2] cursor-none">
+                            <i data-lucide="twitter" class="w-5 h-5 text-gray-400 group-hover:text-[#1DA1F2] transition-colors"></i>
+                        </a>
+                         <!-- Instagram (Pink/Purple) -->
+                        <a href="#" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center transition-all hover:scale-110 hover:bg-black group border border-transparent hover:border-[#E1306C] hover:shadow-[0_0_15px_#E1306C] cursor-none">
+                            <i data-lucide="instagram" class="w-5 h-5 text-gray-400 group-hover:text-[#E1306C] transition-colors"></i>
+                        </a>
+                        <!-- Mail (Gold) -->
+                        <a href="#" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center transition-all hover:scale-110 hover:bg-black group border border-transparent hover:border-gold hover:shadow-[0_0_15px_#FFD700] cursor-none">
+                            <i data-lucide="mail" class="w-5 h-5 text-gray-400 group-hover:text-gold transition-colors"></i>
+                        </a>
+                    </div>
+                </div>
             </div>
-            <div class="text-gray-600 text-xs font-mono">
-                SYSTEM_ID: 2024-PORTFOLIO-V9 <span class="mx-2">|</span> ALL SYSTEMS NOMINAL
+            
+            <div class="border-t border-white/5 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+                <div class="text-gray-600 text-xs font-mono">
+                    SYSTEM_ID: 2024-PORTFOLIO-V10 <span class="mx-2">|</span> STATUS: ONLINE
+                </div>
+                <div class="text-gray-600 text-xs">
+                    &copy; 2024 Tauqeer Mustafaa. All rights reserved.
+                </div>
             </div>
         </div>
     </footer>
 
+    <!-- AI CHAT WIDGET -->
+    <div class="ai-modal" id="ai-modal">
+        <div class="bg-gray-900/90 p-4 border-b border-white/10 flex justify-between items-center rounded-t-xl">
+            <div class="flex items-center gap-2">
+                <div class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div>
+                <span class="text-gold font-bold font-mono text-sm">DIGITAL_TWIN_V1.0</span>
+            </div>
+            <button id="close-chat" class="text-gray-400 hover:text-white cursor-none"><i data-lucide="x" class="w-4 h-4"></i></button>
+        </div>
+        <div class="chat-messages" id="chat-messages">
+            <div class="chat-bubble chat-ai">
+                System Initialized. I am Tauqeer's digital assistant. Query my database regarding his skills, projects, or availability.
+            </div>
+        </div>
+        <div class="p-4 border-t border-white/10 bg-black/50 rounded-b-xl">
+            <div class="flex gap-2">
+                <input type="text" id="chat-input" placeholder="Enter command..." class="flex-grow bg-transparent border border-white/20 rounded px-3 py-2 text-white text-sm focus:outline-none focus:border-gold font-mono">
+                <button id="send-chat" class="bg-gold text-black px-3 py-2 rounded font-bold hover:bg-white transition-colors cursor-none">
+                    <i data-lucide="send" class="w-4 h-4"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <button class="ai-fab btn-ai-shine" id="ai-fab">
+        <i data-lucide="bot" class="w-8 h-8 text-gold"></i>
+    </button>
+
     <script>
         lucide.createIcons();
+        const apiKey = ""; // System provides this
 
         // --- CUSTOM CURSOR LOGIC ---
         const cursorDot = document.querySelector('.cursor-dot');
@@ -666,6 +1048,109 @@
         }
         resize();
         animate();
+
+        // --- GEMINI API INTEGRATION ---
+        
+        async function callGemini(prompt, systemPrompt) {
+            const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
+            const payload = {
+                contents: [{ parts: [{ text: prompt }] }],
+                systemInstruction: { parts: [{ text: systemPrompt }] }
+            };
+
+            try {
+                const response = await fetch(url, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                
+                if (!response.ok) throw new Error('API Error');
+                
+                const data = await response.json();
+                return data.candidates?.[0]?.content?.parts?.[0]?.text || "Error processing request.";
+            } catch (error) {
+                console.error(error);
+                return "Connection lost. Please try again.";
+            }
+        }
+
+        // --- CHATBOT LOGIC ---
+        const fab = document.getElementById('ai-fab');
+        const modal = document.getElementById('ai-modal');
+        const closeChat = document.getElementById('close-chat');
+        const chatInput = document.getElementById('chat-input');
+        const sendChat = document.getElementById('send-chat');
+        const chatMessages = document.getElementById('chat-messages');
+
+        const portfolioContext = `You are the AI portfolio assistant for Tauqeer Mustafaa.
+        Profile:
+        - Roles: Cyber Security Specialist, Financial Auditor, Student Freelancer.
+        - Core Skills: Network Security, Financial Audit, Wireshark, Metasploit, Python, Excel, QuickBooks.
+        - Philosophy: Understanding the "Value" of data (Accountancy) and the "Cost" of losing it (Cyber Security).
+        - Projects:
+          1. E-Commerce Pen-Test: Found 3 critical SQLi vulns. Used SQLMap, BurpSuite.
+          2. SME Restructuring: Saved 15% revenue via tax workflow optimization. Used Excel, Xero.
+        - Experience: 3+ Years, 15+ Deployments, 100% Success.
+        - Contact: Open for freelance.
+        
+        Your goal is to answer visitor questions professionally, highlighting Tauqeer's dual expertise. Be concise, act like a terminal command output where appropriate, and use a professional but tech-savvy tone.`;
+
+        fab.addEventListener('click', () => modal.classList.toggle('active'));
+        closeChat.addEventListener('click', () => modal.classList.remove('active'));
+
+        function appendMessage(text, sender) {
+            const div = document.createElement('div');
+            div.className = `chat-bubble ${sender === 'user' ? 'chat-user' : 'chat-ai'}`;
+            div.innerText = text;
+            chatMessages.appendChild(div);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        async function handleChat() {
+            const text = chatInput.value.trim();
+            if (!text) return;
+
+            appendMessage(text, 'user');
+            chatInput.value = '';
+
+            // Typing indicator
+            const typingDiv = document.createElement('div');
+            typingDiv.className = 'chat-bubble chat-ai ai-typing';
+            typingDiv.innerHTML = '<span></span><span></span><span></span>';
+            chatMessages.appendChild(typingDiv);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+
+            const response = await callGemini(text, portfolioContext);
+            
+            chatMessages.removeChild(typingDiv);
+            appendMessage(response, 'ai');
+        }
+
+        sendChat.addEventListener('click', handleChat);
+        chatInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') handleChat();
+        });
+
+        // --- SMART DRAFT LOGIC ---
+        const btnPolish = document.getElementById('btn-polish');
+        const msgInput = document.getElementById('contact-message');
+
+        btnPolish.addEventListener('click', async () => {
+            const rawText = msgInput.value;
+            if (!rawText) return;
+
+            const originalBtnText = btnPolish.innerHTML;
+            btnPolish.innerHTML = '<i data-lucide="loader" class="w-3 h-3 animate-spin"></i> Processing...';
+            
+            const systemPrompt = "You are a professional business communication assistant. Rewrite the following draft message to be professional, clear, and concise, suitable for a business inquiry regarding security or financial services.";
+            const polished = await callGemini(rawText, systemPrompt);
+            
+            msgInput.value = polished;
+            btnPolish.innerHTML = originalBtnText;
+            lucide.createIcons();
+        });
+
     </script>
 </body>
 </html>
