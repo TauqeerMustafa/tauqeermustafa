@@ -1,276 +1,82 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Tauqeer Mustafa - Strategic Security & Financial Analyst Portfolio">
-    <title>Tauqeer Mustafa | Cyber Command</title>
-
-    <!-- Libraries -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-
-    <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
-
-    <style>
-        :root {
-            --bg-color: #020202;
-            --text-primary: #e0e0e0;
-            --hacker-green: #00ff41; 
-            --cyber-blue: #00f3ff;
-            --card-bg: rgba(10, 15, 10, 0.85);
-        }
-
-        body {
-            background-color: var(--bg-color);
-            color: var(--text-primary);
-            font-family: 'Outfit', sans-serif;
-            overflow-x: hidden;
-            cursor: none;
-        }
-
-        .mono { font-family: 'Space Mono', monospace; }
-
-        /* Cursor */
-        #cursor {
-            position: fixed;
-            top: 0; left: 0;
-            width: 20px; height: 20px;
-            border: 2px solid var(--hacker-green);
-            border-radius: 50%;
-            pointer-events: none;
-            z-index: 9999;
-            transform: translate(-50%, -50%);
-            transition: width 0.2s, height 0.2s, background 0.2s, border-color 0.2s;
-            mix-blend-mode: exclusion;
-            box-shadow: 0 0 10px var(--hacker-green);
-        }
-        #cursor.active { 
-            width: 50px; height: 50px;
-            background: rgba(0,255,65,0.2);
-            border-color: var(--cyber-blue);
-            box-shadow: 0 0 20px var(--cyber-blue);
-        }
-
-        /* Cards */
-        .cyber-card {
-            background: var(--card-bg);
-            border: 1px solid rgba(0,255,65,0.2);
-            box-shadow: 0 0 15px rgba(0,0,0,0.5);
-            backdrop-filter: blur(10px);
-            border-radius: 12px;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-        .cyber-card:hover {
-            border-color: var(--hacker-green);
-            box-shadow: 0 0 25px rgba(0,255,65,0.4);
-            transform: translateY(-5px);
-        }
-
-        /* Preloader */
-        #preloader {
-            position: fixed; inset: 0; background: #000; z-index: 10001;
-            display: flex; flex-direction: column; justify-content: center; align-items: center;
-        }
-        .loader-bar { width: 300px; height: 4px; background: #111; margin-top: 20px; overflow: hidden; }
-        .loader-fill { height: 100%; background: var(--hacker-green); width: 0%; box-shadow: 0 0 15px var(--hacker-green); }
-
-        /* Scroll Progress */
-        #progress-bar {
-            position: fixed; top: 0; left: 0; height: 2px;
-            background: linear-gradient(90deg, var(--hacker-green), var(--cyber-blue));
-            width: 0%; z-index: 9998;
-            box-shadow: 0 0 10px var(--hacker-green);
-        }
-
-        .reveal { opacity: 0; transform: translateY(20px); }
-        .gradient-text {
-            color: transparent;
-            background-image: linear-gradient(90deg, var(--hacker-green), var(--cyber-blue));
-            -webkit-background-clip: text;
-            background-clip: text;
-        }
-        .stroke-text {
-            -webkit-text-stroke: 1px rgba(255,255,255,0.2);
-            color: transparent;
-        }
-
-        /* Marquee Animation */
-        @keyframes marquee {
-            0% { transform: translateX(100%); }
-            100% { transform: translateX(-100%); }
-        }
-        .marquee { display: flex; white-space: nowrap; animation: marquee 40s linear infinite; }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Home - Tauqeer Mustafa</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+body { font-family: 'Outfit', sans-serif; margin:0; padding:0; background:#020202; color:#e0e0e0; }
+nav { position:fixed; top:0; width:100%; background:rgba(0,0,0,0.8); backdrop-filter: blur(10px); z-index:50; display:flex; justify-content:space-between; padding:1rem 2rem; }
+nav a { margin:0 1rem; color:#e0e0e0; font-weight:bold; text-decoration:none; }
+.section { min-height:100vh; display:flex; flex-direction:column; justify-content:center; align-items:center; padding:4rem; }
+.gradient-text { background: linear-gradient(90deg,#00ff41,#00f3ff); -webkit-background-clip:text; color:transparent; }
+.page-transition { opacity:0; transform:translateY(20px); }
+</style>
 </head>
-<body class="selection:bg-green-700 selection:text-black">
+<body>
 
-    <!-- Preloader -->
-    <div id="preloader">
-        <div class="mono text-green-500 text-sm tracking-[0.2em] animate-pulse">SYSTEM BOOT SEQUENCE INITIATED...</div>
-        <div class="loader-bar"><div class="loader-fill" id="loader-fill"></div></div>
-        <div class="mono text-xs text-gray-500 mt-2">LOADING CORE MODULES</div>
-    </div>
+<nav>
+<a href="home.html">Home</a>
+<a href="experience.html">Experience</a>
+<a href="service.html">Service</a>
+<a href="work.html">Work</a>
+<a href="social.html">Social</a>
+<a href="contact.html">Contact</a>
+</nav>
 
-    <div id="cursor"></div>
-    <div id="progress-bar"></div>
-    <canvas id="terrain-canvas" class="fixed inset-0 z-0 opacity-40 pointer-events-none"></canvas>
+<main id="content" class="page-transition">
+<section class="section">
+<h1 class="text-6xl font-bold gradient-text">Welcome to Tauqeer Mustafa Portfolio</h1>
+<p class="mt-6 max-w-xl text-center text-gray-400">Strategic Cyber Security & Financial Analyst. Explore my experience, services, and work.</p>
+</section>
+</main>
 
-    <!-- Navigation -->
-    <nav class="fixed w-full z-50 top-0 px-6 py-4 bg-black/80 backdrop-blur-md border-b border-green-900/30">
-        <div class="max-w-7xl mx-auto flex justify-between items-center">
-            <a href="#" class="flex items-center gap-2 hoverable group">
-                <div class="w-2 h-2 bg-green-500 rounded-full animate-ping"></div>
-                <span class="mono font-bold text-lg text-white group-hover:text-green-400 transition-colors">TM<span class="text-green-500">.SECURE</span></span>
-            </a>
-            <div class="hidden md:flex gap-8">
-                <a href="#about" class="mono text-sm text-gray-400 hover:text-green-400 transition-colors hoverable">01_PROFILE</a>
-                <a href="#intel" class="mono text-sm text-gray-400 hover:text-green-400 transition-colors hoverable">02_INTEL</a>
-                <a href="#arsenal" class="mono text-sm text-gray-400 hover:text-green-400 transition-colors hoverable">03_ARSENAL</a>
-                <a href="#contact" class="mono text-sm border border-green-500/50 text-green-400 px-4 py-1 hover:bg-green-500 hover:text-black transition-all hoverable">UPLINK_REQ</a>
-            </div>
-        </div>
-    </nav>
+<script>
+gsap.to('#content',{opacity:1,y:0,duration:1,ease:'power2.out'});
+</script>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Home - Tauqeer Mustafa</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+body { font-family: 'Outfit', sans-serif; margin:0; padding:0; background:#020202; color:#e0e0e0; }
+nav { position:fixed; top:0; width:100%; background:rgba(0,0,0,0.8); backdrop-filter: blur(10px); z-index:50; display:flex; justify-content:space-between; padding:1rem 2rem; }
+nav a { margin:0 1rem; color:#e0e0e0; font-weight:bold; text-decoration:none; }
+.section { min-height:100vh; display:flex; flex-direction:column; justify-content:center; align-items:center; padding:4rem; }
+.gradient-text { background: linear-gradient(90deg,#00ff41,#00f3ff); -webkit-background-clip:text; color:transparent; }
+.page-transition { opacity:0; transform:translateY(20px); }
+</style>
+</head>
+<body>
 
-    <main class="relative z-10 pt-32 pb-20">
-        <!-- Hero Section -->
-        <section class="min-h-screen flex flex-col justify-center px-6 -mt-20">
-            <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-                <div class="order-2 lg:order-1">
-                    <p class="mono text-green-500 text-xs tracking-[0.2em] mb-4 reveal">/// SYSTEM STATUS: ONLINE</p>
-                    <h1 class="text-6xl md:text-8xl font-bold leading-none tracking-tighter mb-8 text-white reveal">
-                        <span class="block text-white">DIGITAL</span>
-                        <span class="block gradient-text">DEFENSE &</span>
-                        <span class="block text-white">FINANCIAL</span>
-                        <span class="block gradient-text">CLARITY</span>
-                    </h1>
-                    <p class="text-lg text-gray-400 leading-relaxed max-w-xl border-l-2 border-green-500 pl-4 reveal">
-                        I am <strong class="text-white">Tauqeer Mustafa</strong>. Fusing 
-                        <span class="text-green-400">Cyber Security</span> & 
-                        <span class="text-cyan-400">Financial Assurance</span>.
-                    </p>
-                    <div class="flex flex-wrap gap-6 mt-10 reveal">
-                        <a href="#arsenal" class="bg-green-600 text-black font-bold px-8 py-4 mono hover:bg-white transition-colors shadow-[0_0_20px_rgba(0,255,0,0.4)]">ACCESS ARSENAL</a>
-                        <a href="#contact" class="border border-green-500 text-green-400 font-bold px-8 py-4 mono hover:bg-green-500/10 transition-colors">INITIATE COMMS</a>
-                    </div>
-                </div>
+<nav>
+<a href="home.html">Home</a>
+<a href="experience.html">Experience</a>
+<a href="service.html">Service</a>
+<a href="work.html">Work</a>
+<a href="social.html">Social</a>
+<a href="contact.html">Contact</a>
+</nav>
 
-                <div class="order-1 lg:order-2 reveal delay-200">
-                    <div class="terminal cyber-card w-full h-80 hoverable relative">
-                        <div class="terminal-header flex items-center justify-between px-2 py-1">
-                            <div class="flex gap-1">
-                                <span class="w-3 h-3 rounded-full bg-red-500"></span>
-                                <span class="w-3 h-3 rounded-full bg-yellow-500"></span>
-                                <span class="w-3 h-3 rounded-full bg-green-500"></span>
-                            </div>
-                            <span class="text-xs text-gray-500 mono">ACTIVE_SESSION</span>
-                        </div>
-                        <div id="terminal-content" class="text-green-400 text-sm leading-relaxed font-mono h-full overflow-hidden p-4"></div>
-                    </div>
-                </div>
-            </div>
-        </section>
+<main id="content" class="page-transition">
+<section class="section">
+<h1 class="text-6xl font-bold gradient-text">Welcome to Tauqeer Mustafa Portfolio</h1>
+<p class="mt-6 max-w-xl text-center text-gray-400">Strategic Cyber Security & Financial Analyst. Explore my experience, services, and work.</p>
+</section>
+</main>
 
-        <!-- Marquee -->
-        <div class="py-6 border-y border-green-900/30 bg-black/80 backdrop-blur-md overflow-hidden relative z-20">
-            <div class="marquee">
-                <span class="text-2xl font-bold text-white/10 mx-8 mono stroke-text">PENETRATION TESTING</span>
-                <span class="text-2xl font-bold text-green-500 mx-8 mono">FINANCIAL AUDIT</span>
-                <span class="text-2xl font-bold text-white/10 mx-8 mono stroke-text">RISK MANAGEMENT</span>
-                <span class="text-2xl font-bold text-cyan-500 mx-8 mono">CRYPTOGRAPHY</span>
-                <span class="text-2xl font-bold text-white/10 mx-8 mono stroke-text">FORENSICS</span>
-                <span class="text-2xl font-bold text-purple-500 mx-8 mono">COMPLIANCE</span>
-            </div>
-        </div>
-    </main>
-
-    <script>
-    // ==============================
-    // Preloader
-    // ==============================
-    window.addEventListener('load', () => {
-        const fill = document.getElementById('loader-fill');
-        const preloader = document.getElementById('preloader');
-        gsap.to(fill, { width: '100%', duration: 1.2, ease: 'power2.inOut', onComplete: () => {
-            gsap.to(preloader, { opacity: 0, duration: 0.8, onComplete: () => preloader.style.display='none' });
-            gsap.utils.toArray('.reveal').forEach((el,i)=>gsap.fromTo(el, {opacity:0, y:20},{opacity:1, y:0,duration:1,delay:i*0.1, ease:'power2.out'}));
-            typeWriter();
-        }});
-    });
-
-    // ==============================
-    // Terminal Typewriter
-    // ==============================
-    const commands = [
-        "// Establishing encrypted link...",
-        "// Connection status: OK.",
-        "// Nmap scan initiated on 192.168.1.0/24",
-        "// Port 445 vulnerability detected.",
-        "// Executing patch routine: patch -p1 < sql_fix.patch",
-        "// Auditing Ledger integrity: COMPLETE.",
-        "// SYSTEM STATUS: 100% SECURED."
-    ];
-    async function typeWriter(){
-        const container = document.getElementById('terminal-content');
-        container.innerHTML = '';
-        for(let cmd of commands){
-            const p = document.createElement('div');
-            p.classList.add('text-green-400','mb-1');
-            container.appendChild(p);
-            for(let char of cmd){
-                p.innerText += char;
-                await new Promise(r=>setTimeout(r,25));
-            }
-            await new Promise(r=>setTimeout(r,500));
-        }
-    }
-
-    // ==============================
-    // Cursor
-    // ==============================
-    const cursor = document.getElementById('cursor');
-    window.addEventListener('mousemove', e => gsap.to(cursor, {x:e.clientX, y:e.clientY, duration:0.1}));
-    document.querySelectorAll('.hoverable, a').forEach(el=>{
-        el.addEventListener('mouseenter', ()=>cursor.classList.add('active'));
-        el.addEventListener('mouseleave', ()=>cursor.classList.remove('active'));
-    });
-
-    // ==============================
-    // 3D Terrain
-    // ==============================
-    const canvas3d = document.getElementById('terrain-canvas');
-    const scene = new THREE.Scene();
-    scene.fog = new THREE.FogExp2(0x050505, 0.002);
-    const camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);
-    const renderer = new THREE.WebGLRenderer({ canvas: canvas3d, alpha: true, antialias: true });
-    renderer.setSize(window.innerWidth, window.innerHeight);
-
-    const geometry = new THREE.PlaneGeometry(200, 200, 40, 40);
-    const material = new THREE.MeshBasicMaterial({ color: 0x00ff41, wireframe:true, transparent:true, opacity:0.15 });
-    const plane = new THREE.Mesh(geometry, material);
-    plane.rotation.x = -Math.PI/2;
-    scene.add(plane);
-    camera.position.z = 25; camera.position.y = 5;
-
-    let time=0;
-    function animate3d(){
-        requestAnimationFrame(animate3d);
-        time+=0.005;
-        const pos=geometry.attributes.position;
-        for(let i=0;i<pos.count;i++){
-            const z=Math.sin(pos.getX(i)*0.1 + time)*2 + Math.cos(pos.getY(i)*0.1 + time)*2;
-            pos.setZ(i,z);
-        }
-        pos.needsUpdate=true;
-        plane.rotation.z+=0.0005;
-        renderer.render(scene,camera);
-    }
-    animate3d();
-    </script>
+<script>
+gsap.to('#content',{opacity:1,y:0,duration:1,ease:'power2.out'});
+</script>
 </body>
 </html>
