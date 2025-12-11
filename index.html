@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Tauqeer Mustafa - Strategic Security & Financial Analyst Portfolio">
+    <title>Tauqeer Mustafa | Cyber Command</title>
+
+    <!-- Libraries -->
+    <script src="[https://cdn.tailwindcss.com](https://cdn.tailwindcss.com)"></script>
+    <script src="[https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js](https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js)"></script>
+    <script src="[https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js](https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js)"></script>
+    <script src="[https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js](https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js)"></script>
+    
+    <!-- Fonts -->
+    <link href="[https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap](https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap)" rel="stylesheet">
+    
+    <style>
+        /* --- 1. Variables & Base --- */
+        :root {
+            --bg-color: #020202;
+            --text-primary: #e0e0e0;
+            --hacker-green: #00ff41; 
+            --cyber-blue: #00f3ff;
+            --card-bg: rgba(10, 15, 10, 0.9);
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            font-family: 'Outfit', sans-serif;
+            overflow-x: hidden;
+            cursor: none;
+        }
+
+        .mono { font-family: 'Space Mono', monospace; }
+
+        /* --- 2. Components --- */
+        
+        /* Custom Cursor (Neon Focus) */
+        #cursor {
+            position: fixed; top: 0; left: 0;
+            width: 20px; height: 20px;
+            border: 2px solid var(--hacker-green);
+            border-radius: 50%;
+            pointer-events: none; z-index: 9999;
+            transform: translate(-50%, -50%);
+            transition: width 0.2s, height 0.2s, background 0.2s, border-color 0.2s;
+            mix-blend-mode: exclusion;
+            box-shadow: 0 0 10px var(--hacker-green);
+        }
+        #cursor.active { 
+            width: 50px; height: 50px;
+            background: rgba(0, 255, 65, 0.2);
+            border-color: var(--cyber-blue);
+            box-shadow: 0 0 20px var(--cyber-blue);
+        }
+
+        /* Hacker Glass Cards */
+        .cyber-card {
+            background: var(--card-bg);
+            border: 1px solid rgba(0, 255, 65, 0.2);
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(10px);
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .cyber-card:hover {
+            border-color: var(--hacker-green);
+            box-shadow: 0 0 25px rgba(0, 255, 65, 0.4);
+            transform: translateY(-5px);
+        }
+        
+        /* Loading Screen */
+        #preloader {
+            position: fixed; inset: 0; background: #000; z-index: 10001;
+            display: flex; justify-content: center; align-items: center; flex-direction: column;
+        }
+        .loader-bar { width: 300px; height: 4px; background: #111; margin-top: 20px; position: relative; overflow: hidden; }
+        .loader-fill { height: 100%; background: var(--hacker-green); width: 0%; box-shadow: 0 0 15px var(--hacker-green); }
+
+        /* Scroll Progress */
+        #progress-bar {
+            position: fixed; top: 0; left: 0; height: 2px;
+            background: linear-gradient(90deg, var(--hacker-green), var(--cyber-blue));
+            width: 0%; z-index: 9998;
+            box-shadow: 0 0 10px var(--hacker-green);
+        }
+
+        /* --- 3. Animations & Utilities --- */
+        .reveal { opacity: 0; transform: translateY(20px); }
+        
+        .gradient-text {
+            color: transparent;
+            background-image: linear-gradient(90deg, var(--hacker-green), var(--cyber-blue));
+            -webkit-background-clip: text;
+            background-clip: text;
+        }
+
+        .stroke-text {
+            -webkit-text-stroke: 1px rgba(255, 255, 255, 0.2);
+            color: transparent;
+        }
+    </style>
+</head>
+<body class="selection:bg-green-700 selection:text-black">
+
+    <!-- System Elements -->
+    <div id="preloader">
+        <div class="mono text-green-500 text-sm tracking-[0.2em] animate-pulse">SYSTEM BOOT SEQUENCE INITIATED...</div>
+        <div class="loader-bar"><div class="loader-fill" id="loader-fill"></div></div>
+        <div class="mono text-xs text-gray-500 mt-2">LOADING CORE MODULES</div>
+    </div>
+    <div id="cursor"></div>
+    <div id="cursor-dot"></div>
+    <div id="progress-bar"></div>
+
+    <!-- Backgrounds -->
+    <canvas id="terrain-canvas" class="fixed inset-0 z-0 opacity-40 pointer-events-none"></canvas>
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 top-0 px-6 py-4 bg-black/80 backdrop-blur-md border-b border-green-900/30">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <a href="#" class="flex items-center gap-2 hoverable group">
+                <div class="w-2 h-2 bg-green-500 rounded-full animate-ping"></div>
+                <span class="mono font-bold text-lg text-white group-hover:text-green-400 transition-colors">TM<span class="text-green-500">.SECURE</span></span>
+            </a>
+            
+            <div class="hidden md:flex gap-8">
+                <a href="#about" class="mono text-sm text-gray-400 hover:text-green-400 transition-colors hoverable">01_PROFILE</a>
+                <a href="#intel" class="mono text-sm text-gray-400 hover:text-green-400 transition-colors hoverable">02_INTEL</a>
+                <a href="#arsenal" class="mono text-sm text-gray-400 hover:text-green-400 transition-colors hoverable">03_ARSENAL</a>
+                <a href="#contact" class="mono text-sm border border-green-500/50 text-green-400 px-4 py-1 hover:bg-green-500 hover:text-black transition-all hoverable">UPLINK_REQ</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="relative z-10 pt-32 pb-20">
+
+        <!-- Hero Section -->
+        <section class="min-h-screen flex flex-col justify-center px-6 -mt-20">
+            <div class="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div class="order-2 lg:order-1">
+                    <p class="mono text-green-500 text-xs tracking-[0.2em] mb-4 reveal">/// SYSTEM STATUS: ONLINE</p>
+                    
+                    <h1 class="text-6xl md:text-8xl font-bold leading-none tracking-tighter mb-8 text-white reveal">
+                        <span class="block text-white">DIGITAL</span>
+                        <span class="block gradient-text">DEFENSE &</span>
+                        <span class="block text-white">FINANCIAL</span>
+                        <span class="block gradient-text">CLARITY</span>
+                    </h1>
+
+                    <p class="text-lg text-gray-400 leading-relaxed max-w-xl border-l-2 border-green-500 pl-4 reveal">
+                        I am <strong class="text-white">Tauqeer Mustafa</strong>. A strategic consultant fusing 
+                        <span class="text-green-400">Offensive Cyber Security</span> with 
+                        <span class="text-cyan-400">Financial Assurance</span>. 
+                        Protecting high-value enterprises from data breaches and fiscal inaccuracies.
+                    </p>
+
+                    <div class="flex flex-wrap gap-6 mt-10 reveal">
+                        <a href="#arsenal" class="bg-green-600 text-black font-bold px-8 py-4 mono hover:bg-white transition-colors hoverable shadow-[0_0_20px_rgba(0,255,0,0.4)]">
+                            ACCESS ARSENAL
+                        </a>
+                        <a href="#contact" class="border border-green-500 text-green-400 font-bold px-8 py-4 mono hover:bg-green-500/10 transition-colors hoverable">
+                            INITIATE COMMS
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Live Terminal Placeholder -->
+                <div class="order-1 lg:order-2 reveal delay-200">
+                    <div class="terminal cyber-card w-full h-80 hoverable relative">
+                        <div class="terminal-header">
+                            <div class="dot bg-red"></div>
+                            <div class="dot bg-yellow"></div>
+                            <div class="dot bg-green"></div>
+                            <span class="ml-auto text-xs text-gray-500 mono">ACTIVE_SESSION</span>
+                        </div>
+                        <div id="terminal-content" class="text-green-400 text-sm leading-relaxed font-mono h-full overflow-hidden p-4">
+                            <!-- JS types here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Marquee -->
+        <div class="py-6 border-y border-green-900/30 bg-black/80 backdrop-blur-md overflow-hidden relative z-20">
+            <div class="flex whitespace-nowrap animate-[marquee_40s_linear_infinite]">
+                <span class="text-2xl font-bold text-white/10 mx-8 mono stroke-text">PENETRATION TESTING</span>
+                <span class="text-2xl font-bold text-green-500 mx-8 mono">FINANCIAL AUDIT</span>
+                <span class="text-2xl font-bold text-white/10 mx-8 mono stroke-text">RISK MANAGEMENT</span>
+                <span class="text-2xl font-bold text-cyan-500 mx-8 mono">CRYPTOGRAPHY</span>
+                <span class="text-2xl font-bold text-white/10 mx-8 mono stroke-text">FORENSICS</span>
+                <span class="text-2xl font-bold text-purple-500 mx-8 mono">COMPLIANCE</span>
+                <span class="text-2xl font-bold text-white/10 mx-8 mono stroke-text">PENETRATION TESTING</span>
+                <span class="text-2xl font-bold text-green-500 mx-8 mono">FINANCIAL AUDIT</span>
+            </div>
+        </div>
+
+        <!-- Profile Section -->
+        <section id="about" class="py-32 px-6">
+            <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+                <div class="sticky top-32">
+                    <span class="mono text-green-500 text-xs tracking-widest mb-4 block font-bold">/// 01. IDENTITY FILE</span>
+                    <h2 class="text-4xl md:text-5xl font-bold mb-8 text-white">THE DUAL <span class="text-cyan-400">ADVANTAGE</span></h2>
+                    <p class="text-gray-400 text-lg mb-8 leading-relaxed">
+                        My unique background allows me to speak the language of the <span class="text-green-400 mono">CISO</span> and the <span class="text-cyan-400 mono">CFO</span> simultaneously. Security is measured in risk; risk is measured in financial terms. I connect the two.
+                    </p>
+                    
+                    <div class="space-y-4">
+                        <div class="cyber-card p-6 flex justify-between items-center hoverable bg-white/5 border-green-500/20">
+                            <div><h4 class="font-bold text-white text-lg">BS Cyber Security</h4><p class="text-xs text-green-400 mono mt-1">AIR UNIVERSITY • 2023-PRESENT</p></div>
+                        </div>
+                        <div class="cyber-card p-6 flex justify-between items-center hoverable bg-white/5 border-cyan-500/20">
+                            <div><h4 class="font-bold text-white text-lg">Chartered Accountancy</h4><p class="text-xs text-cyan-400 mono mt-1">ICAP • 2023-PRESENT</p></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid gap-6">
+                    <div class="cyber-card p-8 hoverable bg-white/5 border-red-500/20">
+                        <div class="flex items-start justify-between mb-4">
+                            <h3 class="text-xl font-bold text-red-400">Technical Security</h3>
+                            <span class="text-[10px] font-bold bg-red-900/30 text-red-400 px-2 py-1 border border-red-500/30">OFFENSIVE</span>
+                        </div>
+                        <p class="text-gray-400 mb-6 text-sm">Rigorous penetration testing, finding vulnerabilities, and deploying active countermeasures.</p>
+                        <div class="flex gap-2 flex-wrap">
+                            <span class="text-xs border border-red-800 px-2 py-1 text-red-600 mono">Kali Linux</span>
+                            <span class="text-xs border border-red-800 px-2 py-1 text-red-600 mono">Python</span>
+                        </div>
+                    </div>
+
+                    <div class="cyber-card p-8 hoverable bg-white/5 border-blue-500/20">
+                        <div class="flex items-start justify-between mb-4">
+                            <h3 class="text-xl font-bold text-blue-400">Financial Assurance</h3>
+                            <span class="text-[10px] font-bold bg-blue-900/30 text-blue-400 px-2 py-1 border border-blue-500/30">DEFENSIVE</span>
+                        </div>
+                        <p class="text-gray-400 mb-6 text-sm">Forensic accounting, fraud detection, and regulatory audit discrepancy resolution.</p>
+                        <div class="flex gap-2 flex-wrap">
+                            <span class="text-xs border border-blue-800 px-2 py-1 text-blue-600 mono">Adv. Excel</span>
+                            <span class="text-xs border border-blue-800 px-2 py-1 text-blue-600 mono">Auditing</span>
+                        </div>
+                    </div>
+
+                     <div class="cyber-card p-8 hoverable bg-white/5 border-purple-500/20">
+                        <div class="flex items-start justify-between mb-4">
+                            <h3 class="text-xl font-bold text-purple-400">Cloud Operations</h3>
+                            <span class="text-[10px] font-bold bg-purple-900/30 text-purple-400 px-2 py-1 border border-purple-500/30">REMOTE</span>
+                        </div>
+                        <p class="text-gray-400 mb-6 text-sm">Cloud Security (AWS/Azure) and IAM management to secure remote global assets.</p>
+                        <div class="flex gap-2 flex-wrap">
+                            <span class="text-xs border border-purple-800 px-2 py-1 text-purple-600 mono">AWS</span>
+                            <span class="text-xs border border-purple-800 px-2 py-1 text-purple-600 mono">GDPR/HIPAA</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Technical Arsenal -->
+        <section id="arsenal" class="py-32 px-6 border-t border-green-900/20">
+            <div class="max-w-7xl mx-auto">
+                <span class="mono text-cyan-500 text-xs tracking-widest mb-4 block font-bold">/// 03. ARSENAL</span>
+                <h2 class="text-4xl md:text-5xl font-bold mb-16 text-white">TECHNICAL <span class="text-gray-500">STACK</span></h2>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-6">
+                    <div class="cyber-card p-4 text-center hoverable bg-white/5 border-green-500/20"><h4 class="text-lg font-bold text-green-400">Python</h4><p class="text-xs text-gray-500">Scripting</p></div>
+                    <div class="cyber-card p-4 text-center hoverable bg-white/5 border-red-500/20"><h4 class="text-lg font-bold text-red-400">Kali</h4><p class="text-xs text-gray-500">Pentesting</p></div>
+                    <div class="cyber-card p-4 text-center hoverable bg-white/5 border-cyan-500/20"><h4 class="text-lg font-bold text-cyan-400">Wireshark</h4><p class="text-xs text-gray-500">Networking</p></div>
+                    <div class="cyber-card p-4 text-center hoverable bg-white/5 border-blue-500/20"><h4 class="text-lg font-bold text-blue-400">Excel</h4><p class="text-xs text-gray-500">Modeling</p></div>
+                    <div class="cyber-card p-4 text-center hoverable bg-white/5 border-purple-500/20"><h4 class="text-lg font-bold text-purple-400">SQL</h4><p class="text-xs text-gray-500">DB Sec</p></div>
+                    <div class="cyber-card p-4 text-center hoverable bg-white/5 border-yellow-500/20"><h4 class="text-lg font-bold text-yellow-400">Autopsy</h4><p class="text-xs text-gray-500">Forensics</p></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="min-h-screen flex flex-col justify-center items-center px-6 relative border-t border-green-900/20">
+            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-green-900 rounded-full filter blur-[150px] opacity-10 -z-10 animate-pulse"></div>
+
+            <div class="text-center max-w-5xl mx-auto z-10">
+                <span class="mono text-green-500 text-xs tracking-[0.5em] mb-6 block font-bold">/// SECURE UPLINK READY</span>
+                <h2 class="text-6xl md:text-9xl font-bold mb-12 tracking-tighter text-white hover:text-green-400 transition-colors duration-500 cursor-default">INITIALIZE<br>CONTACT</h2>
+                
+                <div class="flex flex-col sm:flex-row justify-center gap-6 mb-16">
+                    <a href="mailto:contact@tauqeermustafaa.tech" class="cyber-card px-12 py-6 text-lg font-bold text-green-400 hover:bg-green-500 hover:text-black transition-all duration-300 hoverable">Email Securely</a>
+                    <a href="[https://linkedin.com/in/tauqeermustafaa](https://linkedin.com/in/tauqeermustafaa)" class="cyber-card px-12 py-6 text-lg font-bold text-blue-400 hover:bg-blue-500 hover:text-white transition-all duration-300 hoverable">LinkedIn Profile</a>
+                </div>
+
+                <div class="flex flex-wrap justify-center gap-4 mb-12" id="social-grid"></div>
+
+                <div class="cyber-card px-8 py-4 inline-block bg-black">
+                    <p class="text-gray-400 text-sm mono">LOCATION: ISLAMABAD, PK • STATUS: <span class="text-green-500 animate-pulse">ONLINE</span></p>
+                </div>
+                <p class="mt-8 text-xs text-gray-600">&copy; 2024 TAUQEER MUSTAFA. ENCRYPTED.</p>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Scripts -->
+    <script>
+        // ============================================
+        // 1. GRAPHICS INITIALIZATION
+        // ============================================
+        const initGraphics = () => {
+            // --- 3D Terrain (Three.js) ---
+            const canvas3d = document.getElementById('terrain-canvas');
+            if (!canvas3d) return; // Safety check
+
+            const scene = new THREE.Scene();
+            scene.fog = new THREE.FogExp2(0x050505, 0.002);
+            const camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);
+            const renderer = new THREE.WebGLRenderer({ canvas: canvas3d, alpha: true, antialias: true });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+
+            const geometry = new THREE.PlaneGeometry(200, 200, 40, 40);
+            const material = new THREE.MeshBasicMaterial({ color: 0x00ff41, wireframe: true, transparent: true, opacity: 0.15 });
+            const plane = new THREE.Mesh(geometry, material);
+            plane.rotation.x = -Math.PI / 2;
+            scene.add(plane);
+            camera.position.z = 25; 
+            camera.position.y = 5;
+
+            let time = 0;
+            const animate3d = () => {
+                requestAnimationFrame(animate3d);
+                time += 0.005;
+                const pos = geometry.attributes.position;
+                for(let i=0; i<pos.count; i++){
+                    const z = Math.sin(pos.getX(i)*0.1 + time)*2 + Math.cos(pos.getY(i)*0.1 + time)*2;
+                    pos.setZ(i, z);
+                }
+                pos.needsUpdate = true;
+                plane.rotation.z += 0.0005;
+                renderer.render(scene, camera);
+            }
+            animate3d();
+        }
+        document.addEventListener('DOMContentLoaded', initGraphics);
+
+
+        // ============================================
+        // 2. GSAP & DOM MANIPULATION
+        // ============================================
+        gsap.registerPlugin(ScrollTrigger);
+
+        window.addEventListener('load', () => {
+            const fill = document.getElementById('loader-fill');
+            const preloader = document.getElementById('preloader');
+            
+            if (!fill || !preloader) return;
+
+            // GSAP Preloader Sequence
+            gsap.to(fill, { width: '100%', duration: 1.2, ease: 'power2.inOut', onComplete: () => {
+                gsap.to(preloader, { opacity: 0, duration: 0.8, onComplete: () => {
+                    preloader.style.display = 'none';
+                    revealContent();
+                    typeWriter();
+                }});
+            }});
+        });
+
+        function revealContent() {
+            // Hero text stagger reveal
+            gsap.utils.toArray('.reveal').forEach((el, i) => {
+                gsap.fromTo(el, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 1, delay: i * 0.1, ease: 'power2.out' });
+            });
+        }
+
+        // 3. Auto-Typing Terminal
+        const commands = [
+            "// Establishing encrypted link...",
+            "// Connection status: OK.",
+            "// Nmap scan initiated on 192.168.1.0/24",
+            "// Port 445 vulnerability detected.",
+            "// Executing patch routine: patch -p1 < sql_fix.patch",
+            "// Auditing Ledger integrity: COMPLETE.",
+            "// SYSTEM STATUS: 100% SECURED."
+        ];
+        async function typeWriter() {
+            const container = document.getElementById('terminal-content');
+            if(!container) return; // Critical safety check
+            container.innerHTML = '';
+            for(let cmd of commands) {
+                const p = document.createElement('div');
+                p.classList.add('text-green-400', 'mb-1', 'typing');
+                container.appendChild(p);
+                for(let char of cmd) {
+                    p.innerText += char;
+                    await new Promise(r => setTimeout(r, 25));
+                }
+                p.classList.remove('typing');
+                await new Promise(r => setTimeout(r, 500));
+            }
+        }
+
+
+        // 4. Cursor and Social Media Initialization
+        document.addEventListener('DOMContentLoaded', () => {
+             // Cursor Logic
+            const cursor = document.getElementById('cursor');
+            const dot = document.getElementById('cursor-dot');
+            if (cursor && dot) {
+                window.addEventListener('mousemove', e => {
+                    gsap.to(cursor, { x: e.clientX, y: e.clientY, duration: 0.1 });
+                    gsap.to(dot, { x: e.clientX, y: e.clientY, duration: 0 });
+                });
+                document.querySelectorAll('.hoverable, a').forEach(el => {
+                    el.addEventListener('mouseenter', () => cursor.classList.add('active'));
+                    el.addEventListener('mouseleave', () => cursor.classList.remove('active'));
+                });
+            }
+
+             // Social Icons Injection
+             const socialData = [
+                { n: 'LinkedIn', u: '[https://linkedin.com/in/tauqeermustafaa](https://linkedin.com/in/tauqeermustafaa)', p: 'M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z' },
+                { n: 'GitHub', u: '[https://github.com/tauqeermustafaa](https://github.com/tauqeermustafaa)', p: 'M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z' },
+                { n: 'X', u: '[https://twitter.com/tauqeermustafaa](https://twitter.com/tauqeermustafaa)', p: 'M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z' },
+                { n: 'Insta', u: '[https://instagram.com/tauqeermustafaa](https://instagram.com/tauqeermustafaa)', p: 'M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z' },
+                { n: 'FB', u: '[https://facebook.com/tauqeermustafaa](https://facebook.com/tauqeermustafaa)', p: 'M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z' },
+                { n: 'YT', u: '[https://youtube.com/@tauqeermustafaa](https://youtube.com/@tauqeermustafaa)', p: 'M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z' },
+                { n: 'WA', u: '[https://wa.me/tauqeermustafaa](https://wa.me/tauqeermustafaa)', p: 'M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z' },
+            { n: 'Tele', u: '[https://t.me/tauqeermustafaa](https://t.me/tauqeermustafaa)', p: 'M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z' },
+            { n: 'Twitch', u: '[https://twitch.tv/tauqeermustafaa](https://twitch.tv/tauqeermustafaa)', p: 'M11.571 4.714h1.715v5.143H11.57zm4.715 0H18v5.143h-1.714zM6 0L1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0zm14.571 11.143l-3.428 3.428h-3.429l-3 3v-3H6.857V1.714h13.714Z' }
+        ];
+
+        document.addEventListener('DOMContentLoaded', () => {
+             const socialContainer = document.getElementById('social-grid');
+             if (socialContainer) {
+                 const iconsHTML = socialData.map(s => `
+                    <a href="${s.link}" target="_blank" title="${s.n}" class="w-12 h-12 rounded-full border border-green-500/30 bg-black shadow-lg flex items-center justify-center text-green-400 hover:bg-green-500 hover:text-black hover:scale-110 transition-all duration-300 hoverable">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="${s.p}"/></svg>
+                    </a>
+                `).join('');
+                socialContainer.innerHTML = iconsHTML;
+             }
+        });
+    </script>
+</body>
+</html>
