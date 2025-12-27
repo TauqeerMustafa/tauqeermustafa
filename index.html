@@ -3,67 +3,90 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About Tauqeer Mustafa</title>
+    <title>Tauqeer Mustafa | Professional Services</title>
     <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <li><a href="about.html" target="_blank" rel="noopener noreferrer" class="nav-link">About</a></li>
 </head>
 <body>
 
-<header>
-    <h1>Professional Background</h1>
-    <p>Bridging the gap between strategy, security, and technology.</p>
-</header>
-
-<div class="container">
-
-    <section class="section">
-        <h2 style="color: var(--accent-blue);">My Journey in Finance</h2>
-        <p>Expertise in market analysis and fiscal strategy. I focus on driving profitability through data-backed decision making.</p>
-        
-        <div class="skill-container">
-            <span class="skill-label">Financial Modeling - 90%</span>
-            <div class="progress-bg">
-                <div class="progress-fill finance-fill" style="--target-width: 90%;"></div>
+    <header class="main-header" id="mainHeader">
+        <nav class="navbar container">
+            <div class="logo">
+                <a href="#home">TAUQEER MUSTAFA</a>
             </div>
-            <span class="skill-label">Risk Assessment - 85%</span>
-            <div class="progress-bg">
-                <div class="progress-fill finance-fill" style="--target-width: 85%;"></div>
+            <ul class="nav-links">
+                <li><a href="#home" class="nav-link">Home</a></li>
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#services" class="nav-link">Services</a></li>
+                <li><a href="#projects" class="nav-link">Experience</a></li>
+                <li><a href="#contact" class="nav-btn">Contact Us</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>Mastering the Digital Frontier</h1>
+            <p>High-end expertise in Finance, Security, and Creative Content.</p>
+            <a href="#contact" class="btn-main">Get Started</a>
+        </div>
+    </section>
+
+    <section id="about" class="section">
+        <div class="container">
+            <h2 class="section-title">About Us</h2>
+            <p class="section-sub">We are a boutique firm providing specialized high-end services for the modern economy. Our team combines precision with creativity to protect and grow your brand through tailored strategic planning.</p>
+        </div>
+    </section>
+
+    <section id="services" class="section bg-alt">
+        <div class="container">
+            <h2 class="section-title">Our Services</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">📊</div>
+                    <h3>Accountant</h3>
+                    <p>Strategic tax planning and financial auditing designed for high-growth businesses.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🛡️</div>
+                    <h3>Cyber Security</h3>
+                    <p>End-to-end protection against digital threats using global encryption standards.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">💻</div>
+                    <h3>Freelancer</h3>
+                    <p>Tailored remote solutions and consultancy for agile project delivery.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🎬</div>
+                    <h3>Digital Creator</h3>
+                    <p>Cinematic video production and multi-platform content strategy.</p>
+                </div>
             </div>
         </div>
     </section>
 
-    <section class="section">
-        <h2 style="color: var(--accent-green);">Cyber Security</h2>
-        <p>Dedicated to fortifying digital assets. My approach combines proactive threat hunting with rigorous compliance standards.</p>
-        
-        <div class="skill-container">
-            <span class="skill-label">Network Security - 95%</span>
-            <div class="progress-bg">
-                <div class="progress-fill cyber-fill" style="--target-width: 95%;"></div>
-            </div>
-            <span class="skill-label">Incident Response - 80%</span>
-            <div class="progress-bg">
-                <div class="progress-fill cyber-fill" style="--target-width: 80%;"></div>
+    <section id="explore" class="section">
+        <div class="container">
+            <h2 class="section-title">Explore Us</h2>
+            <div class="explore-box">
+                <p>Discover our philosophy of "Secure Innovation." We don't just build; we protect and sustain your vision for the long term through rigorous analysis and constant evolution.</p>
             </div>
         </div>
     </section>
 
-    <section class="section">
-        <h2 style="color: var(--accent-purple);">Digital Solutions</h2>
-        <p>Building the future through code. I deliver scalable software solutions that optimize business operations.</p>
-        
-        <div class="skill-container">
-            <span class="skill-label">Full-Stack Development - 88%</span>
-            <div class="progress-bg">
-                <div class="progress-fill digital-fill" style="--target-width: 88%;"></div>
-            </div>
-            <span class="skill-label">Cloud Architecture - 82%</span>
-            <div class="progress-bg">
-                <div class="progress-fill digital-fill" style="--target-width: 82%;"></div>
+    <section id="projects" class="section bg-alt">
+        <div class="container">
+            <h2 class="section-title">Latest Projects</h2>
+            <div class="projects-grid">
+                <div class="project-item">Financial SaaS Audit</div>
+                <div class="project-item">Blockchain Security Protocol</div>
+                <div class="project-item">Global Creator Network</div>
             </div>
         </div>
     </section>
-
-</div>
 
     <section id="contact" class="section">
         <div class="container">
@@ -82,7 +105,7 @@
     <footer class="site-footer">
         <div class="container footer-grid">
             <div class="footer-col brand-info">
-                <div class="logo"><span>B  Nexus</span></div>
+                <div class="logo"><span>T  Nexus</span></div>
                 <p>Providing premium digital solutions with precision and security for the modern era.</p>
             </div>
             <div class="footer-col">
@@ -119,5 +142,12 @@
         </div>
     </footer>
 
+    <script>
+        window.addEventListener('scroll', function() {
+            const header = document.getElementById('mainHeader');
+            if (window.scrollY > 50) header.classList.add('scrolled');
+            else header.classList.remove('scrolled');
+        });
+    </script>
 </body>
 </html>
