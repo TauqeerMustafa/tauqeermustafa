@@ -1,110 +1,391 @@
+
 <!DOCTYPE html>
-<html lang="en">
+<html class="no-js" lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About Tauqeer Mustafa</title>
-    <link rel="stylesheet" href="style.css">
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="">
+    <link rel="icon" href="1.jpg" type="image/jpeg">
+    <title>Tauqeer Mustafa - Corporate And Consulting Business </title>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Original CSS files from the live site -->
+    <link rel="stylesheet" href="/assets/css/plugins/bootstrap.min.css">
+    <link rel="stylesheet" href="/assets/css/plugins/fontawesome.min.css">
+    <link rel="stylesheet" href="/assets/css/plugins/slick.css">
+    <link rel="stylesheet" href="/assets/css/plugins/animate.css">
+    <link rel="stylesheet" href="/assets/css/plugins/swiper.min.css">
+    <link rel="stylesheet" href="/assets/css/plugins/odometer.css">
+    <link rel="stylesheet" href="/assets/css/default.css">
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <!-- In case any local style is needed (optional) -->
 </head>
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+<script>
+document.getElementById("contactForm").addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    var form = e.target;
+    var data = new FormData(form);
+
+    fetch(form.action, {
+        method: "POST",
+        body: data,
+        headers: { 'Accept': 'application/json' }
+    }).then(response => {
+        if (response.ok) {
+            document.getElementById("formMessage").innerHTML =
+                "<span style='color:green;'>✔ Message sent successfully!</span>";
+            form.reset();
+            grecaptcha.reset();
+        } else {
+            document.getElementById("formMessage").innerHTML =
+                "<span style='color:red;'>❌ Something went wrong. Try again.</span>";
+        }
+    }).catch(error => {
+        document.getElementById("formMessage").innerHTML =
+            "<span style='color:red;'>❌ Network error. Try later.</span>";
+    });
+});
+</script>
 <body>
-
-<header>
-    <h1>Professional Background</h1>
-    <p>Bridging the gap between strategy, security, and technology.</p>
-</header>
-
-<div class="container">
-
-    <section class="section">
-        <h2 style="color: var(--accent-blue);">My Journey in Finance</h2>
-        <p>Expertise in market analysis and fiscal strategy. I focus on driving profitability through data-backed decision making.</p>
-        
-        <div class="skill-container">
-            <span class="skill-label">Financial Modeling - 90%</span>
-            <div class="progress-bg">
-                <div class="progress-fill finance-fill" style="--target-width: 90%;"></div>
-            </div>
-            <span class="skill-label">Risk Assessment - 85%</span>
-            <div class="progress-bg">
-                <div class="progress-fill finance-fill" style="--target-width: 85%;"></div>
+    <style>
+body {
+    background: url("2.jpg") no-repeat center center fixed;
+    background-size: cover;
+}
+</style>
+    <!-- Preloader -->
+    <div class="cs_preloader cs_accent_color cs_white_bg">
+        <div class="cs_preloader bg-white d-flex justify-content-center align-items-center">
+            <div class="cs_preloader_in">
+                <img src="circle_254_1771986060303.png" alt="Logo">
             </div>
         </div>
-    </section>
+    </div>
 
-    <section class="section">
-        <h2 style="color: var(--accent-green);">Cyber Security</h2>
-        <p>Dedicated to fortifying digital assets. My approach combines proactive threat hunting with rigorous compliance standards.</p>
-        
-        <div class="skill-container">
-            <span class="skill-label">Network Security - 95%</span>
-            <div class="progress-bg">
-                <div class="progress-fill cyber-fill" style="--target-width: 95%;"></div>
-            </div>
-            <span class="skill-label">Incident Response - 80%</span>
-            <div class="progress-bg">
-                <div class="progress-fill cyber-fill" style="--target-width: 80%;"></div>
+    <!-- Header -->
+    <header class="cs_site_header cs_style_1 cs_sticky_header cs_site_header_full_width">
+        <div class="cs_top_header">
+            <div class="container">
+                <div class="cs_top_header_in">
+                    <div class="cs_top_header_left">
+                        <ul class="cs_top_nav d-flex flex-wrap align-items-center cs_fs_12 text-white m-0 p-0">
+                           <img src="circle_254_1771986060303.png" alt="" width="40" height="25" >
+                           <span>&nbsp;&nbsp;Tauqeer Mustafa</span> 
+                            
+                        </ul>
+                        
+                    </div>
+                    
+                    <div class="cs_top_header_right">
+                        <ul class="cs_top_nav d-flex flex-wrap align-items-center cs_fs_12 text-white m-0 p-0">
+                            <li><a href="">Help</a></li>
+                            <li><a href="">Support</a></li>
+                            <li><a href="contact.html">Contact</a></li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
-    </section>
+        <div class="cs_main_header">
+            <div class="container">
+                <div class="cs_main_header_in">
+                    <div class="cs_main_header_left">
+                        <a class="cs_site_branding" href="index.html">
 
-    <section class="section">
-        <h2 style="color: var(--accent-purple);">Digital Solutions</h2>
-        <p>Building the future through code. I deliver scalable software solutions that optimize business operations.</p>
-        
-        <div class="skill-container">
-            <span class="skill-label">Full-Stack Development - 88%</span>
-            <div class="progress-bg">
-                <div class="progress-fill digital-fill" style="--target-width: 88%;"></div>
-            </div>
-            <span class="skill-label">Cloud Architecture - 82%</span>
-            <div class="progress-bg">
-                <div class="progress-fill digital-fill" style="--target-width: 82%;"></div>
+                        </a>
+                        <div class="cs_nav cs_primary_font fw-medium">
+                            <ul class="cs_nav_list fw-medium text-uppercase">
+                                <li class="menu-item-has-children">
+                                    <a href="index.html">Home</a>
+                                    <ul>
+                                        <li><a href="index.html">Business</a></li>
+                                        <li><a href="corporate.html">Corporate</a></li>
+                                        <li><a href="finance.html">Financial institute</a></li>
+                                        <li><a href="insurance.html">Insurance Company</a></li>
+                                        <li><a href="consulting.html">Consulting Agency</a></li>
+                                        <li><a href="software-agency.html">Software Agency</a></li>
+                                        <li><a href="startup-agency.html">Startup Agency</a></li>
+                                        <li><a href="business-with-ecommerce.html">Business With E-Commerce</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="about.html">About</a></li>
+                                <li class="menu-item-has-children">
+                                    <a href="#">Pages</a>
+                                    <ul>
+                                        <li><a href="project-details.html">Project Details</a></li>
+                                        <li><a href="services-details.html">Service Details</a></li>
+                                        <li><a href="team.html">Team </a></li>
+                                        <li><a href="team-details.html">Team Member</a></li>
+                                        <li><a href="shop.html">Our Store</a></li>
+                                        <li><a href="shop-product-details.html">Product Details</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="service.html">Services</a></li>
+                                <li><a href="portfolio.html">Portfolio</a></li>
+                                <li class="menu-item-has-children">
+                                    <a href="blog">Blog</a>
+                                    <ul>
+                                        <li><a href="blog-grid.html">Blog Grid</a></li>
+                                        <li><a href="writer.html">Become a writer</a></li>
+                                        <li><a href="blog-details.html">Blog Details</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="contact.html">Contact</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="cs_main_header_right">
+                        <div class="cs_toolbox">
+                            <div class="cs_header_search_wrap position-relative">
+                                <span class="cs_header_search_btn d-flex">
+                                    <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M24.7628 23.6399L18.3082 17.2884C19.9984 15.452 21.037 13.0234 21.037 10.3509C21.0362 4.63387 16.3273 0 10.5181 0C4.70891 0 0 4.63387 0 10.3509C0 16.0678 4.70891 20.7017 10.5181 20.7017C13.0281 20.7017 15.3301 19.8335 17.1384 18.3902L23.618 24.7667C23.9338 25.0777 24.4463 25.0777 24.7621 24.7667C25.0785 24.4557 25.0785 23.9509 24.7628 23.6399ZM10.5181 19.1092C5.60289 19.1092 1.61836 15.1879 1.61836 10.3509C1.61836 5.51376 5.60289 1.59254 10.5181 1.59254C15.4333 1.59254 19.4178 5.51376 19.4178 10.3509C19.4178 15.1879 15.4333 19.1092 10.5181 19.1092Z" fill="currentColor"/>
+                                    </svg>                                    
+                                </span>
+                                <form class="cs_header_search_form position-absolute bg-white cs_transition_3 cs_rounded_5 end-0 cs_pt_20 cs_pb_20 cs_pl_20 cs_pr_20">
+                                    <input type="text" placeholder="Type your keywork  ...">
+                                    <button class="cs_header_search_sumbit_btn">
+                                        <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M24.7628 23.6399L18.3082 17.2884C19.9984 15.452 21.037 13.0234 21.037 10.3509C21.0362 4.63387 16.3273 0 10.5181 0C4.70891 0 0 4.63387 0 10.3509C0 16.0678 4.70891 20.7017 10.5181 20.7017C13.0281 20.7017 15.3301 19.8335 17.1384 18.3902L23.618 24.7667C23.9338 25.0777 24.4463 25.0777 24.7621 24.7667C25.0785 24.4557 25.0785 23.9509 24.7628 23.6399ZM10.5181 19.1092C5.60289 19.1092 1.61836 15.1879 1.61836 10.3509C1.61836 5.51376 5.60289 1.59254 10.5181 1.59254C15.4333 1.59254 19.4178 5.51376 19.4178 10.3509C19.4178 15.1879 15.4333 19.1092 10.5181 19.1092Z" fill="currentColor"/>
+                                        </svg>                                        
+                                    </button>
+                                </form>
+                            </div>
+                            <div class="cs_header_contact">
+                                <div class="cs_header_contact_icon text-accent">
+                                    <svg width="35" height="36" viewBox="0 0 35 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <g clip-path="url(#clip0_81_254)">
+                                        <path d="M18.1846 18.6831C18.1846 19.0607 17.8786 19.3667 17.501 19.3667C17.1234 19.3667 16.8174 19.0607 16.8174 18.6831C16.8174 18.3055 17.1234 17.9995 17.501 17.9995C17.8786 17.9995 18.1846 18.3055 18.1846 18.6831Z" fill="currentColor"/>
+                                        <path d="M28.9669 19.1887C28.2043 18.4264 26.9696 18.425 26.2069 19.1885L23.9057 21.4892C23.4576 21.9378 22.7657 22.0294 22.2608 21.7065C21.5959 21.282 20.9029 20.7818 20.2015 20.2197C19.9067 19.9837 19.4765 20.0312 19.2404 20.3257C19.0044 20.6205 19.0519 21.0507 19.3467 21.2868C20.0861 21.879 20.8188 22.408 21.5246 22.8588C22.566 23.5242 23.9743 23.3549 24.8726 22.4558L27.1741 20.1551C27.3989 19.93 27.7672 19.9225 28.0022 20.1575L33.4626 25.5697C33.6904 25.7974 33.6901 26.1683 33.4626 26.3961L32.0615 27.7975C30.0521 29.8061 26.8756 30.3396 24.3361 29.0944C13.2881 23.6775 7.80304 13.9181 6.38512 11.0561C5.12742 8.51667 5.64999 5.44317 7.68555 3.40761L9.05487 2.03722C9.28292 1.80944 9.65382 1.80944 9.88159 2.03695L15.2964 7.45176C15.5244 7.6798 15.5247 8.04937 15.2964 8.27741L12.9954 10.5787C12.0963 11.4777 11.927 12.8858 12.5925 13.9267C13.212 14.8965 13.9687 15.9037 14.8414 16.9206C15.0873 17.2068 15.5188 17.24 15.8056 16.994C16.0919 16.7481 16.125 16.3166 15.8791 16.0298C15.0478 15.0615 14.3298 14.1064 13.7444 13.1902C13.4219 12.6858 13.5135 11.9942 13.9623 11.5453L16.2633 9.24432C17.0257 8.48195 17.0259 7.24748 16.2633 6.48511L10.8482 1.07004C10.088 0.310076 8.85006 0.309809 8.08823 1.07031L6.71837 2.44096C4.26812 4.89149 3.64167 8.59731 5.15999 11.6628C6.62625 14.6225 12.2995 24.7154 23.7342 30.322C24.8373 30.8627 26.0344 31.1383 27.2555 31.1383C27.2694 31.1383 27.2833 31.1375 27.2972 31.1372C27.0993 32.8214 25.6641 34.1325 23.9278 34.1325H19.5117C18.218 34.1325 17.0551 33.4136 16.4767 32.2563L15.5648 30.4333C15.4489 30.2015 15.2123 30.0555 14.9533 30.0555C14.6945 30.0555 14.4577 30.2018 14.342 30.4333L12.9148 33.2876L11.4878 30.4333C11.3719 30.2015 11.1353 30.0555 10.8763 30.0555C10.6175 30.0555 10.3807 30.2018 10.265 30.4333L8.83778 33.2876L7.41078 30.4333C7.29489 30.2015 7.0583 30.0555 6.79928 30.0555C6.54053 30.0555 6.30368 30.2018 6.18805 30.4333L4.76079 33.2876L3.33379 30.4333C3.21789 30.2015 2.98131 30.0555 2.72229 30.0555C2.46354 30.0555 2.22668 30.2018 2.11106 30.4333L0.072297 34.5106C-0.0964651 34.8481 0.0402536 35.2588 0.378045 35.4276C0.717171 35.5971 1.12706 35.4583 1.29529 35.1218L2.72229 32.2678L4.14929 35.1218C4.26518 35.3536 4.50177 35.4996 4.76079 35.4996C5.0198 35.4996 5.25639 35.3533 5.37228 35.1218L6.79928 32.2678L8.22628 35.1218C8.34217 35.3536 8.57876 35.4996 8.83778 35.4996C9.0968 35.4996 9.33339 35.3533 9.44928 35.1218L10.8763 32.2678L12.3033 35.1218C12.4192 35.3536 12.6558 35.4996 12.9148 35.4996C13.1738 35.4996 13.4104 35.3533 13.5263 35.1218L14.9535 32.2675L15.2537 32.8678C16.0649 34.4913 17.6965 35.4996 19.5117 35.4996H23.9278C26.4609 35.4996 28.5376 33.5111 28.6801 31.013C30.3435 30.7222 31.846 29.9457 33.0282 28.7641L34.4298 27.3622C35.19 26.6012 35.1898 25.3632 34.4274 24.6006L28.9669 19.1887Z" fill="currentColor"/>
+                                        </g>
+                                        <defs>
+                                        <clipPath id="clip0_81_254">
+                                        <rect width="35" height="35" fill="white" transform="translate(0 0.5)"/>
+                                        </clipPath>
+                                        </defs>
+                                    </svg>
+                                </div>
+                                <div class="cs_header_contact_right">
+                                    <h3 class="text-white fw-normal cs_mb_6 cs_fs_13">Need help?  Message us:</h3>
+                                    <h3 class="text-white m-0 cs_fs_13">+92 315 517 1238</h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-    </section>
+    </header>
 
-</div>
+    
+   
+  <!--Contact Section-->>  
+<section class="background-filled overflow-hidden" style="background-image:url('cyber-security-concept-digital-art (1).jpg'); padding: 150px 0;">
+    <div class="container">
+        <div class="row align-items-center">
+            
+            <div class="col-xl-5 col-lg-6">
+                <div class="cs_section_heading cs_style_1 d-flex align-items-center cs_mb_20">
+                    <div class="cs_section_heading_in">
+                        <h3 class="cs_fs_20 cs_fs_lg_18 text-accent fw-normal cs_lh_base wow fadeInLeft" data-wow-duration="0.8s" data-wow-delay="0.2s" style="margin-bottom: 10px;">Contact With Us</h3>
+                        <h2 class="text-white" style="font-size: 38px; margin-bottom: 15px; line-height: 1.2;">Let’s Work Together!</h2>
+                        <p class="text-white m-0" style="font-size: 15px; line-height: 1.5;">Ready to elevate your business? Let’s discuss your goals and design a solution built on precision, innovation, and measurable performance.</p>
+                    </div>
+                </div>
+                
+                <div class="d-flex align-items-center" style="margin-bottom: 20px;">
+                    <div class="d-flex align-items-center justify-content-center cs_rounded_10 flex-none bg-accent" style="width: 55px; height: 55px; margin-right: 15px;">
+                        <svg width="22" height="22" viewBox="0 0 32 32" fill="white" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M16 0C7.163 0 0 7.163 0 16c0 2.827.74 5.49 2.03 7.8L0 32l8.39-2.19A15.94 15.94 0 0016 32c8.837 0 16-7.163 16-16S24.837 0 16 0zm0 29.333c-2.49 0-4.82-.65-6.84-1.78l-.49-.29-4.98 1.3 1.33-4.86-.32-.5A13.29 13.29 0 012.667 16C2.667 8.64 8.64 2.667 16 2.667S29.333 8.64 29.333 16 23.36 29.333 16 29.333zm7.45-9.76c-.4-.2-2.35-1.16-2.72-1.29-.36-.13-.63-.2-.9.2-.27.4-1.03 1.29-1.27 1.55-.23.27-.47.3-.87.1-.4-.2-1.7-.63-3.23-2.02-1.19-1.06-2-2.36-2.23-2.76-.23-.4-.02-.62.17-.82.17-.17.4-.47.6-.7.2-.23.27-.4.4-.67.13-.27.07-.5-.03-.7-.1-.2-.9-2.18-1.23-2.99-.32-.77-.65-.67-.9-.68h-.77c-.27 0-.7.1-1.07.5-.36.4-1.4 1.36-1.4 3.32s1.43 3.85 1.63 4.12c.2.27 2.82 4.3 6.83 6.03.95.41 1.7.66 2.28.85.96.3 1.84.26 2.54.16.77-.11 2.35-.96 2.68-1.89.33-.93.33-1.73.23-1.89-.1-.17-.36-.27-.76-.47z"/>
+                        </svg>                
+                    </div>
+                    <div>
+                        <p class="text-accent m-0" style="font-size: 14px; margin-bottom: 4px !important;">Have Any Question?</p>
+                        <h2 class="text-white m-0 fw-medium cs_lh_base" style="font-size: 18px;">
+                            <a href="https://wa.me/923155171238" target="_blank" style="color:white;text-decoration:none;">WhatsApp: +923 1551 71238</a>
+                        </h2>
+                    </div>
+                </div>
+                
+                <div class="d-flex align-items-center" style="margin-bottom: 20px;">
+                    <div class="d-flex align-items-center justify-content-center cs_rounded_10 flex-none bg-accent" style="width: 55px; height: 55px; margin-right: 15px;">
+                        <svg width="22" height="22" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M34.1388 5H5.86125C4.63868 5.00132 3.46656 5.48758 2.60207 6.35207C1.73758 7.21656 1.25132 8.38868 1.25 9.61125V30.3888C1.25132 31.6113 1.73758 32.7834 2.60207 33.6479C3.46656 34.5124 4.63868 34.9987 5.86125 35H34.1388C35.3613 34.9987 36.5334 34.5124 37.3979 33.6479C38.2624 32.7834 38.7487 31.6113 38.75 30.3888V9.61125C38.7487 8.38868 38.2624 7.21656 37.3979 6.35207C36.5334 5.48758 35.3613 5.00132 34.1388 5ZM5.86125 7.5H34.1388C34.6985 7.50066 35.2351 7.72331 35.6309 8.1191C36.0267 8.51489 36.2493 9.05151 36.25 9.61125V10.5675L20 21.0138L3.75 10.5675V9.61125C3.75066 9.05151 3.97331 8.51489 4.3691 8.1191C4.76489 7.72331 5.30151 7.50066 5.86125 7.5ZM34.1388 32.5H5.86125C5.30151 32.4993 4.76489 32.2767 4.3691 31.8809C3.97331 31.4851 3.75066 30.9485 3.75 30.3888V13.54L19.3237 23.5512C19.5254 23.681 19.7602 23.75 20 23.75C20.2398 23.75 20.4746 23.681 20.6763 23.5512L36.25 13.54V30.3888C36.2493 30.9485 36.0267 31.4851 35.6309 31.8809C35.2351 32.2767 34.6985 32.4993 34.1388 32.5Z" fill="white"/>
+                        </svg>               
+                    </div>
+                    <div>
+                        <p class="text-accent m-0" style="font-size: 14px; margin-bottom: 4px !important;">Send Email</p>
+                        <h2 class="text-white m-0 fw-medium cs_lh_base" style="font-size: 18px;">
+                            <a href="mailto:contact@tauqeermustafa.tech" style="color:white;text-decoration:none;">contact@tauqeermustafa.tech</a>
+                        </h2>
+                    </div>
+                </div>
+                
+                <div class="d-flex align-items-center">
+                    <div class="d-flex align-items-center justify-content-center cs_rounded_10 flex-none bg-accent" style="width: 55px; height: 55px; margin-right: 15px;">
+                        <svg width="22" height="22" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M20.0002 0C12.0123 0 5.51367 6.49859 5.51367 14.4864C5.51367 24.3995 18.4777 38.9526 19.0296 39.5673C19.548 40.1447 20.4532 40.1437 20.9707 39.5673C21.5227 38.9526 34.4866 24.3995 34.4866 14.4864C34.4865 6.49859 27.988 0 20.0002 0ZM20.0002 36.6976C15.6371 31.5149 8.12242 21.29 8.12242 14.4866C8.12242 7.93703 13.4507 2.60875 20.0002 2.60875C26.5496 2.60875 31.8779 7.93703 31.8779 14.4865C31.8778 21.2902 24.3643 31.5133 20.0002 36.6976Z" fill="white"/>
+                            <path d="M20.0004 7.19797C15.9814 7.19797 12.7119 10.4676 12.7119 14.4865C12.7119 18.5054 15.9815 21.775 20.0004 21.775C24.0192 21.775 27.2887 18.5054 27.2887 14.4865C27.2887 10.4676 24.0192 7.19797 20.0004 7.19797ZM20.0004 19.1662C17.4199 19.1662 15.3207 17.067 15.3207 14.4865C15.3207 11.906 17.42 9.80672 20.0004 9.80672C22.5807 9.80672 24.68 11.906 24.68 14.4865C24.68 17.067 22.5807 19.1662 20.0004 19.1662Z" fill="white"/>
+                        </svg>                              
+                    </div>
+                    <div>
+                        <p class="text-accent m-0" style="font-size: 14px; margin-bottom: 4px !important;">Address</p>
+                        <h2 class="text-white m-0 fw-medium cs_lh_base" style="font-size: 18px;">Tauqeer Mustafa, Islamabad, <br>Pakistan</h2>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xl-5 col-lg-6 offset-xl-1 cs_mt_lg_30">
+                <div class="cs_contact_wrap position-relative">
+                    <form action="https://formsubmit.co/contact@tauqeermustafa.tech" method="POST" class="cs_contact_form position-relative" style="padding:20px; background:rgba(0,0,0,0.6); border-radius:16px;">
+                        
+                        <input type="hidden" name="_captcha" value="true">
+
+                        <input name="name" required style="width:100%; background:#7a0000; color:white; border:1px solid #ff4d4d; padding:10px 12px; border-radius:6px; margin-bottom:12px; font-size: 15px;" type="text" placeholder="Your Name">
+
+                        <input name="email" required style="width:100%; background:#7a0000; color:white; border:1px solid #ff4d4d; padding:10px 12px; border-radius:6px; margin-bottom:12px; font-size: 15px;" type="email" placeholder="Your Email">
+
+                        <textarea name="message" required style="width:100%; background:#7a0000; color:white; border:1px solid #ff4d4d; padding:10px 12px; border-radius:6px; margin-bottom:12px; font-size: 15px;" rows="3" placeholder="Message here ..."></textarea>
+
+                        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:25px;">
+                            
+                            <div class="g-recaptcha" data-sitekey="YOUR_SITE_KEY" style="display:none;"></div>
+
+                            <button type="submit" style="background:#f5a623; color:#fff; border:none; padding:10px 20px; border-radius:6px; cursor:pointer; width:100%; font-size: 16px; font-weight: 500;">
+                                Submit Now
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            
+        </div>
+    </div>
 </section>
+    
 
-    <footer class="site-footer">
-        <div class="container footer-grid">
-            <div class="footer-col brand-info">
-                <div class="logo"><span>B  Nexus</span></div>
-                <p>Providing premium digital solutions with precision and security for the modern era.</p>
+
+    <!-- Footer -->
+    <footer class="cs_footer background-filled text-white" style="">
+        <div class="container">
+            <div>
+<div class="cs_footer_center d-flex flex-column justify-content-center align-items-center text-center cs_pt_46 cs_pb_46">
+               <h2 class="text-white text-uppercase font-family: sans-serif m-0 cs_fs_22" >Tauqeer Mustafa</h2>
+                <br>
+                <h3 style="
+                
+ font-family: 'Bank Gothic', 'Microgramma', sans-serif;
+    letter-spacing: 6px;
+    font-size: 13px;
+    color: #D4AF37;
+    font-weight: 400;
+    text-decoration-line: ;
+   
+    text-transform: uppercase;
+">
+A LEGACY OF EXCELLENCE
+</h3>
+<!-- Google Font -->
+<link href="https://fonts.googleapis.com/css2?family=Michroma&display=swap" rel="stylesheet">
+
+<style>
+.brand-text {
+    font-family: 'Michroma', sans-serif;
+    
+}
+</style>
+
+<p class="brand-text">
+    "TAUQEER MUSTAFA" is an elite business brand operating under 
+    <b>TAUQEER MUSTAFA Inc.</b>, defined by precision, integrity, 
+    and uncompromising standards of excellence. Built to lead, not follow, 
+    the brand represents a refined legacy of strategic expertise in digital 
+    services, finance, and cybersecurity. Every solution is crafted with 
+    sophistication, innovation, and a results-driven mindset — delivering 
+    value that reflects distinction, credibility, and long-term impact.
+</p>
             </div>
-            <div class="footer-col">
-                <h4>Quick Links</h4>
-                <ul class="footer-links">
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#services">Services</a></li>
-                    <li><a href="#projects">Projects</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                </ul>
+            <div class="cs_footer_top d-flex justify-content-between align-items-start align-items-md-center cs_pt_46 cs_pb_46 cs_column_gap_15 cs_row_gap_15 flex-md-row flex-column">
+            
             </div>
-            <div class="footer-col">
-                <h4>Stay Updated</h4>
-                <div class="newsletter">
-                    <input type="email" placeholder="Email Address">
-                    <button type="button">Join</button>
+            <div class="cs_footer_main cs_pt_30 cs_pb_30">
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="cs_footer_item cs_pt_20 cs_pb_20">
+                            <div class="image">
+                            
+                                <img src="TM2-modified.png" alt="" width="250" height="250" >
+                            
+                            </div>
+                            <br>
+                            <div class="cs_social_btns d-flex flex-wrap cs_column_gap_15 cs_row_gap_15 cs_transition_5">
+                                <a href="https://facebook.com/tauqeermustafaa" class="d-flex align-items-center justify-content-center cs_height_35 cs_width_35 text-white rounded-circle"><i class="fa-brands fa-facebook-f"></i></a>
+                                <a href="https://x.com/tauqeermustafaa" class="d-flex align-items-center justify-content-center cs_height_35 cs_width_35 text-white rounded-circle"><i class="fa-brands fa-twitter"></i></a>
+                                <a href="https://github.com/tauqeermustafa" target="_blank"
+    class="d-flex align-items-center justify-content-center cs_height_35 cs_width_35 text-white rounded-circle">
+    <i class="fa-brands fa-github"></i>
+</a>
+                                <a href="https://linkedin.com/tauqeermustafaa" class="d-flex align-items-center justify-content-center cs_height_35 cs_width_35 text-white rounded-circle"><i class="fa-brands fa-linkedin-in"></i></a>
+                                <a href="https://wa.me/message/JEOWD3NIFJUZN1" target="_blank"
+        class="d-flex align-items-center justify-content-center cs_height_35 cs_width_35 text-white rounded-circle">
+        <i class="fa-brands fa-whatsapp"></i>
+    </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 offset-lg-1">
+                        <div class="cs_footer_item cs_pt_20 cs_pb_20">
+                            <h2 class="cs_widget_title text-white cs_fs_22 cs_mb_22">Explore Us</h2>
+                            <ul class="cs_menu_widget text-uppercase">
+                                <li><a href="about.html">About</a></li>
+                                <li><a href="portfolio.html">Portfolio</a></li>
+                                <li><a href="service.html">Services</a></li>
+                                <li><a href="support.html">Support </a></li>
+                                <li><a href="pricing.html">Pricing Page</a></li>
+                                <li><a href="projects.html">Projects</a></li>
+                                <li><a href="blog-list-with-sidebar.html">Blog</a></li>
+                                <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                                <li><a href="contact.html">Contact</a></li>
+                                <li><a href="journey.html">Our Journey</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="cs_footer_item cs_pt_20 cs_pb_20">
+                            <div class="cs_newsletter cs_style_1">
+                                <h2 class="cs_newsletter_title text-white cs_fs_22 cs_mb_9">Find Us</h2>
+    <iframe 
+        src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d1720.2649449575013!2d71.0329554!3d30.4210772!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3925252266ef440d%3A0x55374bfcf568bfa7!2sTauqeer%20Mustafa!5e0!3m2!1sen!2s!4v1772036386755!5m2!1sen!2s" 
+        width="280" height="200" style="border: 25px;;" 
+        allowfullscreen="" loading="lazy" 
+        referrerpolicy="no-referrer-when-downgrade">
+    </iframe>
+</div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-
-        <div class="footer-bottom">
-            <div class="container bottom-flex">
-                <p>&copy; 2025 Tauqeer Mustafa</p>
-                <div class="wa-footer-socials">
-                    <a aria-label="X" href="https://x.com/tauqeermustafaa" target="_blank" class="wa-icon x-btn"><svg viewBox="0 0 1200 1227"><path d="M714.163 519.284L1160.89 0H1055.03L667.137 450.887L357.328 0H0L468.492 681.821L0 1226.37H105.866L515.491 750.218L842.672 1226.37H1200L714.137 519.284H714.163ZM569.165 687.828L521.697 619.934L144.011 79.6944H306.615L611.412 515.685L658.88 583.579L1055.08 1150.3H892.476L569.165 687.854V687.828Z" fill="white"/></svg></a>
-                    <a aria-label="Instagram" href="https://instagram.com/tauqeermustafaa" target="_blank" class="wa-icon insta-btn"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg></a>
-                    <a aria-label="YouTube" href="https://youtube.com/@tauqeermustafaa" target="_blank" class="wa-icon yt-btn"><svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" fill="white"/></svg></a>
-                    <a aria-label="LinkedIn" href="https://linkedin.com/in/tauqeermustafaa" target="_blank" class="wa-icon ln-btn"><svg viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" fill="white"/></svg></a>
-                    <a aria-label="Facebook" href="https://facebook.com/tauqeermustafaa" target="_blank" class="wa-icon fb-btn"><svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" fill="white"/></svg></a>
-                    <a aria-label="WhatsApp" href="https://wa.me/923155171238" target="_blank" class="wa-icon whatsapp-btn"><svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L0 24l6.335-1.662c1.72.937 3.659 1.435 5.631 1.435h.008c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" fill="white"/></svg></a>
-                    <a aria-label="GitHub" href="https://github.com/tauqeermustafaa" target="_blank" class="wa-icon github-btn"><svg viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.042-1.416-4.042-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" fill="white"/></svg></a>
-                </div>
+        <div class="cs_copyright text-center cs_fs_124 cs_lh_lg cs_pt_36 cs_pb_36 " style="background-color: black;">
+            <div class="container">
+                <p class="m-0" style=" color: #ffffff;" >
+                    © 2026 TAUQEER MUSTAFA Inc.<br>
+                </p>
             </div>
         </div>
     </footer>
 
+    <!-- Scripts -->
+    <script src="/assets/js/plugins/jquery-3.7.1.min.js"></script>
+    <script src="/assets/js/plugins/isotope.pkg.min.js"></script>
+    <script src="/assets/js/plugins/jquery.slick.min.js"></script>
+    <script src="/assets/js/plugins/odometer.js"></script>
+    <script src="/assets/js/plugins/ripples.min.js"></script>
+    <script src="/assets/js/plugins/wow.min.js"></script>
+    <script src="/assets/js/plugins/swiper.min.js"></script>
+    <script src="/assets/js/main.js"></script>
 </body>
 </html>
