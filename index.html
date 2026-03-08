@@ -20,34 +20,66 @@
     <link rel="stylesheet" href="/assets/css/style.css">
     <!-- In case any local style is needed (optional) -->
 </head>
+
 <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
 <script>
-document.getElementById("contactForm").addEventListener("submit", function(e) {
-    e.preventDefault();
+document.addEventListener("DOMContentLoaded", function(){
 
-    var form = e.target;
-    var data = new FormData(form);
+const form = document.getElementById("contactForm");
 
-    fetch(form.action, {
-        method: "POST",
-        body: data,
-        headers: { 'Accept': 'application/json' }
-    }).then(response => {
-        if (response.ok) {
-            document.getElementById("formMessage").innerHTML =
-                "<span style='color:green;'>✔ Message sent successfully!</span>";
-            form.reset();
-            grecaptcha.reset();
-        } else {
-            document.getElementById("formMessage").innerHTML =
-                "<span style='color:red;'>❌ Something went wrong. Try again.</span>";
-        }
-    }).catch(error => {
-        document.getElementById("formMessage").innerHTML =
-            "<span style='color:red;'>❌ Network error. Try later.</span>";
-    });
+form.addEventListener("submit", function(e){
+
+e.preventDefault();
+
+// check captcha
+var captcha = grecaptcha.getResponse();
+
+if(captcha.length === 0){
+document.getElementById("formMessage").innerHTML =
+"<span style='color:red;'>❌ Please complete the CAPTCHA.</span>";
+return;
+}
+
+var data = new FormData(form);
+
+fetch(form.action, {
+method: "POST",
+body: data,
+headers: { 'Accept': 'application/json' }
+
+}).then(response => {
+
+if(response.ok){
+
+document.getElementById("formMessage").innerHTML =
+"<span style='color:lightgreen;'>✔ Message sent successfully!</span>";
+
+form.reset();
+
+grecaptcha.reset();
+
+}
+
+else{
+
+document.getElementById("formMessage").innerHTML =
+"<span style='color:red;'>❌ Something went wrong. Try again.</span>";
+
+}
+
+}).catch(error => {
+
+document.getElementById("formMessage").innerHTML =
+"<span style='color:red;'>❌ Network error. Try later.</span>";
+
+});
+
+});
+
 });
 </script>
+    
 <body>
     <style>
 body {
@@ -617,11 +649,12 @@ body {
 
                         <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:25px;">
                             
-                            <div class="g-recaptcha" data-sitekey="YOUR_SITE_KEY" style="display:none;"></div>
+                            <div class="g-recaptcha" data-sitekey="6LffnYMsAAAAABb0vJAyLupB7p2CfEghN_zmv5Ko"></div>
 
                             <button type="submit" style="background:#680000; color:#fff; border:none; padding:10px 20px; border-radius:6px; cursor:pointer; width:100%; font-size: 16px; font-weight: 500;">
                                 Submit Now
                             </button>
+                            <div id="formMessage"></div>
                         </div>
                     </form>
                 </div>
